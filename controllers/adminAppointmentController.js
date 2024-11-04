@@ -101,7 +101,7 @@ async function handleRejectAppointment(req, res) {
 
   await Notifications.create({
     service,
-    dateAndTime: dayjs(Date.now()).format("MMMM D, YYYY h:mm A"),
+    dateAndTime: dayjs(Date.now()).format("MMMM D, YYYY - h:mm A"),
     type: "rejected",
     userId,
   });
