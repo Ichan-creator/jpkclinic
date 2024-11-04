@@ -323,10 +323,10 @@ window.addEventListener("load", () => {
       then: (data) =>
         data.map((item) => [
           item.id,
-          dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+          dayjs(item.appointmentDate).utc().format("MMMM DD, YYYY - hh:mm A"),
           item.service,
           item.dateApproved ? item.dateApproved !== "Pending" 
-          ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A") : "Pending" : "",
+          ? dayjs(item.dateApproved).utc().format("MMMM DD, YYYY - hh:mm A") : "Pending" : "",
           null,
         ]),
       handle: (res) => {
