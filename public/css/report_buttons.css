@@ -1,0 +1,81 @@
+.button {
+  display: flex-inline;
+  height: 60px;
+  padding: 0;
+  background: #cccccc;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  margin: 14px 25px;
+  overflow: hidden;
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #808080;
+  color: whitesmoke;
+}
+
+.button__text {
+  display: inline-flex;
+  padding: 2px 24px 20px;
+  color: #000;
+}
+
+.button__icon_s {
+  font-size: 1.25em;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px 20px;
+  height: 100%;
+  color: #fff;
+  background: #008081;
+}
+.button__icon_pa {
+  font-size: 1.25em;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px 20px;
+  height: 100%;
+  color: #fff;
+  background: #4f4f4f;
+}
+.button__icon_ca {
+  font-size: 1.25em;
+  background: #689268;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px 20px;
+  color: #fff;
+  height: 100%;
+}
+.button__icon_cancel {
+  font-size: 1.25em;
+  background: #d0312d;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px 20px;
+  color: #fff;
+  height: 100%;
+}
+.button__icon_rd {
+  font-size: 1.25em;
+  background: #8a3324;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px 20px;
+  color: #fff;
+  height: 100%;
+}
+.button__icon_dr {
+  font-size: 1.25em;
+  background: #ceb180;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px 20px;
+  color: #fff;
+  height: 100%;
+}
