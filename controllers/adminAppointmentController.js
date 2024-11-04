@@ -68,7 +68,7 @@ async function handleApproveAppointment(req, res) {
 
   if (!schedule.scheduledJobs[jobName]) {
     schedule.scheduleJob(jobName, reminderTime, async () => {
-      await sendReminder(service, userId, petNames);
+      await sendReminder(service, userId, petNames, appointmentDate);
     });
   }
 

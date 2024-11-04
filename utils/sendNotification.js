@@ -18,7 +18,7 @@ async function sendNotificationEmail(service, appointmentDate, type, userId) {
   const mailOptions = {
     from: "jpkveterinaryclinic@gmail.com",
     to: user.email,
-    subject: "JPK Clinic - Appointment Status Updated",
+    subject: "JPK Veterinary Clinic - Appointment Status Updated",
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <h2 style="color: ${

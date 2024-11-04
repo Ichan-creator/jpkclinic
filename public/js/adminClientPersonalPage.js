@@ -30,7 +30,6 @@ editProfileForm.addEventListener("submit", (event) => {
   const profileEmail = editProfileForm.profileEmail.value;
   const profileContactNumber = editProfileForm.profileContactNumber.value;
   const profileGender = editProfileForm.profileGender.value;
-  const profileOccupation = editProfileForm.profileOccupation.value;
 
   axios
     .post("/admin-edit-client-profile", {
@@ -39,7 +38,6 @@ editProfileForm.addEventListener("submit", (event) => {
       profileEmail,
       profileContactNumber,
       profileGender,
-      profileOccupation,
       userId,
     })
     .then((res) => {

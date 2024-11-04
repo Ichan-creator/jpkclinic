@@ -40,7 +40,6 @@ async function handleAdminEditClientProfile(req, res) {
     profileEmail,
     profileContactNumber,
     profileGender,
-    profileOccupation,
   } = req.body;
 
   const avatarId =
@@ -62,7 +61,6 @@ async function handleAdminEditClientProfile(req, res) {
       email: profileEmail,
       contactNumber: profileContactNumber,
       gender: profileGender,
-      occupation: profileOccupation,
       avatar: avatarLink,
     },
     { where: { id: userId } }
