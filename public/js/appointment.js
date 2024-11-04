@@ -284,7 +284,7 @@ window.addEventListener("load", () => {
         id: "action",
         name: "",
         formatter: (cell, row) => {
-          const isApproved = row.cells[4].data !== "Pending";
+          const isApproved = row.cells[3].data !== "Pending";
 
           return h(
             "button",
@@ -329,7 +329,7 @@ window.addEventListener("load", () => {
           item.service,
           item.dateApproved
             ? item.dateApproved !== "Pending"
-              ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"): "Pending" : "",
+              ? dayjs(item.dateApproved).format("YYYY-MM-DDTHH:mm"): "Pending" : "",
           null,
         ]),
       handle: (res) => {
