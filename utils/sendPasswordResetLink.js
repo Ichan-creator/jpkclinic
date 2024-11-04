@@ -24,7 +24,7 @@ function sendPasswordResetLink(id, email) {
   const mailOptions = {
     from: "jpkveterinaryclinic@gmail.com",
     to: email,
-    subject: "JPK Veterinary Clinic - Password Reset Request",
+    subject: "JPK Clinic - Password Reset Request",
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <h2>Password Reset Request</h2>
