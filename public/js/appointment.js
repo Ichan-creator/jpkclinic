@@ -322,17 +322,20 @@ window.addEventListener("load", () => {
       url: "/appointments-list",
       method: "GET",
       then: (data) =>
-        data.map((item) => [
-          item.id,
-          dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
-          item.service,
-          item.dateApproved
-            ? item.dateApproved !== "Pending"
-              ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
-              : "Pending"
-            : "",
-          null,
-        ]),
+        data.map((item) => {
+          console.log(item);
+          return [
+            item.id,
+            dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
+            item.service,
+            item.dateApproved
+              ? item.dateApproved !== "Pending"
+                ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
+                : "Pending"
+              : "",
+            null,
+          ];
+        }),
       handle: (res) => {
         if (res.status === 404) return { data: [] };
         if (res.ok) return res.json();
