@@ -72,7 +72,7 @@ async function handleApproveAppointment(req, res) {
     });
   }
 
-  const dateApproved = dayjs(Date.now()).format("MMMM D, YYYY - h:mm A");
+  const dateApproved = dayjs(Date.now()).utc().format("MMMM D, YYYY - h:mm A");
 
   await sendNotificationEmail(service, appointmentDate, type, userId);
 
