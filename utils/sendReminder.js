@@ -21,7 +21,7 @@ async function sendReminder(service, userId, petNames) {
     subject: "JPK Veterinary Clinic - Appointment Reminder",
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
-            <p style="font-size: 16px;">Hi <strong>${user.fullName},</strong></p>
+            <p style="font-size: 16px;">Hi <strong>${user.fullName}!,</strong></p>
             <p style="font-size: 16px;">
                 This is from JPK Veterinary Clinic. We are reminding you of the scheduled appointment 
                 for <strong>${service}</strong> of <strong>${petNames}</strong> today at <strong>${appointmentDate}</strong>.

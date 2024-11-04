@@ -24,11 +24,11 @@ function sendPasswordResetLink(id, email) {
   const mailOptions = {
     from: "jpkveterinaryclinic@gmail.com",
     to: email,
-    subject: "JPK Clinic - Password Reset Request",
+    subject: "JPK Veterinary Clinic - Password Reset Request",
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <h2>Password Reset Request</h2>
-            <p>Hello,</p>
+            <p>Hello!,</p>
             <p>We received a request to reset the password for your account associated with this email address. If you made this request, please click the link below to reset your password:</p>
             <a href="${process.env.BASE_URL_DEV}/forgot-password/${resetToken}" style="background-color: #007BFF; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                 Reset Password

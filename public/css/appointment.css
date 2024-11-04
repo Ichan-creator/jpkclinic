@@ -267,11 +267,19 @@ select {
 .notifications-container {
   max-height: 250px;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e0 #f8fafc;
 }
+
 .notifications-container::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
+}
+
+.notifications-container::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+.notifications-container::-webkit-scrollbar-thumb {
+  background-color: #cbd5e0;
+  border-radius: 4px;
 }
 
 .notifications-container .notification-item {

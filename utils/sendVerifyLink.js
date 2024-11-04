@@ -28,11 +28,11 @@ function sendVerifyEmail(email, EMAIL_TOKEN_SECRET) {
   const mailOptions = {
     from: "jpkveterinaryclinic@gmail.com",
     to: email,
-    subject: "JPK Clinic - Verify Account Email",
+    subject: "JPK Veterinary Clinic - Verify Account Email",
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <h2 style="color: #4CAF50;">Verify Your Email</h2>
-            <p style="font-size: 16px;">Hi there,</p>
+            <p style="font-size: 16px;">Hi there!,</p>
             <p style="font-size: 16px;">
                 Thank you for signing up for an account in <strong>JPK Veterinary Clinic</strong>! 
                 To complete your registration and access your account, please verify your email address by clicking the button below:

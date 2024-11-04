@@ -24,7 +24,7 @@ async function sendNotificationEmail(service, appointmentDate, type, userId) {
             <h2 style="color: ${
               type === "approved" ? "#4CAF50" : "red"
             }">Appointment ${type}</h2>
-            <p style="font-size: 16px;">Hi there,</p>
+            <p style="font-size: 16px;">Hi <strong>${user.fullName}!,</strong>,</p>
             <p style="font-size: 16px;">
                 Your appointment for <strong>${service}</strong> at <strong>${appointmentDate}</strong> has been <span style="color: ${
       type === "approved" ? "#4CAF50" : "red"

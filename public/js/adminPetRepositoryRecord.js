@@ -295,7 +295,6 @@ prescriptionTextArea.addEventListener("input", () => {
   prescriptionTextArea.style.height = prescriptionTextArea.scrollHeight + "px";
 });
 
-// Set profile icon based on animal type and breed
 const breedIcons = {
   dog: {
     Labrador: "/images/Dog1.png",
