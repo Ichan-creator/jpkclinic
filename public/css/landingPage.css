@@ -92,7 +92,7 @@ table {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 20px;
   color: rgb(255, 255, 255);
   font-weight: bold;
   transition: color 0.3s;
