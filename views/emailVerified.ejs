@@ -82,19 +82,29 @@
   <body>
     <div>
       <% if (verifySuccess) { %>
-      <h1>Email is verified!</h1>
-      <p><%= verifySuccess %></p>
-      <% } %> <% if (verifyError) { %>
-      <h1><%= verifyError %></h1>
-      <p>This link is invalid. Going back to login in 5 seconds...</p>
-
-      <script>
-        setTimeout(function () {
-          window.location.href = "/login";
-        }, 5000);
-      </script>
+        <h1>Email is verified!</h1>
+        <p><%= verifySuccess %></p>
+      <% } %> 
+      <% if (verifyError) { %>
+        <h1><%= verifyError %></h1>
+        <p>This link is invalid.</br> Going back to login in <span id="countdown">5</span> seconds...</p>
+    
+        <script>
+          let countdown = 5;
+          const countdownElement = document.getElementById("countdown");
+    
+          const countdownInterval = setInterval(function () {
+            countdown--;
+            countdownElement.textContent = countdown;
+    
+            if (countdown <= 0) {
+              clearInterval(countdownInterval);
+              window.location.href = "/login";
+            }
+          }, 1000);
+        </script>
       <% } %>
-
+    
       <a href="/login">Back to login</a>
     </div>
   </body>

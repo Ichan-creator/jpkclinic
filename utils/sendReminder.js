@@ -18,7 +18,7 @@ async function sendReminder(service, userId, petNames) {
   const mailOptions = {
     from: "jpkveterinaryclinic@gmail.com",
     to: user.email,
-    subject: "JPK Clinic - Appointment Reminder",
+    subject: "JPK Veterinary Clinic - Appointment Reminder",
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <p style="font-size: 16px;">Hi <strong>${user.fullName}!,</strong></p>

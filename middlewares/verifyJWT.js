@@ -14,7 +14,7 @@ function verifyJWT(req, res, next) {
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {
     if (error) {
-      return res.status(403).json({ message: "Forbidden" }); // Invalid token or expired
+      return res.status(403).json({ message: "Forbidden" });
     }
 
     req.user = decoded.userId;

@@ -28,7 +28,7 @@ function sendVerifyEmail(email, EMAIL_TOKEN_SECRET) {
   const mailOptions = {
     from: "jpkveterinaryclinic@gmail.com",
     to: email,
-    subject: "JPK Clinic - Verify Account Email",
+    subject: "JPK Veterinary Clinic - Verify Account Email",
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <h2 style="color: #4CAF50;">Verify Your Email</h2>
