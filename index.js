@@ -55,6 +55,7 @@ app.use(
     cookie: { httpOnly: true, sameSite: "strict", maxAge: 1 * 60 * 60 * 1000 },
   })
 );
+
 app.use(flash());
 app.use(noCache);
 

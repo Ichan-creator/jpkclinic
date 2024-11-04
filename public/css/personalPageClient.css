@@ -145,10 +145,12 @@ select {
 .input-field select:focus {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
 }
+
 .input-field select,
 .input-field input[type="date"] {
   color: #707070;
 }
+
 .input-field input[type="date"]:valid {
   color: #333;
 }

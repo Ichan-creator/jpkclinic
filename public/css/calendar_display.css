@@ -51,9 +51,11 @@ body {
   flex-wrap: wrap;
   padding-inline: 160px;
 }
+
 .weekdays {
   padding-top: 58px;
 }
+
 .calendar-days {
   padding-bottom: 58px;
 }

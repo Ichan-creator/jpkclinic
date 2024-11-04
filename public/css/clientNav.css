@@ -126,6 +126,7 @@ a {
 
 .nav__link:hover {
   color: var(--white-color);
+  text-decoration: none;
 }
 
 .nav__icon {

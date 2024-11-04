@@ -185,7 +185,3 @@ input {
   top: -5px;
   right: -5px;
 }
-
-.nav__link:hover {
-  text-decoration: none;
-}
