@@ -201,7 +201,7 @@ window.addEventListener("load", () => {
         id: "action",
         name: "",
         formatter: (cell, row) => {
-          const isApproved = row.cells[5].data !== "Pending";
+          const isApproved = row.cells[6].data !== "Pending";
 
           const approveAppointment = h(
             "button",
