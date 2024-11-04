@@ -224,8 +224,8 @@ window.addEventListener("load", () => {
                     .post("/approve-appointment", {
                       appointmentId: row.cells[0].data,
                       userId: row.cells[2].data,
-                      appointmentDate: row.cells[4].data,
-                      service: row.cells[5].data,
+                      appointmentDate: row.cells[3].data,
+                      service: row.cells[4].data,
                       petNames: row.cells[1].data,
                       type: "approved",
                     })
@@ -296,9 +296,7 @@ window.addEventListener("load", () => {
             item.service,
             item.dateApproved
               ? item.dateApproved !== "Pending"
-                ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
-                : "Pending"
-              : "",
+                ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"): "Pending" : "",
             null,
           ];
         }),

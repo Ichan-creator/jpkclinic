@@ -329,9 +329,7 @@ window.addEventListener("load", () => {
           item.service,
           item.dateApproved
             ? item.dateApproved !== "Pending"
-              ? dayjs(item.dateApproved).utc().format("MMMM DD, YYYY - hh:mm A")
-              : "Pending"
-            : "",
+              ? dayjs(item.dateApproved).utc().format("MMMM DD, YYYY - hh:mm A"): "Pending" : "",
           null,
         ]),
       handle: (res) => {
