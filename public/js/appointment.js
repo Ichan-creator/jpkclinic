@@ -284,7 +284,7 @@ window.addEventListener("load", () => {
         id: "action",
         name: "",
         formatter: (cell, row) => {
-          const isApproved = row.cells[3].data !== "Pending";
+          const isApproved = row.cells[4].data !== "Pending";
 
           return h(
             "button",
