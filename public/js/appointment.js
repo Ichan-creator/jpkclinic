@@ -255,9 +255,9 @@ window.addEventListener("load", () => {
       const tooltip = document.getElementById("event-tooltip");
       const tooltipContent = document.getElementById("event-tooltip-content");
 
-      const formattedAppointmentDate = dayjs(info.event.start).format(
-        "MMMM D, YYYY - hh:mm A"
-      );
+      const formattedAppointmentDate = dayjs(info.event.start)
+        .utc()
+        .format("MMMM D, YYYY - hh:mm A");
 
       tooltipContent.innerHTML = `Service: ${info.event.title}<br />Date: ${formattedAppointmentDate}`;
 
