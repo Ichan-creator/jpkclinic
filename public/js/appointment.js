@@ -169,7 +169,7 @@ const recurringEvents = [
 ];
 
 const appointmentDateInput = document.getElementById("appointmentDate");
-appointmentDateInput.setAttribute("min", dayjs().format("MMM-DD-YYYYTHH:mm"));
+appointmentDateInput.setAttribute("min", dayjs().format("YYYY-MM-DDTHH:mm"));
 
 appointmentDateInput.addEventListener("input", function () {
   const selectedDate = new Date(appointmentDateInput.value);
@@ -323,7 +323,7 @@ window.addEventListener("load", () => {
       then: (data) =>
         data.map((item) => [
           item.id,
-          dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+          dayjs(item.appointmentDate).format("YYYY-MM-DDTHH:mm"),
           item.service,
           item.dateApproved ? item.dateApproved !== "Pending" 
           ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A") : "Pending" : "",
