@@ -188,6 +188,7 @@ const { h } = window.gridjs;
 window.addEventListener("load", () => {
   const calendarEl = document.getElementById("calendar");
   const calendar = new FullCalendar.Calendar(calendarEl, {
+    timeZone: "UTC",
     initialView: "dayGridMonth",
     customButtons: {
       makeAppointmentBtn: {
@@ -322,20 +323,17 @@ window.addEventListener("load", () => {
       url: "/appointments-list",
       method: "GET",
       then: (data) =>
-        data.map((item) => {
-          console.log(item);
-          return [
-            item.id,
-            dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
-            item.service,
-            item.dateApproved
-              ? item.dateApproved !== "Pending"
-                ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
-                : "Pending"
-              : "",
-            null,
-          ];
-        }),
+        data.map((item) => [
+          item.id,
+          dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+          item.service,
+          item.dateApproved
+            ? item.dateApproved !== "Pending"
+              ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
+              : "Pending"
+            : "",
+          null,
+        ]),
       handle: (res) => {
         if (res.status === 404) return { data: [] };
         if (res.ok) return res.json();
@@ -404,8 +402,6 @@ appointmentForm.addEventListener("submit", (event) => {
   const email = appointmentForm.email.value;
   const appointmentDate = appointmentForm.appointmentDate.value;
   const veterinarian = appointmentForm.veterinarian.value;
-
-  console.log(appointmentDate);
 
   axios
     .post("/book-appointment", {
