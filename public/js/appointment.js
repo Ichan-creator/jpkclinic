@@ -326,8 +326,11 @@ window.addEventListener("load", () => {
           item.id,
           dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
           item.service,
-          item.dateApproved ? item.dateApproved !== "Pending" 
-          ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A") : "Pending" : "",
+          item.dateApproved
+            ? item.dateApproved !== "Pending"
+              ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
+              : "Pending"
+            : "",
           null,
         ]),
       handle: (res) => {
@@ -398,6 +401,8 @@ appointmentForm.addEventListener("submit", (event) => {
   const email = appointmentForm.email.value;
   const appointmentDate = appointmentForm.appointmentDate.value;
   const veterinarian = appointmentForm.veterinarian.value;
+
+  console.log(appointmentDate);
 
   axios
     .post("/book-appointment", {
