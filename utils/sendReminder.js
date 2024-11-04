@@ -3,7 +3,7 @@ import { User } from "../models/index.models.js";
 
 async function sendReminder(service, userId, petNames, appointmentDate) {
   const user = await User.findByPk(userId, {
-    attributes: ["email"],
+    attributes: ["email", "fullName"],
     raw: true,
   });
 
