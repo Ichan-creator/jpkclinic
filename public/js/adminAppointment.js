@@ -223,7 +223,7 @@ window.addEventListener("load", () => {
                   axios
                     .post("/approve-appointment", {
                       appointmentId: row.cells[0].data,
-                      userId: row.cells[1].data,
+                      userId: row.cells[2].data,
                       appointmentDate: row.cells[3].data,
                       service: row.cells[4].data,
                       petNames: row.cells[1].data,
