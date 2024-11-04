@@ -255,9 +255,7 @@ window.addEventListener("load", () => {
       const tooltip = document.getElementById("event-tooltip");
       const tooltipContent = document.getElementById("event-tooltip-content");
 
-      const formattedAppointmentDate = dayjs(info.event.start)
-        .utc()
-        .format("MMMM D, YYYY - hh:mm A");
+      const formattedAppointmentDate = dayjs(info.event.start).format("MMMM D, YYYY - hh:mm A");
 
       tooltipContent.innerHTML = `Service: ${info.event.title}<br />Date: ${formattedAppointmentDate}`;
 
@@ -284,7 +282,7 @@ window.addEventListener("load", () => {
         id: "action",
         name: "",
         formatter: (cell, row) => {
-          const isApproved = row.cells[3].data !== "Pending";
+          const isApproved = row.cells[3].data !== "PENDING";
 
           return h(
             "button",
@@ -325,10 +323,10 @@ window.addEventListener("load", () => {
       then: (data) =>
         data.map((item) => [
           item.id,
-          dayjs(item.appointmentDate).utc().format("MMMM DD, YYYY - hh:mm A"),
+          dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
           item.service,
-          item.dateApproved ? item.dateApproved !== "Pending" 
-          ? dayjs(item.dateApproved).utc().format("MMMM DD, YYYY - hh:mm A") : "Pending" : "",
+          item.dateApproved ? item.dateApproved !== "PENDING" 
+          ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A") : "PENDING" : "",
           null,
         ]),
       handle: (res) => {

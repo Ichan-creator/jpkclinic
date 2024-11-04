@@ -104,7 +104,7 @@ async function handleBookAppointment(req, res) {
       email,
       appointmentDate,
       veterinarian,
-      dateApproved: "Pending",
+      dateApproved: "PENDING",
       appointmentStatus: "PENDING",
       petId: existingPetRecord.id,
     });
@@ -125,7 +125,7 @@ async function handleCancelAppointment(req, res) {
   const { appointmentId } = req.body;
 
   await Appointments.update(
-    { dateApproved: "cancelled", appointmentStatus: "CANCELLED" },
+    { dateApproved: "CANCELLED", appointmentStatus: "CANCELLED" },
     { where: { id: appointmentId } }
   );
 
