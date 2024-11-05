@@ -1,6 +1,6 @@
 function checkUser(req, res, next) {
   if (!req.user) {
-    return res.redirect("/welcome");
+    return res.redirect("/login?sessionExpired=true");
   }
   next();
 }

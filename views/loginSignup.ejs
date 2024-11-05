@@ -143,10 +143,16 @@
                 </div>
                 <p
                   class="existing-hidden"
-                  style="color: red; font-size: 0.75em; margin-bottom: 10px; 
-                  line-height: 14px; font-weight: 400;"
+                  style="
+                    color: red;
+                    font-size: 0.75em;
+                    margin-bottom: 10px;
+                    line-height: 14px;
+                    font-weight: 400;
+                  "
                 >
-                Sorry, that email address is already associated with an account.
+                  Sorry, that email address is already associated with an
+                  account.
                 </p>
 
                 <div class="input-wrap">
@@ -789,6 +795,17 @@
         </div>
       </div>
     </main>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("sessionExpired")) {
+        alert("Your session has expired. Please log in again.");
+
+        urlParams.delete("sessionExpired");
+        const newUrl = window.location.pathname + "?" + urlParams.toString();
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    </script>
 
     <!-- Javascript file -->
     <script src="/js/loginSignup.js"></script>
