@@ -481,3 +481,15 @@ function handleLogout(event) {
       console.error("Logout failed:", error);
     });
 }
+
+function handleShowNotif() {
+  const calendarBtn = document.querySelectorAll(".fc-toolbar-chunk")[2];
+
+  calendarBtn.style.zIndex = 10;
+}
+
+function handleCloseNotif() {
+  const calendarBtn = document.querySelectorAll(".fc-toolbar-chunk")[2];
+
+  calendarBtn.style.zIndex = 100;
+}

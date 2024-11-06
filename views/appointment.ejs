@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Appointment | JPK Veterinary Clinic</title>
-    
+
     <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
 
     <!-- <link
@@ -15,7 +15,7 @@
     <link
       href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
       rel="stylesheet"
-    /> 
+    />
 
     <link
       href="https://unpkg.com/tailwindcss@1.7.0/dist/tailwind.min.css"
@@ -26,19 +26,19 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
- 
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     />
 
     <link
-    href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css"
-    rel="stylesheet"
-    /> 
-    
+      href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="https://unpkg.com/intro.js/introjs.css" />
-    
+
     <link rel="stylesheet" href="/css/clientNav.css" />
     <link rel="stylesheet" href="/css/appointment.css" />
   </head>
@@ -66,6 +66,7 @@
         <div class="flex">
           <div x-data="{ dropdownOpen: false }" class="relative my-32">
             <button
+              onclick="handleShowNotif()"
               @click="dropdownOpen = !dropdownOpen"
               class="relative z-10 block rounded-md bg-white p-2 focus:outline-none"
             >
@@ -88,6 +89,7 @@
 
             <div
               x-show="dropdownOpen"
+              onclick="handleCloseNotif()"
               @click="dropdownOpen = false"
               class="fixed inset-0 h-full w-full z-10"
             ></div>
@@ -158,8 +160,15 @@
       <nav class="nav">
         <div>
           <p class="nav__logo">
-            <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo" class="nav__logo-icon">
-            <span class="nav__logo-name">JPK VETERINARY</br> CLINIC</span>
+            <img
+              src="/images/jpk_logo.jpg"
+              alt="JPK Veterinary Clinic Logo"
+              class="nav__logo-icon"
+            />
+            <span class="nav__logo-name"
+              >JPK VETERINARY<br />
+              CLINIC</span
+            >
           </p>
           <div class="nav__list">
             <a href="/" class="nav__link">

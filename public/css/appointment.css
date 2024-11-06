@@ -338,3 +338,7 @@ select {
 .header-name span {
   font-size: 30px;
 }
+
+.fc-toolbar-chunk:nth-child(3) {
+  z-index: 100;
+}

@@ -798,10 +798,10 @@
 
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get("sessionExpired")) {
-        alert("Your session has expired. Please log in again.");
+      if (urlParams.get("loginExpired")) {
+        alert("Login required. Please log in again.");
 
-        urlParams.delete("sessionExpired");
+        urlParams.delete("loginExpired");
         const newUrl = window.location.pathname + "?" + urlParams.toString();
         window.history.replaceState({}, document.title, newUrl);
       }
