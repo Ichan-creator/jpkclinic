@@ -18,6 +18,7 @@ body {
   max-height: 100vh;
   height: 100vh;
 }
+
 table {
   width: 100%;
   padding-right: 30px;
@@ -74,26 +75,32 @@ table {
   font-weight: 500;
   animation: transitionIn-Y-over 0.5s;
 }
+
 table {
   animation: transitionIn-Y-bottom 0.5s;
 }
-.edoc-logo {  
-  font-size: 24px;
+
+.edoc-logo {
+  font-size: 30px;
 }
+
 .edoc-logo-sub {
-  font-size: 12px;
+  font-size: 16px;
 }
+
 .heading-text {
-  font-size: 38px;
+  font-size: 46px;
 }
+
 .sub-text2 {
-  font-size: 15px;
+  font-size: 18px;
 }
+
 .nav-item {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 24px;
   color: rgb(255, 255, 255);
   font-weight: bold;
   transition: color 0.3s;
@@ -119,6 +126,81 @@ table {
   width: 100%;
 }
 
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown button styling */
+.dropdown .nav-item {
+  cursor: pointer;
+}
+
+.dropdown button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdown .arrow {
+  font-size: 12px;
+  margin-left: auto; /* Pushes arrow to the far right */
+  transition: transform 0.3s ease; /* Smooth rotation */
+}
+
+.dropdown:hover .arrow {
+  transform: rotate(90deg); /* Rotate the arrow when hovered */
+}
+
+/* Dropdown content styling with transition */
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 10px 0;
+  width: 240px;
+  background: #ffffff76;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  border-top: 3px solid #16181a;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.295);
+  z-index: 9999;
+  transition: visibility 0s, opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show dropdown with transition on hover */
+.dropdown:hover .dropdown-content {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dropdown link with permanent underline and hover effect */
+.dropdown-content a {
+  color: #0b0b0bd6;
+  padding: 12px 30px;
+  text-decoration: underline;
+  display: block; /* Stacks the items vertically */
+  background-color: transparent; /* Ensures no background color */
+  transition: color 0.3s ease;
+}
+
+/* Color change on hover */
+.dropdown-content a:hover {
+  color: #00000081;
+  background-color: transparent; /* No background color on hover */
+  text-decoration: none;
+  font-weight: 530; /* Make text bold on hover */
+}
+
+/* Footer styles */
 .footer-hashen {
   position: absolute;
   bottom: 0;
@@ -127,12 +209,12 @@ table {
   animation: transitionIn-Y-over 0.5s;
 }
 
+/* Animation keyframes */
 @keyframes transitionIn-X {
   from {
     opacity: 0;
     transform: translateX(-10px);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
@@ -144,7 +226,6 @@ table {
     opacity: 0;
     transform: translateY(-10px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -156,14 +237,16 @@ table {
     opacity: 0;
     transform: translateY(30px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+/* Font import */
 @import url("font-inter.css");
+
+/* Root variables */
 :root {
   --primarycolor: #5d9eda;
   --primarycolorhover: #017aec;
@@ -171,6 +254,7 @@ table {
   --btnnicetext: #1b62b3;
 }
 
+/* General styles */
 body {
   margin: 0;
   padding: 0;
@@ -201,6 +285,7 @@ body {
   background: #555;
 }
 
+/* Input text styling */
 .input-text {
   border-radius: 4px;
   border: 0.5px solid rgb(226, 226, 226);
@@ -245,12 +330,13 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+/* Button styling */
 .btn {
   cursor: pointer;
   padding: 8px 20px;
   outline: none;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.5px;
   transition: all 0.3s;
   border-radius: 5px;
@@ -264,20 +350,23 @@ body {
   color: rgb(255, 255, 255);
   font-weight: 600;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-  transition: all 0.5s; 
+  transition: all 0.5s;
   font-family: "Inter", sans-serif;
   transition: all 0.5s ease;
 }
 
+/* Primary button styling */
 .btn-primary {
   background-color: var(--primarycolor);
   font-weight: 550;
   border: 1px solid var(--primarycolor);
   color: rgba(0, 0, 0, 0.741);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
-  transition: background-color 0.7s ease, color 0.7s ease, border 0.7s ease, box-shadow 0.5s ease;
+  transition: background-color 0.7s ease, color 0.7s ease, border 0.7s ease,
+    box-shadow 0.5s ease;
 }
 
+/* Responsive styles */
 @media screen and (max-width: 600px) {
   .edoc-logo {
     line-height: 30px;
