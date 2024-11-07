@@ -89,18 +89,18 @@ table {
 }
 
 .heading-text {
-  font-size: 46px;
+  font-size: 40px;
 }
 
 .sub-text2 {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .nav-item {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 18px;
   color: rgb(255, 255, 255);
   font-weight: bold;
   transition: color 0.3s;
@@ -126,13 +126,11 @@ table {
   width: 100%;
 }
 
-/* Dropdown container */
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* Dropdown button styling */
 .dropdown .nav-item {
   cursor: pointer;
 }
@@ -140,7 +138,7 @@ table {
 .dropdown button {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 18px;
   cursor: pointer;
   color: white;
   display: flex;
@@ -150,21 +148,20 @@ table {
 
 .dropdown .arrow {
   font-size: 12px;
-  margin-left: auto; /* Pushes arrow to the far right */
-  transition: transform 0.3s ease; /* Smooth rotation */
+  margin-left: auto;
+  transition: transform 0.3s ease;
 }
 
 .dropdown:hover .arrow {
-  transform: rotate(90deg); /* Rotate the arrow when hovered */
+  transform: rotate(90deg);
 }
 
-/* Dropdown content styling with transition */
 .dropdown-content {
   position: absolute;
   top: 100%;
   left: 0;
-  padding: 10px 0;
-  width: 240px;
+  padding: 9px 0;
+  width: 200px;
   background: #ffffff76;
   visibility: hidden;
   opacity: 0;
@@ -175,32 +172,28 @@ table {
   transition: visibility 0s, opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Show dropdown with transition on hover */
 .dropdown:hover .dropdown-content {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Dropdown link with permanent underline and hover effect */
 .dropdown-content a {
   color: #0b0b0bd6;
-  padding: 12px 30px;
+  padding: 9px 28px;
   text-decoration: underline;
-  display: block; /* Stacks the items vertically */
-  background-color: transparent; /* Ensures no background color */
+  display: block;
+  background-color: transparent;
   transition: color 0.3s ease;
 }
 
-/* Color change on hover */
 .dropdown-content a:hover {
   color: #00000081;
-  background-color: transparent; /* No background color on hover */
+  background-color: transparent;
   text-decoration: none;
-  font-weight: 530; /* Make text bold on hover */
+  font-weight: 530;
 }
 
-/* Footer styles */
 .footer-hashen {
   position: absolute;
   bottom: 0;
@@ -209,7 +202,6 @@ table {
   animation: transitionIn-Y-over 0.5s;
 }
 
-/* Animation keyframes */
 @keyframes transitionIn-X {
   from {
     opacity: 0;
@@ -243,10 +235,8 @@ table {
   }
 }
 
-/* Font import */
 @import url("font-inter.css");
 
-/* Root variables */
 :root {
   --primarycolor: #5d9eda;
   --primarycolorhover: #017aec;
@@ -254,7 +244,6 @@ table {
   --btnnicetext: #1b62b3;
 }
 
-/* General styles */
 body {
   margin: 0;
   padding: 0;
@@ -336,7 +325,7 @@ body {
   padding: 8px 20px;
   outline: none;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 0.5px;
   transition: all 0.3s;
   border-radius: 5px;

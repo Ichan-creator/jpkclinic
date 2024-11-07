@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JPK Veterinary Clinic Services</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+      }
+      .header {
+        padding: 20px;
+        background-color: #e0f7fa;
+        margin-bottom: 20px;
+        border-radius: 8px;
+      }
+      .header img {
+        width: 100px;
+        height: auto;
+      }
+      .header h1 {
+        margin: 10px 0;
+        font-size: 28px;
+        color: #00796b;
+      }
+      .section {
+        margin-bottom: 30px;
+      }
+      .section h2 {
+        font-size: 24px;
+        color: #004d40;
+        margin-bottom: 10px;
+      }
+      .services {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      .service-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+        width: 250px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .service-card h3 {
+        color: #00796b;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      .service-card p {
+        color: #333;
+        font-size: 14px;
+      }
+
+      #scrollToTopBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo" />
+        <h1>Our Services</h1>
+        <p>
+          Providing comprehensive care and professional veterinary services at
+          JPK Veterinary Clinic.
+        </p>
+      </div>
+
+      <!-- Vaccination & Deworming Section -->
+      <div class="section">
+        <h2>Vaccination & Deworming</h2>
+        <div class="services">
+          <div class="service-card">
+            <h3>First Vet Visit</h3>
+            <p>
+              Vaccinations and deworming for puppies/kittens during their first
+              vet visit.
+            </p>
+          </div>
+          <div class="service-card">
+            <h3>1-2 Pets</h3>
+            <p>
+              Vaccination and/or deworming for 1-2 pets (no consultation
+              included).
+            </p>
+          </div>
+          <div class="service-card">
+            <h3>3 or More Pets</h3>
+            <p>
+              Vaccination and/or deworming for 3 or more pets (no consultation
+              included).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Consultations Section -->
+      <div class="section">
+        <h2>Consultations</h2>
+        <div class="services">
+          <div class="service-card">
+            <h3>Consultation for 1 Pet</h3>
+            <p>
+              Consultation for one pet (sick pet, ear/eye/skin check,
+              ultrasound, blood tests, etc.).
+            </p>
+          </div>
+          <div class="service-card">
+            <h3>Consultation for 2+ Pets</h3>
+            <p>
+              Consultation for two or more pets in one visit (sick pet,
+              ear/eye/skin check, ultrasound, blood tests, etc.).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="history.back()" id="scrollToTopBtn">Go back</button>
+    </div>
+  </body>
+</html>

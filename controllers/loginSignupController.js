@@ -13,6 +13,10 @@ function handleGetWelcome(req, res) {
   res.render("landingPage");
 }
 
+function handleGetServices(req, res) {
+  res.render("services");
+}
+
 function handleGetLoginSignup(req, res) {
   res.render("loginSignup", {
     loginError: req.flash("error"),
@@ -204,6 +208,7 @@ function handleLogout(req, res) {
 
 export {
   handleGetWelcome,
+  handleGetServices,
   handleGetLoginSignup,
   handleGetForgotPassword,
   handleGetForgotPasswordToken,

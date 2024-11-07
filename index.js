@@ -8,8 +8,7 @@ import passport from "./config/passport.js";
 import path from "path";
 import session from "express-session";
 
-import { initDB, Pets, User } from "./models/index.models.js";
-import checkUser from "./middlewares/checkUser.js";
+import { initDB, User } from "./models/index.models.js";
 import noCache from "./middlewares/noCache.js";
 
 import loginSignupRouter from "./routes/loginSignupRoute.js";
@@ -28,8 +27,6 @@ import adminEmployeeRecordsRouter from "./routes/adminEmployeeRecords.js";
 import hashPassword from "./utils/hashPassword.js";
 import isAdmin from "./middlewares/isAdmin.js";
 
-import multer from "multer";
-
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -38,8 +35,6 @@ const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-
-const upload = multer({ dest: path.join(__dirname, "/public/uploads/") });
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "/public")));
@@ -76,9 +71,6 @@ app.get("/try", async (req, res) => {
 
 app.use(adminLoginRouter);
 app.use(loginSignupRouter);
-
-// User check middleware
-app.use(checkUser);
 
 // Client pages
 app.use(clientNavRouter);
