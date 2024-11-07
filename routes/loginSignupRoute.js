@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   handleGetWelcome,
+  handleContactUs,
   handleGetServices,
   handleGetLoginSignup,
   handleGetForgotPassword,
@@ -19,6 +20,7 @@ import {
 const loginSignupRouter = express.Router();
 
 loginSignupRouter.get("/welcome", handleGetWelcome);
+loginSignupRouter.get("/contact", handleContactUs);
 loginSignupRouter.get("/services", handleGetServices);
 loginSignupRouter.get("/login", handleGetLoginSignup);
 loginSignupRouter.get("/forgot-password", handleGetForgotPassword);

@@ -176,14 +176,21 @@ window.addEventListener("load", () => {
   }).render(document.getElementById("medical-records-table"));
 });
 
+const logoutModal = document.getElementById("logoutModal");
+
 function handleLogout(event) {
   event.preventDefault();
 
+  logoutModal.style.display = "flex";
+  logoutModal.style.alignItems = "center";
+  logoutModal.style.justifyContent = "center";
+}
+
+function handleConfirmLogout() {
   fetch("/logout", { method: "POST" })
     .then((response) => {
       if (response.ok) {
         window.location.replace("/admin-login");
-
         setTimeout(() => {
           window.history.pushState(null, null, "/admin-login");
         }, 500);
@@ -192,4 +199,8 @@ function handleLogout(event) {
     .catch((error) => {
       console.error("Logout failed:", error);
     });
+}
+
+function handleCancelLogout() {
+  logoutModal.style.display = "none";
 }

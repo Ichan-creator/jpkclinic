@@ -17,6 +17,10 @@ function handleGetServices(req, res) {
   res.render("services");
 }
 
+function handleContactUs(req, res) {
+  res.render("contactUs");
+}
+
 function handleGetLoginSignup(req, res) {
   res.render("loginSignup", {
     loginError: req.flash("error"),
@@ -208,6 +212,7 @@ function handleLogout(req, res) {
 
 export {
   handleGetWelcome,
+  handleContactUs,
   handleGetServices,
   handleGetLoginSignup,
   handleGetForgotPassword,
