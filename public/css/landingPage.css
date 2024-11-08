@@ -15,8 +15,7 @@ body {
 .full-height {
   background: rgba(0, 0, 0, 0.548);
   background-attachment: fixed;
-  max-height: 100vh;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 table {

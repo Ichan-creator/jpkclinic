@@ -197,12 +197,13 @@ window.addEventListener("load", () => {
       "Client Name",
       { name: "Date & Time", sort: true },
       "Service",
+      { name: "petNames", hidden: true },
       { name: "Date Approved", sort: true },
       {
         id: "action",
         name: "",
         formatter: (cell, row) => {
-          const isApproved = row.cells[5].data !== "Pending";
+          const isApproved = row.cells[6].data !== "Pending";
 
           const approveAppointment = h(
             "button",
@@ -222,10 +223,10 @@ window.addEventListener("load", () => {
                   axios
                     .post("/approve-appointment", {
                       appointmentId: row.cells[0].data,
-                      userId: row.cells[2].data,
-                      appointmentDate: row.cells[4].data,
-                      service: row.cells[5].data,
-                      petNames: row.cells[1].data,
+                      userId: row.cells[1].data,
+                      appointmentDate: row.cells[3].data,
+                      service: row.cells[4].data,
+                      petNames: row.cells[5].data,
                       type: "approved",
                     })
                     .then((res) => {
@@ -286,12 +287,17 @@ window.addEventListener("load", () => {
       method: "GET",
       then: (data) =>
         data.map((item) => {
+          console.log(item.dateApproved);
+          console.log(
+            dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
+          );
           return [
             item.id,
             item["user.id"],
             item["user.fullName"],
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.service,
+            item.petNames,
             item.dateApproved
               ? item.dateApproved !== "Pending"
                 ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")

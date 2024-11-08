@@ -86,6 +86,11 @@ button.pinterest {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.veterinarians-box-contact {
+  padding: 20px;
+  margin: 20px;
+}
+
 .notifications-container {
   max-height: 250px;
   overflow-y: auto;

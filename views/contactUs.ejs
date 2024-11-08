@@ -7,88 +7,153 @@
     <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
 
     <link rel="stylesheet" href="/css/clinicDirectory.css" />
+    <link rel="stylesheet" href="/css/landingPage.css" />
 
     <style>
       body {
         font-family: "Nunito", sans-serif;
       }
 
-      .veterinarians-box {
-        background-image: url("./images/veterinarians-bg.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        color: black;
-      }
-      .veterinarians-box h2 {
-        color: black;
+      .veterinarians-box-contact h2 {
+        color: #fff;
       }
       .veterinarians-box p {
         color: black;
-      }
-
-      #backBtn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 18px;
       }
     </style>
 
     <title>Contact | JPK Veterinary Clinic</title>
   </head>
   <body id="body-pd">
-    <div class="veterinarians-box">
-      <h2
-        style="
-          text-align: center;
-          margin-top: 20px;
-          font-weight: bold;
-          font-size: 24px;
-        "
-      >
-        VETERINARIANS
-      </h2>
+    <div class="full-height">
+      <center>
+        <table border="0">
+          <tr>
+            <td width="50%">
+              <a href="/welcome" style="text-decoration: none">
+                <font class="edoc-logo">JPK VETERINARY CLINIC</font>
+                <font class="edoc-logo-sub">| APPOINTMENT SYSTEM</font>
+              </a>
+            </td>
+            <td width="4%">
+              <a href="/" class="non-style-link">
+                <p class="nav-item">HOME</p>
+              </a>
+            </td>
+            <td width="7%">
+              <a href="/contact" class="non-style-link">
+                <p class="nav-item">CONTACT US</p>
+              </a>
+            </td>
+            <td width="5%">
+              <a href="/services" class="non-style-link">
+                <p class="nav-item">SERVICES</p>
+              </a>
+            </td>
+            <td width="4%">
+              <a href="/login" class="non-style-link">
+                <p class="nav-item">LOGIN</p>
+              </a>
+            </td>
+            <td width="4%">
+              <a
+                href="/login"
+                class="non-style-link"
+                onclick="handleRegisterClick()"
+              >
+                <p class="nav-item" style="padding-right: 5px">REGISTER</p>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6">
+              <div class="veterinarians-box-contact">
+                <h2
+                  style="
+                    text-align: center;
+                    margin-top: 20px;
+                    font-weight: bold;
+                    font-size: 24px;
+                  "
+                >
+                  VETERINARIANS
+                </h2>
 
-      <div class="card-body">
-        <div class="card">
-          <div class="card-image">
-            <img src="/images/profile-icon1.png" alt="" />
-          </div>
-          <p class="name">Dr. Francis M. Katalbas</p>
-          <p class="contact_num"><b>Contact Number:</b> (0917)815-3121</p>
-          <p class="email_address"><b>Email:</b> DOKFMK@yahoo.com.ph</p>
-        </div>
+                <div class="card-body">
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="/images/profile-icon1.png" alt="" />
+                    </div>
+                    <p class="name">Dr. Francis M. Katalbas</p>
+                    <p class="contact_num">
+                      <b>Contact Number:</b> (0917)815-3121
+                    </p>
+                    <p class="email_address">
+                      <b>Email:</b> DOKFMK@yahoo.com.ph
+                    </p>
+                  </div>
 
-        <div class="card">
-          <div class="card-image">
-            <img src="/images/profile-icon2.png" alt="" />
-          </div>
-          <p class="name">Dr. Francisella P. Katalbas</p>
-          <p class="contact_num"><b>Contact Number:</b> (0928)831-0031</p>
-          <p class="email_address"><b>Email:</b> franskatalbas@gmail.com</p>
-        </div>
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="/images/profile-icon2.png" alt="" />
+                    </div>
+                    <p class="name">Dr. Francisella P. Katalbas</p>
+                    <p class="contact_num">
+                      <b>Contact Number:</b> (0928)831-0031
+                    </p>
+                    <p class="email_address">
+                      <b>Email:</b> franskatalbas@gmail.com
+                    </p>
+                  </div>
 
-        <div class="card">
-          <div class="card-image">
-            <img src="/images/profile-icon3.png" alt="" />
-          </div>
-          <p class="name">Jessica Katalbas</p>
-          <p class="contact_num"><b>Contact Number:</b> (0919)362-4915</p>
-          <p class="email_address"><b>Email:</b> jessicakatalbas@yahoo.com</p>
-        </div>
-      </div>
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="/images/profile-icon3.png" alt="" />
+                    </div>
+                    <p class="name">Jessica Katalbas</p>
+                    <p class="contact_num">
+                      <b>Contact Number:</b> (0919)362-4915
+                    </p>
+                    <p class="email_address">
+                      <b>Email:</b> jessicakatalbas@yahoo.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td
+              colspan="6"
+              style="
+                color: white;
+                text-align: center;
+                vertical-align: middle;
+                height: 200px;
+                padding-left: 100px;
+                padding-right: 100px;
+              "
+            >
+              <h2 style="margin: 0 0 50px; font-weight: bold; font-size: 24px">
+                We hope you enjoy visiting our website and learning more about
+                our JPK Veterinary Clinic. We urge you to contact Dr. Katalbas
+                or any other member of our team if you have any questions,
+                concerns, or are ready to schedule your pet's visit with us! Be
+                sure to reference our available services if you want to further
+                discuss your pet's health and the treatment plan we'll be
+                working on creating together. Our team here at JPK Veterinary
+                Clinic look forward to meeting you and your incredible pet!
+              </h2>
+            </td>
+          </tr>
+        </table>
+      </center>
     </div>
 
-    <button onclick="history.back()" id="backBtn">Go back</button>
+    <script>
+      function handleRegisterClick() {
+        localStorage.setItem("isRegisterClicked", "true");
+      }
+    </script>
   </body>
 </html>
