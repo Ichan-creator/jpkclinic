@@ -349,15 +349,25 @@ p {
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 .confirm-button {
-  background-color: #007bff;
+  background-color: #87CEFA; /* Light blue */
   color: white;
+}
+
+.confirm-button:hover {
+  background-color: #1E90FF; /* Dark blue */
 }
 
 .cancel-button {
   background-color: #ffffff;
-  color: #007bff;
-  border: 1px solid #007bff;
+  color: #1E90FF; /* Blue text */
+  border: 1px solid #1E90FF;
+}
+
+.cancel-button:hover {
+  background-color: #1E90FF; /* Blue background */
+  color: white; /* White text */
 }
