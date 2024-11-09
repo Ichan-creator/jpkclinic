@@ -16,7 +16,6 @@ const sequelize = new Sequelize(
     dialect: dbConfig.dialect,
     port: 3306,
     pool: { max: 10, min: 0, acquire: 30000, idle: 10000 },
-    timezone: "-08:00",
   }
 );
 
