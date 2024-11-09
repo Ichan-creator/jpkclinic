@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JPK Veterinary Clinic Services</title>
+
+    <link rel="stylesheet" href="/css/servicesPage.css" />
+    <link rel="stylesheet" href="/css/landingPage.css" />
+  </head>
+  <body>
+    <div class="full-height">
+      <center>
+        <table border="0">
+          <tr>
+            <td width="50%">
+              <a href="/welcome" style="text-decoration: none">
+                <font class="edoc-logo">JPK VETERINARY CLINIC</font>
+                <font class="edoc-logo-sub">| APPOINTMENT SYSTEM</font>
+              </a>
+            </td>
+            <td width="4%">
+              <a href="/" class="non-style-link">
+                <p class="nav-item">HOME</p>
+              </a>
+            </td>
+            <td width="7%">
+              <a href="/contact" class="non-style-link">
+                <p class="nav-item">CONTACT US</p>
+              </a>
+            </td>
+            <td width="5%">
+              <a href="/services" class="non-style-link">
+                <p class="nav-item">SERVICES</p>
+              </a>
+            </td>
+            <td width="4%">
+              <a href="/login" class="non-style-link">
+                <p class="nav-item">LOGIN</p>
+              </a>
+            </td>
+            <td width="4%">
+              <a
+                href="/login"
+                class="non-style-link"
+                onclick="handleRegisterClick()"
+              >
+                <p class="nav-item" style="padding-right: 5px">REGISTER</p>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </center>
+
+      <div class="container">
+        <div class="header">
+          <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo" />
+          <h1>Our Services</h1>
+          <p>
+            Providing comprehensive care and professional veterinary services
+            at JPK Veterinary Clinic.
+          </p>
+        </div>
+        <div class="section">
+          <h2>Vaccination & Deworming</h2>
+          <div class="services">
+            <div class="service-card">
+              <h3>First Vet Visit</h3>
+              <p>
+                Vaccinations and deworming for puppies/kittens during their
+                first vet visit.
+              </p>
+            </div>
+            <div class="service-card">
+              <h3>1-2 Pets</h3>
+              <p>
+                Vaccination and/or deworming for 1-2 pets (no consultation
+                included).
+              </p>
+            </div>
+            <div class="service-card">
+              <h3>3 or More Pets</h3>
+              <p>
+                Vaccination and/or deworming for 3 or more pets (no
+                consultation included).
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2>Consultations</h2>
+          <div class="services">
+            <div class="service-card">
+              <h3>Consultation for 1 Pet</h3>
+              <p>
+                Consultation for one pet (sick pet, ear/eye/skin check,
+                ultrasound, blood tests, etc.).
+              </p>
+            </div>
+            <div class="service-card">
+              <h3>Consultation for 2+ Pets</h3>
+              <p>
+                Consultation for two or more pets in one visit (sick pet,
+                ear/eye/skin check, ultrasound, blood tests, etc.).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function handleRegisterClick() {
+        localStorage.setItem("isRegisterClicked", "true");
+      }
+    </script>
+  </body>
+</html>
