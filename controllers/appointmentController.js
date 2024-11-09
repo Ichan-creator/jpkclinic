@@ -102,7 +102,7 @@ async function handleBookAppointment(req, res) {
       concern,
       contactNumber,
       email,
-      appointmentDate: dayjs(appointmentDate).toISOString(),
+      appointmentDate,
       veterinarian,
       dateApproved: "Pending",
       appointmentStatus: "PENDING",

@@ -49,6 +49,9 @@ async function handleGetAdminAppointmentsList(req, res) {
       model: User,
       attributes: ["id", "fullName"],
     },
+    where: {
+      dateApproved: { [Op.ne]: "cancelled" },
+    },
     raw: true,
   });
 

@@ -287,10 +287,6 @@ window.addEventListener("load", () => {
       method: "GET",
       then: (data) =>
         data.map((item) => {
-          console.log(item.dateApproved);
-          console.log(
-            dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
-          );
           return [
             item.id,
             item["user.id"],
@@ -298,11 +294,9 @@ window.addEventListener("load", () => {
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.service,
             item.petNames,
-            item.dateApproved
-              ? item.dateApproved !== "Pending"
-                ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
-                : "Pending"
-              : "",
+            item.dateApproved === "Pending"
+              ? "Pending"
+              : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
             null,
           ];
         }),
