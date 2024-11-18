@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login and Registration | JPK Veterinary Clinic</title>
+    <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <link rel="stylesheet" href="/css/termsAndConditions.css" />
+    <link rel="stylesheet" href="/css/loginSignup.css" />
+  </head>
+  <body>
+    <a href="/welcome" class="back-button">Back</a>
+    <main>
+      <div class="box">
+        <div class="inner-box">
+          <div class="forms-wrap">
+            <form id="login-form" autocomplete="off" class="sign-in-form">
+              <div class="logo">
+                <img src="/images/jpk_logo.jpg" alt="" />
+                <h4>JPK VETERINARY CLINIC</h4>
+              </div>
+              <div class="heading">
+                <h2>Welcome Back</h2>
+                <h6>Not registered yet?</h6>
+                <a class="toggle">Sign up</a>
+              </div>
+              <div class="session-message">
+                Your session has expired. Please login again.
+              </div>
+              <div class="actual-form">
+                <div class="input-wrap">
+                  <input
+                    id="loginUsername"
+                    type="text"
+                    name="loginUsername"
+                    minlength="4"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Username</label>
+                </div>
+                <div class="input-wrap password">
+                  <input
+                    id="loginPassword"
+                    type="password"
+                    name="loginPassword"
+                    minlength="6"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Password</label>
+                  <span
+                    class="material-symbols-outlined password-toggle"
+                    onclick="togglePassword()"
+                  >
+                    visibility
+                  </span>
+                </div>
+                <p
+                  class="flash-message"
+                  style="
+                    display: none;
+                    color: red;
+                    font-size: 0.8em;
+                    margin-bottom: 10px;
+                  "
+                ></p>
+                <p
+                  class="flash-message"
+                  style="
+                    display: none;
+                    color: green;
+                    font-size: 0.8em;
+                    margin-bottom: 10px;
+                  "
+                ></p>
+                <input type="submit" value="Login" class="sign-btn" />
+                <p class="text">
+                  Forgot your password?
+                  <a href="/forgot-password"> Reset Password </a>
+                </p>
+                <p class="text">Admin? <a href="/admin-login">Login here</a></p>
+              </div>
+            </form>
+            <form
+              id="signUpForm"
+              action="/signup"
+              method="post"
+              autocomplete="off"
+              class="sign-up-form"
+            >
+              <div class="logo">
+                <img src="/images/jpk_logo.jpg" alt="" />
+                <h4>JPK VETERINARY CLINIC</h4>
+              </div>
+              <div class="heading">
+                <h2>Get Started</h2>
+                <h6>Already have an account?</h6>
+                <a class="toggle">Sign in</a>
+              </div>
+              <div class="actual-form">
+                <div class="input-wrap">
+                  <input
+                    id="signUpUsername"
+                    name="signUpUsername"
+                    type="text"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Username</label>
+                </div>
+                <span id="usernameError" class="error-message"></span>
+                <div class="input-wrap">
+                  <input
+                    id="signUpEmail"
+                    name="signUpEmail"
+                    type="email"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Email</label>
+                </div>
+                <p
+                  class="existing-hidden"
+                  style="
+                    color: red;
+                    font-size: 0.75em;
+                    margin-bottom: 10px;
+                    line-height: 14px;
+                    font-weight: 400;
+                  "
+                >
+                  Sorry, that email address is already associated with an
+                  account.
+                </p>
+                <div class="input-wrap">
+                  <input
+                    id="signUpPassword"
+                    name="signUpPassword"
+                    type="password"
+                    minlength="12"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Password</label>
+                </div>
+                <div class="input-wrap">
+                  <input
+                    id="signUpConfirmPassword"
+                    name="signUpConfirmPassword"
+                    type="password"
+                    minlength="12"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Confirm Password</label>
+                </div>
+                <p
+                  class="hidden"
+                  style="color: red; font-size: 0.8em; margin-bottom: 10px"
+                >
+                  Passwords do not match.
+                </p>
+                <input
+                  type="button"
+                  value="Sign Up"
+                  class="sign-btn"
+                  onclick="handleSignUp()"
+                />
+                <p class="text">
+                  By signing up, I agree to the
+                  <a href="#" id="termsButton" onclick="handleTermsClick(event)"
+                    >Terms of Services and Privacy Policy</a
+                  >
+                </p>
+              </div>
+            </form>
+          </div>
+          <div class="carousel">
+            <div class="images-wrapper">
+              <img src="/images/image1.png" class="image img-1 show" alt="" />
+              <img src="/images/image2.png" class="image img-2" alt="" />
+              <img src="/images/image3.png" class="image img-3" alt="" />
+            </div>
+            <div class="text-slider">
+              <div class="text-wrap">
+                <div class="text-group">
+                  <h2>Book an appointment</h2>
+                  <h2>Monitor your pet's health condition</h2>
+                  <h2>Contact your veterinarian</h2>
+                </div>
+              </div>
+              <div class="bullets">
+                <span class="active" data-value="1"></span>
+                <span data-value="2"></span>
+                <span data-value="3"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function goBack() {
+          if (document.referrer) {
+            window.history.back();
+          } else {
+            window.location.href = "/welcome";
+          }
+        }
+      </script>
+
+      <div id="terms-modal" class="terms-modal">
+        <div class="terms-container">
+          <span class="close" id="closeTermsButton">&times;</span>
+          <h2>Terms and Conditions</h2>
+          <div class="terms-content" id="termsContent">
+            <h3>Acceptance of the Terms of Use</h3>
+            <p>
+              These terms of use are entered into by and between You and JPK
+              Veterinary Clinic (“JPK”, “we”, or “us”). The following terms and
+              conditions, together with any documents they expressly incorporate
+              by reference (collectively, these “Terms of Use”), govern your
+              access to and use of this website, including any content,
+              functionality, and services offered on or through this website
+              (the “Website”).
+            </p>
+            <p>
+              Please read the Terms of Use carefully before you start to use the
+              Website. By using the Website, you accept and agree to be bound
+              and abide by these Terms of Use and our Privacy Policy,
+              incorporated herein by reference. If you do not want to agree to
+              these Terms of Use or the Privacy Policy, you must not access or
+              use the Website.
+            </p>
+            <p>
+              This Website is offered and available to users who are 18 years of
+              age or older and reside in Las Pinas City or any of its
+              territories or possessions. By using this Website, you represent
+              and warrant that you are of legal age to form a binding contract
+              with JPK and meet all of the foregoing eligibility requirements.
+              If you do not meet all of these requirements, you must not access
+              or use the Website.
+            </p>
+
+            <h3>Services</h3>
+            <p>
+              JPK Veterinary Clinic provides veterinary services including
+              laboratory, consultation, deworming, and minor surgeries like
+              spaying, cesarean, etc., for pets. By scheduling an appointment or
+              using our services, you agree to adhere to these terms and
+              conditions.
+            </p>
+            <p>
+              During clinic hours, unforeseen walk-in emergencies may arise,
+              necessitating immediate attention. If you have a pre-existing
+              appointment during such instances, our system will notify you that
+              an emergency walk-in has occurred, and the duration of your wait
+              may vary as these cases are prioritized. You will be presented
+              with the option to either reschedule or cancel your appointment in
+              light of the circumstances. Your understanding and cooperation are
+              greatly appreciated as we strive to provide the best care to all
+              our patients.
+            </p>
+            <p>
+              At our clinic, we prioritize pet owners who are senior citizens
+              and individuals with disabilities (PWD). We want to ensure that
+              these individuals receive the attention and care they need. If you
+              fall into one of these categories, please let us know, and we will
+              ensure that you are given priority. Your comfort and convenience
+              are important to us, and we appreciate your understanding as we
+              strive to accommodate all our patients' needs.
+            </p>
+            <p>
+              We provide estimated times for services such as consultation,
+              laboratory work, vaccination, and deworming to give you an idea of
+              the duration of your visit. However, please note that these times
+              may vary depending on the flow of services and the unique case of
+              each patient.
+            </p>
+
+            <h3>Appointments and Cancellations</h3>
+            <p>
+              <strong>Appointments:</strong> Appointments can be made via our
+              website, SMS, or in person. You are responsible for arriving on
+              time.
+            </p>
+            <p>
+              <strong>Cancellations:</strong> Our system will send you a
+              notification one hour before your scheduled appointment to confirm
+              whether you intend to proceed with your booked appointment.
+            </p>
+
+            <h3>Changes to the Terms of Use</h3>
+            <p>
+              We may modify these Terms of Use at our discretion. Any updates
+              take effect as soon as they are posted and apply to all future
+              access and use of the Website. By continuing to use the Website
+              after changes are posted, you accept and agree to the revised
+              Terms of Use. Please check this page each time you visit the
+              Website to stay informed of any updates, as they are binding on
+              you.
+            </p>
+
+            <h3>Intellectual Property Rights</h3>
+            <p>
+              The Website and all its content, features, and functionality
+              (including information, software, text, displays, images, video,
+              audio, design, selection, and arrangement) are owned by JPK
+              Veterinary Clinic, its licensors, or other providers and are
+              protected by the Philippines and international copyright,
+              trademark, patent, trade secret, and other intellectual property
+              laws.
+            </p>
+            <p>
+              These Terms of Use allow you to use the Website for personal,
+              non-commercial purposes only. You must not:
+            </p>
+            <ul>
+              <li>
+                Reproduce, distribute, modify, create derivative works from,
+                publicly display, publicly perform, republish, download, store,
+                or transmit any material on the Website, except as follows:
+              </li>
+              <ul>
+                <li>
+                  Your computer may temporarily store copies in RAM for
+                  incidental access and viewing.
+                </li>
+                <li>
+                  Your Web browser may automatically cache files for display
+                  enhancement.
+                </li>
+                <li>
+                  You may print one copy of a reasonable number of Website pages
+                  for personal, non-commercial use only.
+                </li>
+                <li>
+                  If we offer desktop, mobile, or other applications for
+                  download, you may download a single copy for personal,
+                  non-commercial use, provided you agree to our end user license
+                  agreement.
+                </li>
+                <li>
+                  If we provide social media features with certain content, you
+                  may use those features as allowed.
+                </li>
+              </ul>
+              <li>Modify any materials from the site.</li>
+              <li>
+                Use any illustrations, photographs, video or audio sequences, or
+                graphics separately from the accompanying text.
+              </li>
+              <li>
+                Remove or alter any copyright, trademark, or other proprietary
+                rights notices from copies of materials from this site.
+              </li>
+              <li>
+                Access or use any part of the Website or its services or
+                materials for commercial purposes.
+              </li>
+            </ul>
+            <p>
+              If you print, copy, modify, download, or otherwise use or give
+              anyone else access to any part of the Website in violation of
+              these Terms of Use, your right to use the Website will immediately
+              end and you must return or destroy any copies of the materials you
+              have made. No rights, title, or interest in the Website or its
+              content is transferred to you, and all rights not expressly
+              granted are reserved by JPK Veterinary Clinic. Any unauthorized
+              use of the Website breaches these Terms of Use and may violate
+              copyright, trademark, and other laws.
+            </p>
+
+            <h3>Trademarks</h3>
+            <p>
+              The name "JPK Veterinary Clinic" and the JPK logo, along with all
+              related names, logos, product and service names, designs, and
+              slogans, are trademarks of JPK Veterinary Clinic or its affiliates
+              or licensors. You must not use these trademarks without prior
+              written permission from JPK. All other names, logos, product and
+              service names, designs, and slogans on this Website are the
+              trademarks of their respective owners.
+            </p>
+
+            <h3>Information About You and Your Visits to the Website</h3>
+            <p>
+              Any information gathered on this Website is governed by our
+              Privacy Policy. By using the Website, you agree to all actions
+              taken by us regarding your information following the Privacy
+              Policy.
+            </p>
+
+            <h3>Geographic Restrictions</h3>
+            <p>
+              We offer this Website for use solely by individuals located in the
+              Philippines. We do not assert that the Website or any of its
+              content is accessible or suitable outside of the Philippines.
+              Accessing the Website may not be permissible for certain
+              individuals or in certain countries. If you access the Website
+              from outside the Philippines, you do so voluntarily and are
+              accountable for complying with local laws.
+            </p>
+
+            <h3>Reservation of Rights</h3>
+            <p>
+              We reserve the right to request that you remove all links or any
+              particular link to our Website. You approve to immediately remove
+              all links to our Website upon request. We also reserve the right
+              to amend these terms and conditions and its linking policy at any
+              time. By continuously linking to our Website, you agree to be
+              bound to and follow these linking terms and conditions.
+            </p>
+          </div>
+
+          <div class="checkbox-container">
+            <label>
+              <input type="checkbox" id="readTerms" disabled /> I have read the
+              terms and conditions
+            </label>
+            <label>
+              <input type="checkbox" id="acceptTerms" disabled /> I accept the
+              terms and conditions
+            </label>
+          </div>
+
+          <div class="button-container">
+            <button
+              type="button"
+              id="submitButton"
+              disabled
+              onclick="handleConfirmTermsAndConditions()"
+            >
+              Proceed with Signup
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="terms-modal-2" class="terms-modal-2">
+        <div class="terms-container-2">
+          <span class="close" id="closeTermsButton2">&times;</span>
+          <h2>Terms of Services and Privacy Policy</h2>
+          <div class="terms-content-2" id="termsContent2">
+            <h3>Welcome to JPK Veterinary Clinic!</h3>
+            <p>
+              We are dedicated to providing high-quality veterinary care for
+              your pets. By availing our services, you are hereby agreeing to
+              the following Terms and Services:
+            </p>
+            <ol>
+              <li>
+                <strong>Appointment Scheduling</strong>
+                <ul>
+                  <li>
+                    Appointments can be made via phone, our website, or in
+                    person. We recommend scheduling appointments in advance.
+                  </li>
+                  <li>
+                    Please arrive 10 minutes early for your appointment. Late
+                    arrivals may result in delays or rescheduling.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Services Provided</strong>
+                <ul>
+                  <li>
+                    At JPK Veterinary Clinic, we are committed to providing
+                    high-quality veterinary care for your pets. We offer a wide
+                    range of services, which includes:
+                    <ul>
+                      <li>
+                        Services and initiations conducted during preliminary
+                        visits
+                      </li>
+                      <li>Vaccinations</li>
+                      <li>Deworming</li>
+                      <li>Consultation</li>
+                    </ul>
+                  </li>
+                  <li>
+                    By utilizing our services, you acknowledge that the scope of
+                    treatment is at the discretion of our licensed
+                    veterinarians, who will assess your pet's health needs and
+                    determine the most appropriate medical interventions.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Payment Policy</strong>
+                <ul>
+                  <li>
+                    Full payment is rendered personally at the time of service,
+                    not during the appointment process which took place in JPK
+                    Veterinary Clinic’s official website. We accept cash,
+                    credit/debit cards, and pet insurance (In cases where
+                    insurance claims are applicable, it is the pet owner's
+                    responsibility to comply with the insurance provider's
+                    requirements).
+                  </li>
+                  <li>
+                    Estimates for procedures will be provided upon request after
+                    the time of the appointed date already took place.
+                  </li>
+                  <li>
+                    Any kind of negotiation pertaining to method of payment
+                    (e.g., installment plan) can be applied at the behest of the
+                    veterinarian. We reserve the right to charge interest on
+                    outstanding balances and may refer overdue accounts to
+                    collections if necessary.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Cancellation/Rescheduling Policy</strong>
+                <ul>
+                  <li>
+                    We encourage pet owners to schedule appointments in advance
+                    to ensure availability. Should you need to cancel or
+                    reschedule an appointment, we request that you inform us at
+                    least 24 hours in advance. We understand that emergencies
+                    occur, and we will handle such situations on a case-by-case
+                    basis, but we appreciate your cooperation in keeping our
+                    schedule as efficient as possible for all clients.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Treatment Consent</strong>
+                <ul>
+                  <li>
+                    By presenting your pet for examination and treatment at JPK
+                    Veterinary Clinic, you consent to the procedures and
+                    services recommended by our veterinary staff. You also
+                    understand that all medical procedures carry risks, and you
+                    confirm that you have discussed any concerns with your
+                    veterinarian. Consent applies to all patients and includes
+                    necessary treatments beyond the initial consultation, which
+                    may arise during the course of care.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Medical Records</strong>
+                <ul>
+                  <li>
+                    Your pet’s medical records are confidential and will only be
+                    shared with your consent or as required by law.
+                  </li>
+                  <li>
+                    You have the right to access your pet’s medical records upon
+                    request.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Liability Waiver</strong>
+                <ul>
+                  <li>
+                    While we take all necessary precautions to ensure the safety
+                    of your pet, you acknowledge that there are inherent risks
+                    associated with veterinary care; as well as the inevitable
+                    fate that can be expectantly presumed, according to due
+                    prognosis, on terminally-ill pets. By accepting our Terms
+                    and Services, you agree that JPK Veterinary Clinic shall not
+                    be held liable for any accidents, injuries, or illnesses
+                    that may occur in our premises or as a result of treatment
+                    provided. You acknowledge that you have read and understood
+                    this waiver, and you assume full responsibility for your
+                    pet's welfare while they are in our care.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Emergency Care</strong>
+                <ul>
+                  <li>
+                    JPK Veterinary Clinic provides emergency veterinary services
+                    during regular hours and on a limited basis after hours.
+                    Emergency care is defined as medical treatment required for
+                    animals that are experiencing a sudden and severe health
+                    issue, posing an immediate risk to their life or well-being.
+                  </li>
+                  <li>
+                    Upon arrival on the premise, a veterinary professional will
+                    evaluate the extent of the emergency and prioritize care
+                    based on the severity of the situation. Not all patients may
+                    be seen immediately, as care is rendered according to
+                    urgency.
+                  </li>
+                  <li>
+                    In certain situations, we may refer you to a specialized
+                    emergency animal hospital or 24-hour emergency care facility
+                    for continued treatment. Clients shall be responsible for
+                    any services rendered at referral facilities.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Code of Conduct</strong>
+                <ul>
+                  <li>
+                    We expect all clients to treat our staff with respect and
+                    courtesy. Abusive language or behavior may result in
+                    dismissal from our clinic.
+                  </li>
+                  <li>
+                    As the pet owner, you are responsible for providing accurate
+                    and complete information regarding your pet’s medical
+                    history, vaccination status, and any relevant behaviors or
+                    conditions that could impact treatment.
+                  </li>
+                  <li>
+                    Additionally, we ask that all pets be leashed or contained
+                    prior to arrival at the clinic to ensure safety for all
+                    animals and staff.
+                  </li>
+                  <li>
+                    You should also ensure that any personal information
+                    regarding the owner, such as contact details, is up to date
+                    in our records archive.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Amendments</strong>
+                <ul>
+                  <li>
+                    JPK Veterinary Clinic reserves the right to modify these
+                    Terms and Services at any time. Any changes will be
+                    effective upon posting on our website or available in print
+                    at our clinic. Continued use of our services after such
+                    modifications constitutes your acceptance of the revised
+                    terms. We encourage our clients to periodically review our
+                    Terms and Services to stay informed on any updates.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+            <h3>Privacy Policy for JPK Veterinary Clinic</h3>
+            <p>
+              At JPK Veterinary Clinic, we are committed to protecting the
+              privacy of our clients and their beloved pets. This Privacy Policy
+              outlines how we collect, use, disclose, and safeguard your
+              personal information. Our goal is to ensure transparency and trust
+              in the ways we handle the information you provide to us, and we
+              take our responsibility to protect your data seriously. By using
+              our services, you consent to the practices described in this
+              policy:
+            </p>
+            <ol>
+              <li>
+                <strong>Information Collection</strong>
+                <ul>
+                  <li>
+                    We collect personal information that is essential for
+                    providing veterinary services, which may include your name,
+                    address, phone number, email, and payment information.
+                  </li>
+                  <li>
+                    Additionally, we may collect information about your pets,
+                    including their medical history, vaccination records, and
+                    other relevant medical details. This information is obtained
+                    directly from you through forms distributed on-site,
+                    communication, as well as indirectly through veterinary
+                    records and pet health information provided.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Use of Information</strong>
+                <ul>
+                  <li>
+                    The personal information we collect is used primarily to
+                    provide the best care for your pets and to ensure effective
+                    communication with our clients. This includes scheduling
+                    appointments, sending reminders, and addressing any medical
+                    needs your pet may have.
+                  </li>
+                  <li>
+                    We may also use your information for internal purposes, such
+                    as improving our services, conducting research, and
+                    complying with legal obligations.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Information Sharing and Disclosure</strong>
+                <ul>
+                  <li>
+                    We respect your privacy and do not sell or rent your
+                    personal information to third parties. However, we may share
+                    your information with trusted partners and third-party
+                    service providers who assist us in delivering veterinary
+                    services, such as laboratory services, pharmaceuticals, or
+                    emergency referrals. These parties are obligated to maintain
+                    the confidentiality of your information and use it solely
+                    for the purposes for which it was shared.
+                  </li>
+                  <li>
+                    We may also disclose your information if required by law or
+                    in response to legal requests.
+                  </li>
+                  <li>
+                    Be mindful about with whom you disclose your information.
+                    The clinic is legally rightful to object any manifestation
+                    of plausible deniability displayed by clients who have not
+                    reviewed, or are not made aware, of the privacy policy of
+                    our clinic.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Data Security</strong>
+                <ul>
+                  <li>
+                    We implement appropriate administrative, technical, and
+                    physical security measures to protect your personal
+                    information from unauthorized access, use, or disclosure.
+                    Our staff is trained in data protection best practices, and
+                    we regularly review and update our security protocols to
+                    address new challenges. However, please be aware that no
+                    method of transmission over the internet or electronic
+                    storage is 100% secure, and while we strive to protect your
+                    information, we cannot guarantee its absolute security.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Your Rights and Choices</strong>
+                <ul>
+                  <li>
+                    You have the right to access, correct, or delete your
+                    personal information held by us. If you wish to amend your
+                    data or withdraw your consent for our use of it, please
+                    contact our clinic directly. We will make reasonable efforts
+                    to accommodate your requests, subject to legal or
+                    contractual obligations, and ensure that we continue to
+                    provide the best possible care for your pets.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Changes to this Privacy Policy</strong>
+                <ul>
+                  <li>
+                    We may update this Privacy Policy from time to time to
+                    reflect changes in our practices or applicable laws. We will
+                    notify you of significant changes by posting an updated
+                    policy on our website and may also communicate via email.
+                    Your continued use of our services following any changes
+                    signifies your acceptance of the updated policy. We
+                    encourage you to regularly review this policy for the latest
+                    information on our privacy practices.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Contact Us</strong>
+                <ul>
+                  <li>
+                    If you have any questions or concerns about this Privacy
+                    Policy or our data practices, please do not hesitate to
+                    contact the clinic. JPK Veterinary Clinic is here to assist
+                    you and address any privacy-related inquiries you may have.
+                    We value your trust and appreciate the opportunity to care
+                    for your pets!
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="verify-modal-2">
+        <div class="verify-content-2">
+          <div class="loader"></div>
+        </div>
+      </div>
+      <div class="verify-modal">
+        <div class="verify-content">
+          <span class="close-btn">&times;</span>
+          <div class="title">Verify Your Email</div>
+          <p class="message">
+            Please check your email for a link to verify your email address.
+          </p>
+          <p class="message">Once verified, you'll be able to continue.</p>
+          <input id="resend-email" type="text" hidden disabled />
+          <p class="message lower-message">
+            Didn't receive an email?
+            <a href="#" class="resend-link" onclick="handleResendEmail(event)"
+              >Resend</a
+            >
+            <span id="countdown"></span>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script src="/js/loginSignup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+</html>

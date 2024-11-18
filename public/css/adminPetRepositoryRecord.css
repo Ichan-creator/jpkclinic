@@ -1,0 +1,294 @@
+section {
+  background: #b2d9c4;
+  padding: 0;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  color: #000;
+}
+
+.student-profile .card {
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.student-profile .card .card-header .profile_img {
+  width: 138px;
+  height: 138px;
+  object-fit: cover;
+  margin: 10px auto;
+  border: 10px solid #ccc;
+  border-radius: 50%;
+}
+
+.student-profile .card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.student-profile .card p {
+  font-size: 16px;
+  color: #000;
+}
+
+.student-profile .table th,
+.student-profile .table td {
+  font-size: 14px;
+  padding: 10px 15px;
+  color: #000;
+}
+
+.pet-record-modal,
+.edit-status-modal {
+  display: none;
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.pet-record-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.edit-status-modal-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pet-record-modal form .fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.pet-record-modal form .fields .input-field {
+  display: flex;
+  width: calc(100% / 3 - 15px);
+  flex-direction: column;
+  margin: 4px 0;
+}
+
+.edit-status-modal form .fields .input-field {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 4px 0;
+}
+
+.pet-record-modal .input-field label,
+.edit-status-modal .input-field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+
+.pet-record-modal .input-field input,
+select {
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  height: 42px;
+  margin: 8px 0;
+}
+
+.input-field input :focus,
+textarea :focus .input-field select:focus {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+.input-field select,
+.input-field input[type="date"] {
+  color: #707070;
+}
+.input-field input[type="date"]:valid {
+  color: #333;
+}
+
+.pet-record-modal form button,
+.edit-status-modal form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  max-width: 200px;
+  width: 100%;
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: 5px;
+  margin: 25px 0;
+  background-color: green;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+
+.pet-record-modal form .btnText {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.pet-record-modal form button:hover {
+  background-color: darkgreen;
+}
+.pet-record-modal form button i,
+.pet-record-modal form .backBtn i {
+  margin: 0 6px;
+}
+.pet-record-modal form .backBtn i {
+  transform: rotate(180deg);
+}
+.pet-record-modal form .buttons {
+  display: flex;
+  align-items: center;
+}
+.pet-record-modal form .buttons button,
+.backBtn {
+  margin-right: 14px;
+}
+
+.edit-status-button,
+.view-report-button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin: 0 1rem 1rem 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: #1c64f2;
+  cursor: pointer;
+}
+
+textarea {
+  outline: none;
+  width: 100%;
+  height: 42px;
+  color: #333;
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: none;
+  overflow: hidden;
+}
+
+.pending-status {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: gray;
+}
+.complete-status {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: green;
+}
+.ongoing-status {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: #ffae42;
+}
+.cancelled-status {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: #fc423b;
+}
+.norecord-status {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: #fc423b;
+}
+
+.header__admin {
+  display: flex;
+  align-items: center;
+}
+
+.header__img {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.header__img img {
+  width: 40px;
+}
+
+.jpk-logo {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.admin-name {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

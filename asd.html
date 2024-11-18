@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Confirmation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        backdrop-filter: blur(8px);
+      }
+      .dialog-box {
+        background-color: rgba(255, 255, 255, 0.644);
+        padding: 14px;
+        border-radius: 12px;
+        text-align: center;
+        width: 220px;
+        color: #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.622);
+      }
+      .dialog-box p {
+        font-size: 14px;
+        margin-bottom: 20px;
+        color: #383838;
+      }
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+      }
+      .confirm-btn,
+      .cancel-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        color: #333;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 45%;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .confirm-btn {
+        background-color: #a5d6a797;
+        color: #2e7d32;
+      }
+      .cancel-btn {
+        background-color: #ef9a9a95;
+        color: #c62828;
+      }
+
+      .confirm-btn:hover {
+        background-color: #4caf50;
+        color: white;
+      }
+      .cancel-btn:hover {
+        background-color: #f44336;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dialog-box">
+      <p>Are you sure you want to confirm your appointment?</p>
+      <div class="button-group">
+        <button class="confirm-btn">Confirm</button>
+        <button class="cancel-btn">Cancel</button>
+      </div>
+    </div>
+  </body>
+</html>

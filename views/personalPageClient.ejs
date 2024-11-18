@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg">
+    <link href="https://unpkg.com/tailwindcss@1.7.0/dist/tailwind.min.css" rel="stylesheet"/>
+    <script 
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" 
+      defer>
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="https://unpkg.com/intro.js/introjs.css" />
+    <link rel="stylesheet" href="/css/clientNav.css" />
+    <link rel="stylesheet" href="/css/personalPageClient.css" />
+
+    <style>
+      .introjs-skipbutton {
+        display: none !important;
+      }
+    </style>
+
+    <title>Personal Information | JPK Veterinary Clinic</title>
+  </head>
+  <body id="body-pd">
+    <header class="header" id="header">
+      <div class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+        "
+      >
+      <a href="/personal-page" class="header-name"
+          ><%= fullName %>
+          <img
+            id="profileIcon"
+            class="header__img"
+            src="<%= avatar %>"
+            alt="Profile Icon" />
+          </a>
+      <div class="flex">
+        <div x-data="{ dropdownOpen: false }" class="relative my-32">
+          <button
+            @click="dropdownOpen = !dropdownOpen"
+            class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+            <svg
+              class="h-5 w-5 text-gray-800"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor">
+              <path
+                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <span
+              class="badge absolute top-0 right-0 transform translate-x-1 -translate-y-1">
+              <%= notifications.filter(n => !n.isRead).length %>
+            </span>
+          </button>
+
+          <div
+            x-show="dropdownOpen"
+            @click="dropdownOpen = false"
+            class="fixed inset-0 h-full w-full z-10">
+          </div>
+          <div
+            x-show="dropdownOpen"
+            class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
+            style="width: 20rem">
+            <div
+              class="py-2 notifications-container">
+              <% if (notifications.length > 0) { %> <%
+              notifications.forEach(notification => { %>
+              <p
+                class="notification-item text-gray-600 text-sm mx-2 px-4 py-3 border-b hover:bg-gray-100 -mx-2 cursor-pointer">
+                Your appointment for
+                <span class="font-bold"><%= notification.service %></span>
+                at <%= notification.dateAndTime %> has been
+                <span
+                  class="<%= notification.type === 'approved' ? 'text-blue-500' : 'text-red-500' %>">
+                  <%= notification.type %>.
+                </span>
+                <br />
+                - <%= notification.timeAgo %>
+              </p>
+              <% }); %> <% } else { %>
+              <p class="text-gray-600 text-sm mx-2">
+                No notifications available at the moment.
+              </p>
+              <% } %>
+            </div>
+            <div
+              class="block bg-gray-800"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+              ">
+              <a class="text-white text-center font-bold py-2"
+                >Your notifications</a>
+              <span class="text-white text-center font-bold py-2">—</span>
+              <a
+                href="#"
+                class="text-white text-center font-bold py-2"
+                style="
+                  display: flex;
+                  align-items: center;
+                  text-decoration: none;
+                "
+                onclick="handleReadAllNotifications(event)"
+                ><span class="text-white text-center font-bold">
+                  Mark all as read
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header__img">
+        <img decoding="async" src="./images/jpk_logo.jpg" />
+      </div>
+    </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <p class="nav__logo">
+            <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo" class="nav__logo-icon">
+            <span class="nav__logo-name">JPK VETERINARY</br> CLINIC</span>
+          </p>
+          <div class="nav__list">
+            <a href="/" class="nav__link">
+              <i class="bx bx-grid-alt nav__icon"></i>
+              <span class="nav__name">Homepage</span>
+            </a>
+            <a href="/appointment" class="nav__link">
+              <i class="bx bx-stopwatch nav__icon"></i>
+              <span class="nav__name">Appointment</span>
+            </a>
+            <a href="/personal-page" class="nav__link active">
+              <i class="bx bx-message-square-detail nav__icon"></i>
+              <span class="nav__name">Personal Page</span>
+            </a>
+            <a href="/clinic-directory" class="nav__link">
+              <i class="bx bx-list-ul nav__icon"></i>
+              <span class="nav__name">Clinic Directory</span>
+            </a>
+          </div>
+        </div>
+        <form onsubmit="handleLogout(event)">
+          <button type="submit" class="nav__link">
+            <i class="bx bx-log-out nav__icon"></i>
+            <span class="nav__name">Log Out</span>
+          </button>
+        </form>
+      </nav>
+    </div>
+
+    <section id="section">
+      <div class="rt-container">
+        <div class="col-rt-12">
+          <div class="Scriptcontent">
+            <div class="student-profile py-4">
+              <div class="container">
+                <div id="step1" class="row">
+                  <div class="col-lg-4">
+                    <div class="card shadow-sm">
+                      <div class="card-header bg-transparent text-center">
+                        <img
+                          id="personalIcon"
+                          class="profile_img"
+                          src="<%= avatar %>"
+                          alt="Profile Icon"/>
+                        <h3><%= fullName %></h3>
+                        <form id="profilePictureForm" enctype="multipart/form-data" style="display: flex; flex-direction: column; align-items: center;">
+                          <label for="profilePicture" class="upload-picture">Choose Picture</label>
+                          <input id="profilePicture" name="profilePicture" type="file" accept="image/*" />
+                          <p id="selectedFile" style="display: none;"></p>
+                          <button id="uploadImageButton" type="button" onclick="uploadImage()" style="display: none;">Upload</button>
+                        </form>
+                      </div>
+                      <div class="card-body">
+                        <p class="mb-0">
+                          <strong class="pr-1">Client ID:</strong><%= id %>
+                        </p>
+                        <p class="mb-0">
+                          <strong class="pr-1">Date Committed:</strong><%=
+                          createdAt %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="profile-modal" class="edit-profile-modal">
+                    <div class="profile-modal-content">
+                      <span class="close" id="closeEditProfilelBtn"
+                        >&times;</span>
+                      <h2>Personal Details</h2>
+                      <form id="profile-modal-form">
+                        <div class="form first">
+                          <div class="details personal">
+                            <span class="title"></span>
+                            <div class="fields">
+                              <div class="input-field">
+                                <label>Full Name</label>
+                                <input
+                                  id="profileFullName"
+                                  name="profileFullName"
+                                  type="text"
+                                  placeholder="Enter your name"
+                                  required
+                                  value="<%= fullName %>"/>
+                              </div>
+                              <div class="input-field">
+                                <label>Date of Birth</label>
+                                <input
+                                  id="profileBirthdate"
+                                  name="profileBirthdate"
+                                  type="date"
+                                  placeholder="Enter birth date"
+                                  required
+                                  value="<%= birthday %>"/>
+                              </div>
+                              <div class="input-field">
+                                <label>Email</label>
+                                <input
+                                  id="profileEmail"
+                                  name="profileEmail"
+                                  type="text"
+                                  placeholder="Enter your email"
+                                  required
+                                  value="<%= email %>"/>
+                              </div>
+                              <div class="input-field">
+                                <label>Contact Number</label>
+                                <input
+                                  id="profileContactNumber"
+                                  name="profileContactNumber"
+                                  type="text"
+                                  minlength="11"
+                                  maxlength="12"
+                                  placeholder="Enter your contact details"
+                                  required
+                                  value="<%= contactNumber %>" />
+                              </div>
+                              <div class="input-field">
+                                <label>Gender</label>
+                                <select
+                                  id="profileGender"
+                                  name="profileGender"
+                                  required>
+                                  <option disabled selected>
+                                    Select gender
+                                  </option>
+                                  <option value="Male" <%= gender === 'Male' ? 'selected' : '' %>>Male</option>
+                                  <option value="Female" <%= gender === 'Female' ? 'selected' : '' %>>Female</option>
+                                  <option value="Others" <%= gender === 'Others' ? 'selected' : '' %>>Others</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <button type="update" class="update">
+                            <span class="btnText">Update</span>
+                            <i class="uil uil-navigator"></i>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div id="step2" class="card shadow-sm">
+                      <div class="card-header bg-transparent border-0">
+                        <h3 class="mb-0">
+                          <i class="far fa-clone pr-1"></i>General Information</h3>
+                      </div>
+                      <div class="card-body pt-0">
+                        <table class="table table-bordered">
+                          <tr>
+                            <th width="30%">Date of Birth</th>
+                            <td width="2%">:</td>
+                            <td><%= birthday ? dayjs(birthday).format("MMMM D, YYYY") : '' %></td>
+                          </tr>
+                          <tr>
+                            <th width="30%">Gender</th>
+                            <td width="2%">:</td>
+                            <td><%= gender %></td>
+                          </tr>
+                          <tr>
+                            <th width="30%">Contact Number</th>
+                            <td width="2%">:</td>
+                            <td><%= contactNumber %></td>
+                          </tr>
+                          <tr>
+                            <th width="30%">Email Address</th>
+                            <td width="2%">:</td>
+                            <td><%= email %></td>
+                          </tr>
+                        </table>
+                        <button id="editProfileBtn" class="button button2">
+                          Edit Profile
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div id="step4" class="card shadow-sm">
+                  <div class="card-header bg-transparent border-0">
+                    <h3 class="mb-0">
+                      <i class="far fa-clone pr-1"></i>Owned Pets
+                    </h3>
+                  </div>
+                  <div class="card-body pt-0">
+                    <div id="pet-table"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="logoutModal" class="modal-logout">
+      <div class="popup">
+        <h2>Logout Confirmation</h2>
+        <p>Are you sure you want to logout?</p>
+        <div class="button-container">
+          <button class="button confirm-button" onclick="handleConfirmLogout()">Confirm</button>
+          <button class="button cancel-button" onclick="handleCancelLogout()">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/intro.js/intro.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="/js/clientNav.js"></script>
+    <script src="/js/personalPageClient.js"></script>
+  </body>
+</html>

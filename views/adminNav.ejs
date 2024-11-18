@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/adminNav.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <title>Admin - Home | JPK Veterinary Clinic</title>
+  </head>
+  <body id="body-pd">
+    <header class="header" id="header">
+      <div class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+        "
+      >
+      <div class="header__admin">
+        <span class="admin-name">Administrator</span>
+        <img decoding="async" src="/images/admin-profile_icon.jpg" alt="Admin Icon" class="user-icon" />
+    </div>
+    <div class="header__img">
+      <img decoding="async" src="/images/jpk_logo.jpg" />
+    </div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <p class="nav__logo">
+            <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo" class="nav__logo-icon">
+            <span class="nav__logo-name">JPK VETERINARY</br> CLINIC</span>
+          </p>
+          <div class="nav__list">
+            <a href="/admin" class="nav__link active">
+              <i class="bx bx-grid-alt nav__icon"></i>
+              <span class="nav__name">Homepage</span>
+            </a>
+            <a href="/admin-appointment" class="nav__link">
+              <i class="bx bx-stopwatch nav__icon"></i>
+              <span class="nav__name">Appointment</span>
+            </a>
+            <a href="/admin-client-page" class="nav__link">
+              <i class="bx bx-message-square-detail nav__icon"></i>
+              <span class="nav__name">Client Page</span>
+            </a>
+            <a href="/admin-pet-repository" class="nav__link">
+              <i class="bx bx-list-ul nav__icon"></i>
+              <span class="nav__name">Pet Repository</span>
+            </a>
+            <a href="/admin-employee-records" class="nav__link">
+              <i class="bx bx-list-ul nav__icon"></i>
+              <span class="nav__name">Employee Records</span>
+            </a>
+          </div>
+        </div>
+        <form onsubmit="handleLogout(event)">
+          <button type="submit" class="nav__link">
+            <i class="bx bx-log-out nav__icon"></i>
+            <span class="nav__name">Log Out</span>
+          </button>
+        </form>
+      </nav>
+    </div>
+    <main class="reports-container">
+      <div
+        class="reports-row"
+        style="display: flex; justify-content: space-evenly">
+        <div
+          class="reports-item reports-item-1"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          "
+        >
+          <div
+            style="display: flex; flex-direction: column; align-items: center">
+            <i class="bx bx-list-ul"></i>
+            <span>Services</span>
+          </div>
+          <div class="card-number">5</div>
+        </div>
+        <div class="reports-item reports-item-2">
+          <i class="bx bx-calendar"></i>
+          <span>Pending Appointment</span>
+          <div class="card-number"><%= pendingAppointments %></div>
+        </div>
+        <div class="reports-item reports-item-3">
+          <i class="bx bx-calendar-check"></i>
+          <span>Confirmed Appointment</span>
+          <div class="card-number"><%= confirmedAppointments %></div>
+        </div>
+        <div class="reports-item reports-item-4">
+          <i class="bx bx-calendar-x"></i>
+          <span>Cancelled Appointment</span>
+          <div class="card-number"><%= cancelledAppointments %></div>
+        </div>
+      </div>
+      <div class="appointments-section">
+        <div class="appointment-box">
+          <div class="appointments-header">
+            <h2>Appointment Requests</h2>
+          </div>
+          <div id="appointment-requests-table"></div>
+        </div>
+        <div class="appointment-box" style="margin-top: 30px">
+          <div class="appointments-header">
+            <h2>Medical Records</h2>
+          </div>
+          <div id="medical-records-table"></div>
+        </div>
+      </div>
+    </main>
+    <div id="logoutModal" class="modal-logout">
+      <div class="popup">
+        <h2>Logout Confirmation</h2>
+        <p>Are you sure you want to logout?</p>
+        <div class="button-container">
+          <button class="button confirm-button" onclick="handleConfirmLogout()">Confirm</button>
+          <button class="button cancel-button" onclick="handleCancelLogout()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    <script src="/js/adminNav.js"></script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
+    <link rel="stylesheet" href="/css/landingPage.css" />
+    <link rel="stylesheet" href="/css/servicesPage.css" />
+    <title>Services | JPK Veterinary Clinic</title>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <a href="/welcome" style="text-decoration: none">
+          <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo">
+          <span class="edoc-logo">JPK VETERINARY CLINIC</span>
+          <span class="edoc-logo-sub">| APPOINTMENT SYSTEM</span>
+        </a>
+      </div>
+      <div class="navbar-toggle-wrapper" id="menuToggle">
+        &#9776;
+      </div>
+      <div class="nav-menu desktop">
+        <a href="/welcome" class="non-style-link nav-item">HOME</a>
+        <a href="/contact" class="non-style-link nav-item">CONTACT US</a>
+        <a href="/services" class="non-style-link nav-item">SERVICES</a>
+        <a href="/login" class="non-style-link nav-item">LOGIN</a>
+        <a href="/login" class="non-style-link nav-item" onclick="handleRegisterClick()">REGISTER</a>
+      </div>
+    </div>
+    <div class="nav-menu mobile" id="navMenu">
+      <a href="/welcome" class="non-style-link nav-item">HOME</a>
+      <a href="/contact" class="non-style-link nav-item">CONTACT US</a>
+      <a href="/services" class="non-style-link nav-item">SERVICES</a>
+    </div>
+    <div class="full-height">
+      <center>
+        <table border="0">
+          <div class="container">
+            <div class="header">
+              <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo" />
+              <h1>OUR SERVICES</h1>
+              <p>
+                Providing comprehensive care and professional veterinary services
+                at JPK Veterinary Clinic.
+              </p>
+            </div>
+            <div class="section">
+              <h2>Vaccination & Deworming</h2>
+              <div class="services">
+                <div class="service-card">
+                  <h3>First Vet Visit</h3>
+                  <p>
+                    Vaccinations and deworming for puppies/kittens during their
+                    first vet visit.
+                  </p>
+                </div>
+                <div class="service-card">
+                  <h3>1-2 Pets</h3>
+                  <p>
+                    Vaccination and/or deworming for 1-2 pets (no consultation
+                    included).
+                  </p>
+                </div>
+                <div class="service-card">
+                  <h3>3 or More Pets</h3>
+                  <p>
+                    Vaccination and/or deworming for 3 or more pets (no
+                    consultation included).
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <h2>Consultations</h2>
+              <div class="services">
+                <div class="service-card">
+                  <h3>Consultation for 1 Pet</h3>
+                  <p>
+                    Consultation for one pet (sick pet, ear/eye/skin check,
+                    ultrasound, blood tests, etc.).
+                  </p>
+                </div>
+                <div class="service-card">
+                  <h3>Consultation for 2+ Pets</h3>
+                  <p>
+                    Consultation for two or more pets in one visit (sick pet,
+                    ear/eye/skin check, ultrasound, blood tests, etc.).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </table>
+    </center>
+
+    <script>
+      document.getElementById("menuToggle").addEventListener("click", function () {
+        document.getElementById("navMenu").classList.toggle("active");
+      });
+      document.addEventListener("click", function (event) {
+        const navMenu = document.getElementById("navMenu");
+        const menuToggle = document.getElementById("menuToggle");
+        if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+          navMenu.classList.remove("active");
+        }
+      });
+      
+      function handleRegisterClick() {
+        localStorage.setItem("isRegisterClicked", "true");
+      }
+    </script>
+  </body>
+</html>

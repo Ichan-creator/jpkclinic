@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
+    <link href="https://unpkg.com/tailwindcss@1.7.0/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="/css/clientNav.css" />
+    <link rel="stylesheet" href="/css/clientLandingPage.css" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <title>Home | JPK veterinary Clinic</title>
+  </head>
+  <body id="body-pd">
+    <header class="header" id="header">
+      <div class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+        "
+      >
+        <a href="/personal-page" class="header-name"
+          ><%= fullName %>
+          <img
+            id="profileIcon"
+            class="header__img"
+            src="<%= avatar %>"
+            alt="Profile Icon" />
+          </a>
+        <div class="flex">
+          <div x-data="{ dropdownOpen: false }" class="relative my-32">
+            <button
+              @click="dropdownOpen = !dropdownOpen"
+              class="relative z-10 block rounded-md bg-white p-2 focus:outline-none" >
+              <svg
+                class="h-5 w-5 text-gray-800"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor" >
+                <path
+                  d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+              </svg>
+              <span
+                class="badge absolute top-0 right-0 transform translate-x-1 -translate-y-1" >
+                <%= notifications.filter(n => !n.isRead).length %>
+              </span>
+            </button>
+            <div
+              x-show="dropdownOpen"
+              @click="dropdownOpen = false"
+              class="fixed inset-0 h-full w-full z-10" >
+            </div>
+            <div
+              x-show="dropdownOpen"
+              class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
+              style="width: 20rem" >
+              <div class="py-2 notifications-container">
+                <% if (notifications.length > 0) { %> <%
+                notifications.forEach(notification => { %>
+                <p
+                  class="notification-item text-gray-800 text-sm mx-3 px-3 py-2 border-b hover:bg-gray-100 -mx-2 cursor-pointer" >
+                  Your appointment for
+                  <span class="font-bold text-blue-500"><%= notification.service %></span>
+                  at <%= notification.dateAndTime %> has been
+                  <span
+                    class="<%= notification.type === 'approved' ? 'text-green-500' : 'text-red-500' %>" >
+                    <%= notification.type %>.
+                  </span>
+                  <br />
+                  - <%= notification.timeAgo %>
+                </p>
+                <% }); %> <% } else { %>
+                <p class="text-gray-900 text-sm mx-3">
+                  No notifications available at the moment.
+                </p>
+                <% } %>
+              </div>
+              <div
+                class="block bg-gray-800"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-evenly;
+                "
+              >
+                <a class="text-white text-center font-bold py-2"
+                  >Your notifications</a>
+                <span class="text-white text-center font-bold py-2">—</span>
+                <a
+                  href="#"
+                  class="text-white text-center font-bold py-2"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                  "
+                  onclick="handleReadAllNotifications(event)" >
+                  <span class="text-white text-center font-bold">
+                    Mark all as read
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header__img">
+          <img decoding="async" src="./images/jpk_logo.jpg" />
+        </div>
+      </div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <p class="nav__logo">
+            <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo" class="nav__logo-icon">
+            <span class="nav__logo-name">JPK VETERINARY</br> CLINIC</span>
+          </p>
+          <div class="nav__list">
+            <a href="/" class="nav__link active">
+              <i class="bx bx-grid-alt nav__icon"></i>
+              <span class="nav__name">Homepage</span>
+            </a>
+            <a href="/appointment" class="nav__link">
+              <i class="bx bx-stopwatch nav__icon"></i>
+              <span class="nav__name">Appointment</span>
+            </a>
+            <a href="/personal-page" class="nav__link">
+              <i class="bx bx-message-square-detail nav__icon"></i>
+              <span class="nav__name">Personal Page</span>
+            </a>
+            <a href="/clinic-directory" class="nav__link">
+              <i class="bx bx-list-ul nav__icon"></i>
+              <span class="nav__name">Clinic Directory</span>
+            </a>
+          </div>
+        </div>
+        <form onsubmit="handleLogout(event)">
+          <button type="submit" class="nav__link">
+            <i class="bx bx-log-out nav__icon"></i>
+            <span class="nav__name">Log Out</span>
+          </button>
+        </form>
+      </nav>
+    </div>
+    <section class="dashboard">
+      <div class="dashboard-image"></div>
+      <div class="dashboard-content">
+        <h1>JPK Veterinary Clinic Appointment</h1>
+        <p>
+          We are here to provide you with the highest quality of care for your
+          pets.
+          <br />Schedule your appointments with us to ensure your pets receive
+          timely<br />
+          checkups, consultations, and treatments.
+        </p>
+        <a href="/appointment" onclick="onScheduleAppointmentClick(event)"
+          >Schedule an Appointment</a>
+      </div>
+    </section>
+    <section>
+      <div class="row" style="text-align: center">
+        <h2 class="section-heading" style="font-weight: bold; font-size: 28px">
+          Services
+        </h2>
+      </div>
+      <div
+        class="row"
+        style="
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin: 20px 0;
+        "
+      >
+        <h3 class="no-underline" style="width: 100%; text-align: center">
+          Vaccinations and Deworming
+        </h3>
+        <div class="column" style="margin: 5px">
+          <div class="card" style="text-align: center">
+            <p>
+              FIRST VET VISIT OF A PUPPY/KITTEN FOR VACCINATION OR DEWORMING
+            </p>
+            <p>(30 MINUTES)</p>
+          </div>
+        </div>
+        <div class="column" style="margin: 5px">
+          <div class="card" style="text-align: center">
+            <p>VACCINATION AND/OR DEWORMING FOR 1-2 PETS (NO CONSULTATION)</p>
+            <p>(25 MINUTES)</p>
+          </div>
+        </div>
+        <div class="column" style="margin: 5px">
+          <div class="card" style="text-align: center">
+            <p>
+              VACCINATION AND/OR DEWORMING FOR 3 OR MORE PETS (NO CONSULTATION)
+            </p>
+            <p>(1 HOUR)</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row"
+        style="
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin: 0;
+        "
+      >
+        <h3 class="no-underline" style="width: 100%; text-align: center">
+          Consultations
+        </h3>
+        <div class="column" style="margin: 5px">
+          <div class="card" style="text-align: center">
+            <p>
+              CONSULTATION FOR 1 PET (SICK PET, EAR/EYE/SKIN CHECK, ULTRASOUND,
+              BLOOD TEST, ETC.)
+            </p>
+            <p>(35 MINUTES)</p>
+          </div>
+        </div>
+        <div class="column" style="margin: 5px">
+          <div class="card" style="text-align: center">
+            <p>
+              CONSULTATION FOR 2 OR MORE PETS IN ONE VISIT (SICK PET,
+              EAR/EYE/SKIN CHECK, ULTRASOUND, BLOOD TEST, ETC.)
+            </p>
+            <p>(1 HOUR)</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin: 60px 0 80px 0">
+        <h2 class="section-heading" style="font-weight: bold; font-size: 28px">
+          About Us
+        </h2>
+        <h4
+          style="max-width: 600px; margin: 40px auto 0 auto; text-align: center">
+          JPK Veterinary Clinic is dedicated to providing the highest level of
+          medical care for your pets. With state-of-the-art equipment and a
+          compassionate team, we ensure the best treatment and advice for your
+          furry family members. Our mission is to enhance the health and
+          well-being of pets through advanced veterinary services in a warm,
+          welcoming environment.
+      </h4>
+        <div
+          class="row"
+          style="display: flex; justify-content: center; margin-top: 20px">
+          <div
+            class="tabs-left"
+            style="flex: 1; display: flex; justify-content: center">
+            <div class="tab" style="margin: 0 10px">
+              <input type="checkbox" id="chck1" onchange="toggleTabs(this)" />
+              <label class="tab-label" for="chck1">What is JPK?</label>
+              <div class="tab-content" style="text-align: justify">
+                <img class="tab-image" src="/images/what-is-jpk.jpg" alt="" />
+                JPK Veterinary Clinic is a full-service facility located in Las
+                Piñas,<br />
+                dedicated to providing top-notch care for your beloved pets,
+                from routine check-ups to emergency services.<br />
+              </div>
+            </div>
+            <div class="tab" style="margin: 0 10px">
+              <input type="checkbox" id="chck2" onchange="toggleTabs(this)" />
+              <label class="tab-label" for="chck2">Our Philosophy</label>
+              <div class="tab-content" style="text-align: justify">
+                <img
+                  class="tab-image"
+                  src="/images/Our-Philosophy.jpg"
+                  alt="" />
+                We believe every pet deserves the best care possible. Our focus
+                is on client education and providing tailored treatment for each
+                pet's unique needs.<br />
+              </div>
+            </div>
+          </div>
+          <div
+            class="tabs-right"
+            style="flex: 1; display: flex; justify-content: center">
+            <div class="tab" style="margin: 0 10px">
+              <input type="checkbox" id="chck3" onchange="toggleTabs(this)" />
+              <label class="tab-label" for="chck3">Meet Our Team</label>
+              <div class="tab-content" style="text-align: justify">
+                <img class="tab-image" src="/images/Meet-Our-Team.jpg" alt="" />
+                Our highly skilled veterinary team brings diverse backgrounds
+                and expertise, all united by a passion for animal care and a
+                commitment to your pets' health.<br />
+              </div>
+            </div>
+            <div class="tab" style="margin: 0 10px">
+              <input type="checkbox" id="chck4" onchange="toggleTabs(this)" />
+              <label class="tab-label" for="chck4">Appointment Process</label>
+              <div class="tab-content" style="text-align: justify">
+                <img
+                  class="tab-image"
+                  src="/images/Appointment-Process.jpg"
+                  alt="" />
+                Scheduling an appointment at JPK is easy!<br />
+                You can book online or call our reception.<br />
+                We recommend arriving 10 minutes early for check-in.<br />
+                During your appointment, our veterinarians will assess your
+                pet’s health and address your concerns.<br />
+                After your visit, you'll receive clear instructions for any
+                follow-up care or medications,<br />
+                and our team will follow up to check on your pet's recovery.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="height: 40px"></div>
+      <footer
+        style="
+          width: 100%;
+          margin-top: 50px;
+          background-color: #f1f1f1;
+          padding: 20px;
+          text-align: center;
+        "
+      >
+        <div
+          class="section"
+          style="display: flex; justify-content: center; flex-wrap: wrap">
+          <div
+            class="column"
+            style="width: 42%; margin: 8px; text-align: left">
+            <h3 class="section-heading">Contact Us</h3>
+            <p>
+              <strong>Address:</strong> Unit 5 Star Arcade Building, CV Starr
+              Avenue,<br />
+              Philamlife Village, Pamplona 2, Las Piñas City, Metro Manila,
+              1740.<br />
+              <strong>Appointments and Inquiries:</strong> (02) 8831-0031<br />
+              <strong>GLOBE:</strong> (0917) 815-3121<br />
+              <strong>SMART:</strong> (0919) 362-4915<br />
+              <strong>Email:</strong> jpkveterinaryclinic@gmail.com
+            </p>
+          </div>
+          <div
+            class="column"
+            style="width: 45%; margin: 10px; text-align: left">
+            <h3 class="section-heading">Clinic Hours</h3>
+            <ul style="list-style: none; padding: 0">
+              <li>Mon-Sat: 9:00 AM - 5:00 PM</li>
+              <li>Sun: Closed</li>
+              <li>House call: by appointment</li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </section>
+    <div id="logoutModal" class="modal-logout">
+      <div class="popup">
+        <h2>Logout Confirmation</h2>
+        <p>Are you sure you want to logout?</p>
+        <div class="button-container">
+          <button class="button confirm-button" onclick="handleConfirmLogout()">Confirm</button>
+          <button class="button cancel-button" onclick="handleCancelLogout()">Cancel</button>
+        </div>
+      </div>
+    </div>
+    
+    <script src="/js/clientNav.js"></script>
+    <script src="https://unpkg.com/intro.js/intro.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+</html>

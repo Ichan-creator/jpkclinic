@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
+    <link rel="stylesheet" href="/css/animations.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/landingPage.css" />
+    <title>JPK Veterinary Clinic</title>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <a href="/welcome" style="text-decoration: none">
+          <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo">
+          <span class="edoc-logo">JPK VETERINARY CLINIC</span>
+          <span class="edoc-logo-sub">| APPOINTMENT SYSTEM</span>
+        </a>
+      </div>
+      <div class="navbar-toggle-wrapper" id="menuToggle">
+        &#9776;
+      </div>
+      <div class="nav-menu desktop">
+        <a href="/welcome" class="non-style-link nav-item">HOME</a>
+        <a href="/contact" class="non-style-link nav-item">CONTACT US</a>
+        <a href="/services" class="non-style-link nav-item">SERVICES</a>
+        <a href="/login" class="non-style-link nav-item">LOGIN</a>
+        <a href="/login" class="non-style-link nav-item" onclick="handleRegisterClick()">REGISTER</a>
+      </div>
+    </div>
+    <div class="nav-menu mobile" id="navMenu">
+      <a href="/welcome" class="non-style-link nav-item">HOME</a>
+      <a href="/contact" class="non-style-link nav-item">CONTACT US</a>
+      <a href="/services" class="non-style-link nav-item">SERVICES</a>
+    </div>
+    <div class="full-height">
+      <center>
+        <table border="0">
+          <tr>
+            <td colspan="7" class="center-text">
+              <p class="heading-text">Welcome to JPK Veterinary Clinic</p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="7" class="center-text">
+              <p class="sub-text2">
+                JPK Veterinary Clinic means a building or<br /> part of a building
+                where facilities are provided for animal health services,<br />
+                including vaccinations, consultations, routine checkups, and the
+                prevention of diseases.<br /> The clinic may also offer temporary shelter for
+                animals during their treatment period.<br />
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="7" class="center-text">
+              <center>
+                <a href="/login">
+                  <input
+                    type="button"
+                    value="Make Appointment"
+                    class="login-btn btn-primary btn"
+                    style="
+                      padding-left: 25px;
+                      padding-right: 25px;
+                      padding-top: 10px;
+                      padding-bottom: 10px;
+                    "
+                  />
+                </a>
+              </center>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+          </tr>
+        </table>
+      </center>
+    </div>
+
+    <script>
+      document.getElementById("menuToggle").addEventListener("click", function () {
+        document.getElementById("navMenu").classList.toggle("active");
+      });
+      document.addEventListener("click", function (event) {
+        const navMenu = document.getElementById("navMenu");
+        const menuToggle = document.getElementById("menuToggle");
+        if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+          navMenu.classList.remove("active");
+        }
+      });
+      
+      function handleRegisterClick() {
+        localStorage.setItem("isRegisterClicked", "true");
+      }
+    </script>
+  </body>
+</html>

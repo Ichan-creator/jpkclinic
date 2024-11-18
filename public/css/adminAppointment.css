@@ -1,0 +1,494 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+:root {
+  --header-height: 3rem;
+  --nav-width: 68px;
+
+  --first-color: rgb(79, 78, 78);
+  --first-color-light: #b2d9c4;
+  --white-color: #d6d6d6;
+
+  --body-font: "Nunito", sans-serif;
+  --normal-font-size: 1rem;
+
+  --z-fixed: 100;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: var(--header-height) 0 0 0;
+  padding: 0 1rem;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: 0.5s;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: var(--white-color);
+  z-index: var(--z-fixed);
+  transition: 0.5s;
+}
+.header__toggle {
+  color: var(--first-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.header__admin {
+  display: flex;
+  align-items: center;
+}
+
+.header__img {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.header__img img {
+  width: 40px;
+}
+
+.jpk-logo {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.admin-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: -30%;
+  width: var(--nav-width);
+  height: 100vh;
+  background: var(--first-color);
+  padding: 0.5rem 1rem 0 0;
+  transition: 0.5s;
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.nav__logo,
+.nav__link {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: 1rem;
+  padding: 0.5rem 0 0.5rem 1.1rem;
+}
+
+.nav__logo {
+  margin-bottom: 1.5rem;
+}
+
+.nav__logo-icon {
+  width: 35px;
+  height: auto;
+}
+
+.nav__logo-icon {
+  font-size: 1.25rem;
+  color: var(--first-color-light);
+}
+.nav__logo-name {
+  font-weight: 700;
+  color: var(--first-color-light);
+}
+.nav__link {
+  background: none;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  color: var(--first-color-light);
+  margin-bottom: 1.5rem;
+  transition: 0.3s;
+}
+.nav__link:hover {
+  color: var(--white-color);
+}
+.nav__icon {
+  font-size: 1.25rem;
+}
+
+.show {
+  left: 0;
+}
+.body-pd {
+  padding-left: calc(var(--nav-width) + 1rem);
+}
+
+.active {
+  color: var(--white-color);
+}
+.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 32px;
+  background-color: var(--white-color);
+}
+h1 {
+  padding: 2rem 0 0;
+}
+p {
+  color: #333;
+  line-height: 1.6;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    margin: calc(var(--header-height) + 1rem) 0 0 0;
+    padding-left: calc(var(--nav-width) + 2rem);
+  }
+  .header {
+    height: calc(var(--header-height) + 1rem);
+    padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
+  }
+  .header__img {
+    width: 40px;
+    height: 40px;
+  }
+  .header__img img {
+    width: 45px;
+  }
+  .l-navbar {
+    left: 0;
+    padding: 1rem 1rem 0 0;
+  }
+
+  .show {
+    width: calc(var(--nav-width) + 156px);
+  }
+
+  .body-pd {
+    padding-left: calc(var(--nav-width) + 188px);
+  }
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.modal-appointment {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 10px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-appointment-content {
+  position: relative;
+  width: 70%;
+  height: auto;
+  border-radius: 6px;
+  padding: 30px;
+  margin: 10% auto;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.close-appointment {
+  color: #aaa;
+  float: right;
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close-appointment:hover,
+.close-appointment:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.approve-appointment {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: #1c64f2;
+  cursor: pointer;
+}
+.reject-appointment {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: #f21c1c;
+  cursor: pointer;
+}
+
+.disabled-approve-appointment,
+.disabled-reject-appointment {
+  font-weight: bold;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: #727272;
+  cursor: not-allowed;
+}
+
+.modal-logout {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.603);
+}
+
+.popup {
+  background: #fff;
+  padding: 20px;
+  width: 300px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.352);
+}
+
+.popup h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.popup p {
+  color: #272727;
+  font-size: 16px;
+  margin: 10px 0 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.confirm-button {
+  background-color: #87CEFA;
+  color: white;
+}
+
+.confirm-button:hover {
+  background-color: #1E90FF;
+}
+
+.cancel-button {
+  background-color: #ffffff;
+  color: #1E90FF;
+  border: 1px solid #1E90FF;
+}
+
+.cancel-button:hover {
+  background-color: #1E90FF;
+  color: white;
+}
+
+.notification, 
+.reject-notification {
+  position: fixed;
+  width: auto;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 18px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.274);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+.notification {
+  background-color: #e5f7e5;
+  color: #4b8a4b;
+  border: 2px solid #cce0cc;
+}
+
+.notification.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.notification .icon {
+  color: #7cd17c;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.reject-notification {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 2px solid #f5c6cb;
+}
+
+.reject-notification.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reject-notification .icon {
+  width: 24px;
+  height: 24px;
+  background-color: #f55968;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.reject-notification-message {
+  font-weight: normal;
+  color: #721c24;
+}
+
+.approve-confirm-modal,
+.reject-confirm-modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.566);
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-box {
+  background-color: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  width: 220px;
+  color: #232323;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.622);
+}
+.dialog-box p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #232323;
+}
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+.confirm-btn,
+.approve-cancel-btn,
+.reject-cancel-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #232323;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 45%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.confirm-btn {
+  background-color: #a5d6a797;
+  color: #2e7d32;
+}
+.approve-cancel-btn,
+.reject-cancel-btn {
+  background-color: #ef9a9a95;
+  color: #c62828;
+}
+
+.confirm-btn:hover {
+  background-color: #4caf50;
+  color: white;
+}
+.approve-cancel-btn:hover,
+.reject-cancel-btn:hover {
+  background-color: #f44336;
+  color: white;
+}

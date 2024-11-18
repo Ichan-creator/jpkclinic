@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+
+body {
+  height: 100vh;
+  background-color: palegreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Quicksand", sans-serif;
+  user-select: none;
+}
+
+.card {
+  width: 630px;
+  height: fit-content;
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+
+.calendar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid black;
+}
+
+.calendar-toolbar > .current-month {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+.calendar-toolbar > [class$="month-btn"] {
+  width: 40px;
+  aspect-ratio: 1;
+  text-align: center;
+  line-height: 40px;
+  font-size: 14px;
+  color: black;
+  background: #f8f7fa;
+  border: none;
+  border-radius: 15px;
+}
+
+.weekdays,
+.calendar-days {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline: 160px;
+}
+
+.weekdays {
+  padding-top: 58px;
+}
+
+.calendar-days {
+  padding-bottom: 58px;
+}
+
+.weekday-name,
+[class$="-day"] {
+  width: 40px;
+  height: 40px;
+  color: #19181a;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.weekday-name {
+  color: #19181a;
+  font-weight: 1000;
+}
+
+.current-day {
+  background-color: palegreen;
+  color: black;
+  border-radius: 15px;
+  font-weight: 700;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.padding-day {
+  color: #a5a5a5;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.calendar-toolbar > [class$="month-btn"]:hover,
+.month-day:hover,
+.btn:hover {
+  border-radius: 15px;
+  background-color: white;
+  color: limegreen;
+  transition: 0.1s;
+  cursor: pointer;
+  box-shadow: inset 0px 0px 0px 1.5px limegreen;
+}
+
+.calendar-toolbar > [class$="month-btn"]:focus,
+.month-day:focus,
+.btn:focus {
+  border-radius: 15px;
+  background-color: whitesmoke;
+  color: limegreen;
+}
+
+.goto-buttons {
+  border-top: 1px solid black;
+  padding-block: 18px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn {
+  background: #f8f7fa;
+  border: none;
+  border-radius: 15px;
+  padding: 11px 13px;
+  color: #19181a;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 1px;
+  box-shadow: 0px 0px 0px #efefef;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}

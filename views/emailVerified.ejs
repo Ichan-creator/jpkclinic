@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
+    <link rel="stylesheet" href="/css/emailVerified.css" />
+    <title>Verify Email | JPK Veterinary Clinic</title>
+  </head>
+  <body>
+    <div class="container">
+      <% if (linkExpired) { %>
+      <div>
+        <h2>This email verification link has expired.</h2>
+        <a href="/login" class="modal-button">Continue</a>
+      </div>
+      <% } %> <% if (verifySuccess) { %>
+      <div>
+        <h2>Email is verified!</h2>
+        <p>
+          You have successfully verified your email. You may now login to your
+          account.
+        </p>
+        <a href="/login">Back to login →</a>
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>

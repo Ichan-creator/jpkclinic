@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Login | JPK Veterinary Clinic</title>
+    <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
+    <link rel="stylesheet" href="/css/adminLogin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title"><span>Admin Login</span></div>
+      <form action="/admin-login" method="post">
+        <div class="row">
+          <i class="fas fa-user"></i>
+          <input
+            name="adminUsername"
+            type="text"
+            placeholder="Email or Phone"
+            required
+          />
+        </div>
+        <div class="row">
+          <i class="fas fa-lock"></i>
+          <input
+            name="adminPassword"
+            type="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="pass"></div>
+        <div class="row button">
+          <input type="submit" value="Login" />
+        </div>
+        <div class="signup-link">
+          Not a member of JPK?
+          <a href="/login">Go back to the Main Log-in Page</a>
+        </div>
+      </form>
+    </div>
+
+    <script></script>
+  </body>
+</html>
