@@ -212,7 +212,7 @@ select {
 
   .student-profile .card p {
     font-size: 12px;
-    text-align: center;
+    text-align: center  ;
   }
 
   .student-profile .table th,
@@ -223,7 +223,8 @@ select {
     padding: 4px 6px;
   }
 
-  .button1,
+  .button2, .button1,
+  #visitation-table button,
   #visitation-table .button {
     font-size: 7px;
     padding: 2px 4px;
@@ -791,6 +792,14 @@ textarea {
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@media screen and (max-width: 480px) {
+  .button2,
+  #editProfile .button {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
 }
 
 .confirm-button {
