@@ -275,7 +275,7 @@ select {
   height: auto;
   border-radius: 6px;
   padding: 30px;
-  margin: 10% auto;
+  margin: 7% auto;
   background-color: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -366,7 +366,7 @@ select {
   .modal-appointment-content {
     width: 90%;
     padding: 8px;
-    top: 70px;
+    top: 10%;
   }
 
   .close-appointment {
