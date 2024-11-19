@@ -271,10 +271,10 @@ select {
 
 .modal-appointment-content {
   position: relative;
-  width: 70%;
+  width: 80%;
   height: auto;
   border-radius: 6px;
-  padding: 30px;
+  padding: 50px;
   margin: 7% auto;
   background-color: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
