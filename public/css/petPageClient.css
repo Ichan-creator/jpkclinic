@@ -212,6 +212,7 @@ select {
 
   .student-profile .card p {
     font-size: 12px;
+    text-align: center;
   }
 
   .student-profile .table th,
@@ -219,11 +220,10 @@ select {
   #visitation-table th,
   #visitation-table td {
     font-size: 7px;
-    padding: 9px 6px;
+    padding: 4px 6px;
   }
 
-  .button2, .button1,
-  #visitation-table button,
+  .button1,
   #visitation-table .button {
     font-size: 7px;
     padding: 2px 4px;
@@ -504,6 +504,7 @@ textarea :focus .input-field select:focus {
     min-height: 60vh;
     display: block;
     overflow-y: auto;
+    position: relative;
   }
 
   .pet-record-content .header {

@@ -159,6 +159,7 @@ select {
 
   .student-profile .card p {
     font-size: 12px;
+    text-align: center;
   }
 
   .student-profile .table th,
@@ -170,8 +171,7 @@ select {
     text-align: center;
   }
 
-  .button2, .button1,
-  #pet-table button,
+  .button1,
   #pet-table .button {
     font-size: 7px;
     padding: 4px 6px;
@@ -502,6 +502,14 @@ select {
   font-size: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@media screen and (max-width: 480px) {
+  .button2,
+  #editProfile .button {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
 }
 
 .confirm-button {
