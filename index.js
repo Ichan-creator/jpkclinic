@@ -47,7 +47,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MySQLSessionStore,
-    cookie: { httpOnly: true, sameSite: "strict", maxAge: 10 * 60 * 1000 },
+    cookie: { httpOnly: true, sameSite: "strict", maxAge: 60 * 60 * 1000 },
   })
 );
 
