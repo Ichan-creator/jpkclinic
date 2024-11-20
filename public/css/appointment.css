@@ -275,7 +275,7 @@ select {
   height: auto;
   border-radius: 6px;
   padding: 50px;
-  margin: 7% auto;
+  margin: 4% auto;
   background-color: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -283,7 +283,7 @@ select {
 .close-appointment {
   color: #aaa;
   float: right;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   font-size: 28px;
   font-weight: bold;
 }
@@ -326,13 +326,13 @@ select {
   }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .cancel-appointment {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    padding-left: 0.8rem;
-    padding-right: 0.8rem;
-    font-size: 11px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 15px;
     margin-bottom: 0.8rem;
   }
 }
