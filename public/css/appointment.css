@@ -478,7 +478,7 @@ select {
   z-index: 100;
 }
 
-.modal-log-out {
+.modal-logout {
   display: none;
   position: fixed;
   z-index: 100;
