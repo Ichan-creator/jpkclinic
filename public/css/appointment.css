@@ -514,7 +514,6 @@ select {
 .button-container {
   display: flex;
   justify-content: space-around;
-  padding-top: 8px;
 }
 
 .button {
