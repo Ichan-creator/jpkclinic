@@ -306,7 +306,6 @@ select {
   font-weight: bold;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   border-width: 1px;
@@ -327,7 +326,7 @@ select {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .cancel-appointment {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -343,7 +342,6 @@ select {
   font-weight: bold;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   border-width: 1px;
@@ -480,7 +478,7 @@ select {
   z-index: 100;
 }
 
-.modal-logout {
+.modal-log-out {
   display: none;
   position: fixed;
   z-index: 100;
@@ -492,7 +490,7 @@ select {
   background-color: rgba(0, 0, 0, 0.603);
 }
 
-.popup {
+.popup-log-out {
   background: #fff;
   padding: 20px;
   width: 300px;
@@ -694,6 +692,10 @@ select {
 }
 
 @media (max-width: 480px) {
+  .modal-log-out {
+    width: 65%;
+  }
+
   .popup {
     width: 55%;
   }
