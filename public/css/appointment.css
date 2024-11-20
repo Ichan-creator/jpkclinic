@@ -693,6 +693,46 @@ select {
   background-color: #d32f2f;
 }
 
+@media (max-width: 480px) {
+  .popup {
+    width: 55%;
+  }
+
+  .popup .close-btn {
+    font-size: 25px;
+  }
+
+  .popup .title {
+    font-size: 16px;
+  }
+
+  .popup .message {
+    font-size: 12px;
+  }
+
+  .popup .ok-btn {
+    font-size: 12px;
+  }
+
+  .cancel-modal {
+    width: 65%;
+    padding: 12px;
+  }
+
+  .cancel-modal-header {
+    font-size: 18px;
+  }
+
+  .cancel-modal-message {
+    font-size: 12px;
+  }
+
+  .cancelled-button {
+    width: 45%;
+    font-size: 12px;
+  }
+}
+
 .close-popup-icon {
   cursor: pointer;
   position: absolute;
