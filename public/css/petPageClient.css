@@ -800,6 +800,10 @@ textarea {
     font-size: 11px;
     padding: 8px 12px;
   }
+
+  .header__img {
+    display: none;
+  }
 }
 
 .confirm-button {

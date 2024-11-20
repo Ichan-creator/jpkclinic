@@ -407,12 +407,6 @@ select {
   margin-right: 10px;
 }
 
-@media screen and (max-width: 768px) {
-  .header__img {
-    display: none;
-  }
-}
-
 .header__img img {
   width: 40px;
 }
@@ -509,6 +503,10 @@ select {
   #editProfile .button {
     font-size: 11px;
     padding: 8px 12px;
+  }
+
+  .header__img {
+    display: none;
   }
 }
 
