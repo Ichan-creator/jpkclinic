@@ -499,13 +499,13 @@ select {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.352);
 }
 
-.popup h2 {
+.popup-log-out h2 {
   margin: 0;
   font-size: 20px;
   font-weight: bold;
 }
 
-.popup p {
+.popup-log-out p {
   color: #272727;
   font-size: 16px;
   margin: 10px 0 20px;
@@ -514,7 +514,7 @@ select {
 .button-container {
   display: flex;
   justify-content: space-around;
-  padding-top: 20px;
+  padding-top: 8px;
 }
 
 .button {
