@@ -243,7 +243,8 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 24px;
+    margin: 0 auto;
+    padding-left: 4px;
   }
 
   .tab {
