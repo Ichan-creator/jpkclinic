@@ -273,10 +273,10 @@ p {
 }
 
 .dashboard-content a {
-  padding: 10px 20px;
+  padding: 12px 25px;
   background-color: #4caf50;
   color: white;
-  border-radius: 5px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
   display: inline-block;
@@ -465,7 +465,7 @@ p {
 
   .dashboard-content a {
     padding: 10px 16px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 
