@@ -572,8 +572,8 @@ textarea :focus .input-field select:focus {
 
   .profile-modal-content {
     height: auto;
-    max-width: 80%;
-    margin-left: 12%;
+    max-width: 60%;
+    margin-left: 24%;
     margin-bottom: 50%;
   }
 
@@ -617,8 +617,8 @@ textarea :focus .input-field select:focus {
 @media (max-width: 1024px) and (max-width: 768px) {
   .pet-record-content {
     height: 20px;
-    max-width: 80%;
-    margin-left: 10%;
+    max-width: 85%;
+    margin-left: 8%;
     margin-bottom: 0;
   }
 

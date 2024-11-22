@@ -205,8 +205,8 @@ select {
 @media (max-width: 1024px) and (min-width: 768px) {
   .profile-modal-content {
     height: auto;
-    max-width: 80%;
-    margin-left: 12%;
+    max-width: 60%;
+    margin-left: 24%;
     margin-bottom: 50%;
   }
 
