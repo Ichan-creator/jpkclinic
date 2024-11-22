@@ -624,9 +624,9 @@ textarea :focus .input-field select:focus {
 
   .profile-modal-content {
     height: auto;
-    max-width: 80%;
-    margin-left: 12%;
-    margin-bottom: 50%;
+    max-width: 85%;
+    margin-left: 7%;
+    margin-bottom: 10%;
   }
 
   .button2, .button1,
