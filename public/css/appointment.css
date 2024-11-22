@@ -296,7 +296,7 @@ select {
 
 @media screen and (min-width: 768px){
   .modal-appointment-content {
-    width: 85%;
+    width: 75%;
     top: 5%;
     left: 20px;
   }
