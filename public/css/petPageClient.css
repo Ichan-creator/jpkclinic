@@ -562,9 +562,61 @@ textarea :focus .input-field select:focus {
   }
 }
 
-@media (max-width: 768px) and (min-width: 1024px) {
+@media screen and (max-width: 1024px) {
   .pet-record-content {
-    height: 20px;
+    height: auto;
+    max-width: 80%;
+    margin-left: 12%;
+    margin-bottom: 30rem;
+  }
+
+  .profile-modal-content {
+    height: auto;
+    max-width: 80%;
+    margin-left: 12%;
+    margin-bottom: 50%;
+  }
+
+  .button2, .button1,
+  #visitation-table button,
+  #visitation-table .button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  table th, table td {
+    padding: 8px;
+    text-align: left;
+    font-size: 10px;
+  }
+
+  table th, table td {
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .close {
+    font-size: 30px;
+    font-weight: bold;
+    color: #aaa;
+    float: right;
+  }
+}
+
+@media (max-width: 1024px) and (max-width: 768px) {
+  .pet-record-content {
+    height: 10px;
     max-width: 80%;
     margin-left: 12%;
     margin-bottom: 0;
