@@ -61,7 +61,7 @@ async function handleApproveAppointment(req, res) {
     appointmentDate,
     "MMMM DD, YYYY - hh:mm A"
   ).toDate();
-  const reminderTime = new Date(appointmentDateTime.getTime() - 30 * 60000);
+  const reminderTime = new Date(appointmentDateTime.getTime() - 60 * 60000);
 
   const jobName = `appointmentReminder-${appointmentId}`;
 
