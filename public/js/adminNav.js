@@ -35,9 +35,11 @@ window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
       "#",
-      "Name",
+      "Client Name",
+      "Pet Name",
       "Animal",
       "Veterinarian",
+      "Appointment Date",
       {
         name: "Status",
         formatter: (cell, row) => {
@@ -75,9 +77,11 @@ window.addEventListener("load", () => {
         data.map((item, index) => {
           return [
             index + 1,
+            item["pet.user.fullName"],
             item["pet.name"],
             item["pet.animalType"],
             item.veterinarian,
+            dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),  
             item.appointmentStatus,
           ];
         }),

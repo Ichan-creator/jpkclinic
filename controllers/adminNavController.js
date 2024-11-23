@@ -34,10 +34,11 @@ async function handleAdminNav(req, res) {
 
 async function handleGetAdminAppointmentRequests(req, res) {
   const appointmentRequests = await Appointments.findAll({
-    attributes: ["veterinarian", "appointmentStatus"],
+    attributes: ["veterinarian", "appointmentStatus", "appointmentDate"],
     include: {
       model: Pets,
       attributes: ["name", "animalType"],
+      include: { model: User, attributes: ["fullName"] },
     },
     raw: true,
   });
