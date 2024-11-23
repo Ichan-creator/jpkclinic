@@ -54,7 +54,7 @@ window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
       { name: "Pet ID", width: "200" },
-      "Name",
+      "Pet Name",
       "Animal",
       "Breed",
       {

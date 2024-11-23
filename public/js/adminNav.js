@@ -111,7 +111,7 @@ window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
       "#",
-      "Name",
+      "Pet Name",
       "Animal",
       "Veterinarian",
       "Service",

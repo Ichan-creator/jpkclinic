@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
       { name: "id", hidden: true },
-      "Name",
+      "Client Name",
       "Email",
       "Phone Number",
       {
