@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
       {
         name: "Status",
         formatter: (cell, row) => {
-          const status = row.cells[4].data;
+          const status = row.cells[6].data;
 
           let statusClassName = "";
 
