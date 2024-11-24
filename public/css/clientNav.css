@@ -66,7 +66,6 @@ a {
   width: 40px;
 }
 
-/* Layout Container */
 .layout-container {
   display: flex;
   gap: 45px;
@@ -232,7 +231,6 @@ th {
   font-size: 16px;
 }
 
-/* Media Queries */
 @media (max-width: 1024px) and (min-width: 768px) {
   .layout-container {
     flex-direction: row;
