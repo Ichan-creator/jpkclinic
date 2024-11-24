@@ -234,7 +234,7 @@ th {
 @media screen and (max-width: 1024px) and (min-width: 768px) {
   .layout-container {
     display: grid;
-    margin-bottom: 800px;
+    margin-bottom: 350px;
   }
 }
 
