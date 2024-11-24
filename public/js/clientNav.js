@@ -110,3 +110,138 @@ function handleConfirmLogout() {
 function handleCancelLogout() {
   logoutModal.style.display = "none";
 }
+
+const { h, html } = window.gridjs;
+
+window.addEventListener("load", () => {
+  const calendarEl = document.getElementById("calendar-table");
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: "dayGridMonth",
+    eventSources: ["/appointments-calendar"],
+  });
+  calendar.render();
+});
+
+window.addEventListener("load", () => {
+  new gridjs.Grid({
+    columns: [
+      { name: "id", hidden: true },
+      { name: "Date and Time", sort: true },
+      "Service",
+      { name: "Date Approved", sort: true },
+    ],
+    width: "100%",
+    server: {
+      url: "/appointments-list",
+      method: "GET",
+      then: (data) =>
+        data.map((item) => [
+          item.id,
+          dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+          item.service,
+          item.dateApproved
+            ? item.dateApproved !== "Pending"
+              ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
+              : "Pending"
+            : "",
+        ]),
+      handle: (res) => {
+        if (res.status === 404) return { data: [] };
+        if (res.ok) return res.json();
+
+        throw Error("oh no :(");
+      },
+    },
+    fixedHeader: true,
+    pagination: {
+      limit: 5,
+      summary: true,
+      resetPageOnUpdate: true,
+    },
+  }).render(document.getElementById("upcoming-appointments-table"));
+});
+
+window.addEventListener("load", () => {
+  new gridjs.Grid({
+    columns: [
+      { name: "Pet ID", hidden: true },
+      "Name",
+      "Animal",
+      {
+        name: "Breed",
+        formatter: (cell, row) => {
+          const intro = introJs();
+          intro.setOptions({
+            steps: [
+              {
+                title: "Pet Profile Update Required",
+                intro: "Pet information needs to be updated.",
+                element: document.querySelector(
+                  `button[data-pet-id="${row.cells[0].data}"]`
+                ),
+              },
+            ],
+            exitOnEsc: false,
+            exitOnOverlayClick: false,
+          });
+          intro.onexit(() => {
+            const id = row.cells[0].data;
+
+            window.location.href = `/owned-pets/${id}`;
+          });
+
+          return cell ? cell : intro.start();
+        },
+      },
+      {
+        id: "action",
+        name: "",
+        formatter: (cell, row) => {
+          return h(
+            "button",
+            {
+              className: "action-buttons",
+              "data-pet-id": row.cells[0].data,
+              onClick: () => {
+                const id = row.cells[0].data;
+
+                window.location.href = `/owned-pets/${id}`;
+              },
+            },
+            "View Pet Record"
+          );
+        },
+      },
+    ],
+    server: {
+      url: "/owned-pets",
+      method: "GET",
+      then: (data) =>
+        data.map((item) => [item.id, item.name, item.animalType, item.breed]),
+      handle: (res) => {
+        if (res.status === 404) return { data: [] };
+        if (res.ok) return res.json();
+
+        throw Error("oh no :(");
+      },
+    },
+    fixedHeader: true,
+    pagination: {
+      limit: 5,
+      summary: true,
+      resetPageOnUpdate: true,
+    },
+  }).render(document.getElementById("animals-table"));
+});
+
+function viewAllAppointments() {
+  localStorage.setItem("viewAllAppointments", "true");
+
+  window.location.href = "/appointment";
+}
+
+function viewAllPets() {
+  localStorage.setItem("viewAllPets", "true");
+
+  window.location.href = "/personal-page";
+}

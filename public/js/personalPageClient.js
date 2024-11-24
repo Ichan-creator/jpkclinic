@@ -1,3 +1,54 @@
+const showNavbar = (toggleId, navId, bodyId, headerId) => {
+  const toggle = document.getElementById(toggleId),
+    nav = document.getElementById(navId),
+    bodypd = document.getElementById(bodyId),
+    headerpd = document.getElementById(headerId);
+
+  if (toggle && nav && bodypd && headerpd) {
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("show");
+
+      toggle.classList.toggle("bx-x");
+
+      bodypd.classList.toggle("body-pd");
+
+      headerpd.classList.toggle("body-pd");
+    });
+  }
+};
+
+showNavbar("header-toggle", "nav-bar", "body-pd", "header");
+
+const linkColor = document.querySelectorAll(".nav__link");
+
+function colorLink() {
+  if (linkColor) {
+    linkColor.forEach((l) => l.classList.remove("active"));
+    this.classList.add("active");
+  }
+}
+linkColor.forEach((l) => l.addEventListener("click", colorLink));
+
+function toggleTabs(selectedCheckbox) {
+  const allContents = document.querySelectorAll(".tab-content");
+  allContents.forEach((content) => {
+    content.style.maxHeight = "0";
+    content.style.opacity = "0";
+    content.style.transition = "max-height 0.3s ease, opacity 0.3s ease";
+  });
+  if (selectedCheckbox.checked) {
+    const content = selectedCheckbox.nextElementSibling.nextElementSibling;
+    content.style.maxHeight = content.scrollHeight + "px";
+    content.style.opacity = "1";
+  }
+  const checkboxes = document.querySelectorAll('.tab input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    if (checkbox !== selectedCheckbox) {
+      checkbox.checked = false;
+    }
+  });
+}
+
 const profileModal = document.getElementById("profile-modal");
 const editProfileBtn = document.getElementById("editProfileBtn");
 const closeEditProfilelBtn = document.getElementById("closeEditProfilelBtn");
@@ -50,6 +101,14 @@ editProfileForm.addEventListener("submit", (event) => {
 const { h, html } = window.gridjs;
 
 window.addEventListener("load", () => {
+  if (localStorage.getItem("viewAllPets") === "true") {
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }, 1000);
+    localStorage.removeItem("viewAllPets");
+    return;
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
   const isFirstTime = urlParams.get("firstTimeLogin");
 

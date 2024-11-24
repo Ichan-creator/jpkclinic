@@ -342,6 +342,17 @@ window.addEventListener("load", () => {
 });
 
 window.addEventListener("load", () => {
+  if (localStorage.getItem("viewAllAppointments") === "true") {
+    document
+      .querySelector(
+        ".fc-appointmentListBtn-button.fc-button.fc-button-primary"
+      )
+      .click();
+
+    localStorage.removeItem("viewAllAppointments");
+    return;
+  }
+
   if (localStorage.getItem("updatePetProfile") === "true") {
     const intro = introJs();
 
