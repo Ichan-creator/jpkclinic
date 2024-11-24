@@ -118,6 +118,16 @@ window.addEventListener("load", () => {
   const calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "dayGridMonth",
     eventSources: ["/appointments-calendar"],
+    eventClick: (info) => {
+      document.querySelector(".calendar-details").style.display = "block";
+      document.getElementById("upcomingAppointmentDate").textContent = dayjs(
+        info.event._instance.range.start
+      )
+        .utcOffset(0)
+        .format("MMMM DD, YYYY - hh:mm A");
+      document.getElementById("upcomingService").textContent =
+        info.event._def.title;
+    },
   });
   calendar.render();
 });

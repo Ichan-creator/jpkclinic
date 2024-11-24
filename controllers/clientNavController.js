@@ -11,11 +11,6 @@ async function handleClientNav(req, res) {
 
   const user = await User.findOne({
     where: { id: req.user.id },
-    include: {
-      model: Appointments,
-      attributes: ["petNames", "service", "appointmentDate"],
-      order: [["appointmentDate", "DESC"]],
-    },
     raw: true,
   });
 
@@ -44,13 +39,6 @@ async function handleClientNav(req, res) {
     notifications: formattedNotifications,
     fullName: user.fullName,
     avatar: user.avatar,
-    appointmentDate: user["appointments.appointmentDate"]
-      ? dayjs(user["appointments.appointmentDate"]).format(
-          "MMMM DD, YYYY - hh:mm A"
-        )
-      : "",
-    service: user["appointments.service"],
-    petNames: user["appointments.petNames"],
   });
 }
 

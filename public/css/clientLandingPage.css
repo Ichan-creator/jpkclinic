@@ -81,7 +81,7 @@ span {
   h4 {
     font-size: 13px;
   }
-  
+
   h3 {
     font-size: 16px;
   }
@@ -238,7 +238,8 @@ input {
     gap: 40px;
   }
 
-  .tabs-left, .tabs-right {
+  .tabs-left,
+  .tabs-right {
     flex: 1 100%;
     display: flex;
     flex-direction: column;

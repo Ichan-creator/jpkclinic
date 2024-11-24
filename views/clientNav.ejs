@@ -212,11 +212,19 @@
       <div class="sidebar-panel">
         <div class="calendar-title">Clinic Visits</div>
         <div id="calendar-table"></div>
-        <div class="calendar-details">
-          <% if (appointmentDate) { %> Upcoming:
-          <strong><%= appointmentDate %></strong><br /><br />
-          <strong><%= service %></strong> for <strong><%= petNames %></strong>
-          <% } %>
+        <div class="calendar-details" style="display: none">
+          Upcoming:<br />
+          Date:
+          <strong
+            ><span
+              id="upcomingAppointmentDate"
+              style="color: black"
+            ></span></strong
+          ><br />
+          Service:
+          <strong
+            ><span id="upcomingService" style="color: black"></span
+          ></strong>
         </div>
 
         <div id="event-tooltip" class="tooltip">
@@ -460,6 +468,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
+    <script>
+      dayjs.extend(window.dayjs_plugin_utc);
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
     <script src="https://unpkg.com/intro.js/intro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
