@@ -253,7 +253,7 @@ function viewAllAppointments() {
   window.location.href = "/appointment";
 }
 
-function viewAllPets() {
+function viewAllOwnedPets() {
   localStorage.setItem("viewAllPets", "true");
 
   window.location.href = "/personal-page";
