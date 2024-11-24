@@ -167,7 +167,7 @@ window.addEventListener("load", () => {
     },
     fixedHeader: true,
     pagination: {
-      limit: 5,
+      limit: 3,
       summary: true,
       resetPageOnUpdate: true,
     },
@@ -240,7 +240,7 @@ window.addEventListener("load", () => {
     },
     fixedHeader: true,
     pagination: {
-      limit: 5,
+      limit: 3,
       summary: true,
       resetPageOnUpdate: true,
     },
