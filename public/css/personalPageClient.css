@@ -50,6 +50,7 @@ section {
 .button2 {
   border: 2px solid #008cba;
   background-color: white;
+  color: #008cba;
   padding: 12px 32px;
   text-align: center;
   text-decoration: none;
@@ -68,7 +69,7 @@ section {
 
 .button1 {
   background-color: white;
-  color: black;
+  color: #04aa6d;
   border: 2px solid #04aa6d;
   text-decoration: none;
   display: inline-block;
