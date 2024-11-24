@@ -319,8 +319,7 @@ th {
     padding: 6px 10px;
   }
 
-  .gridjs-pagination,
-  .gridjs-th-content {
+  .gridjs-pagination {
     font-size: 10px;
   }
 }
