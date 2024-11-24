@@ -119,6 +119,12 @@ window.addEventListener("load", () => {
     initialView: "dayGridMonth",
     eventSources: ["/appointments-calendar"],
     eventClick: (info) => {
+      document.querySelectorAll(".event-highlight").forEach((el) => {
+        el.classList.remove("event-highlight");
+      });
+
+      info.el.classList.add("event-highlight");
+
       document.querySelector(".calendar-details").style.display = "block";
       document.getElementById("upcomingAppointmentDate").textContent = dayjs(
         info.event._instance.range.start
