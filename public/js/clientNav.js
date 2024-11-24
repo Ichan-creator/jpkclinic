@@ -128,6 +128,9 @@ window.addEventListener("load", () => {
       document.getElementById("upcomingService").textContent =
         info.event._def.title;
     },
+    eventMouseEnter: (info) => {
+      info.el.style.cursor = "pointer";
+    },
   });
   calendar.render();
 });
