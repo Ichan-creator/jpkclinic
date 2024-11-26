@@ -38,9 +38,7 @@ form.addEventListener("submit", (event) => {
       newPassword: form.newPassword.value,
     })
     .then((res) => {
-      console.log(res);
-      alert("You have successfully changed your password. You may now login.");
-      window.location.href = "/login";
+      document.getElementById("popup-container").style.display = "flex";
     })
     .catch((error) => {
       console.error(error);
