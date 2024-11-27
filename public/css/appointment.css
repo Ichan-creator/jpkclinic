@@ -170,6 +170,7 @@ select {
 @media screen and (max-width: 480px) {
   .container {
     width: 90%;
+    margin-top: 10rem;
     padding: 20px;
     position: fixed;
     left: 20px;
