@@ -835,7 +835,7 @@ select {
 
 @media (max-width: 1024px) and (min-width: 768px) {
   .calendar-popup-form {
-    width: 30%;
+    width: 40%;
     padding: 15px;
     margin-bottom: 80rem;
   }
