@@ -166,7 +166,7 @@ window.addEventListener("load", () => {
     disableInteraction: true,
     steps: [
       {
-        title: "Hello and welcome 👋",
+        title: "Hello and welcome👋",
         intro:
           "Welcome to JPK Veterinary Clinic's Online System. To get started, let's setup your profile first 🙂",
       },
