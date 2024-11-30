@@ -772,7 +772,7 @@ select {
   align-items: center;
 }
 
-.calendar-container {
+.calendar-popup-form {
   width: 350px;
   background: #ffffff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.44);
@@ -782,7 +782,7 @@ select {
   position: relative;
 }
 
-.calendar-container .close {
+.calendar-popup-form .close {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -791,31 +791,31 @@ select {
   cursor: pointer;
 }
 
-.calendar-container .close:hover {
+.calendar-popup-form .close:hover {
   color: #333;
 }
 
-.calendar-container .icon {
+.calendar-popup-form .icon {
   font-size: 70px;
   color: #f15353;
   margin-bottom: 5px;
   margin-top: 8px;
 }
 
-.calendar-container h2 {
+.calendar-popup-form h2 {
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 0;
   color: #333;
 }
 
-.calendar-container p {
+.calendar-popup-form p {
   font-size: 18px;
   color: #282828;
   margin-bottom: 30px;
 }
 
-.calendar-container button {
+.calendar-popup-form button {
   background-color: #eafaf1;
   color: #000000;
   font-size: 16px;
@@ -828,7 +828,7 @@ select {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.calendar-container button:hover {
+.calendar-popup-form button:hover {
   background-color: #04aa6d;
   color: #ffffff;
 }
@@ -840,31 +840,26 @@ select {
     margin-bottom: 80rem;
   }
 
-  .calendar-container {
-    width: 45%;
-    padding: 20px;
-  }
-
-  .calendar-container .close {
+  .calendar-popup-form .close {
     top: 15px;
     right: 15px;
     font-size: 34px;
   }
 
-  .calendar-container .icon {
+  .calendar-popup-form .icon {
     font-size: 70px;
   }
 
-  .calendar-container h2 {
+  .calendar-popup-formh2 {
     font-size: 28px;
     font-weight: bold;
   }
 
-  .calendar-container p {
+  .calendar-popup-form p {
     font-size: 22px;
   }
 
-  .calendar-container button {
+  .calendar-popup-form button {
     font-size: 22px;
     padding: 12px 25px;
   }
@@ -876,26 +871,26 @@ select {
     padding: 10px;
   }
 
-  .calendar-container .close {
+  .calendar-popup-form .close {
     top: 10px;
     right: 15px;
     font-size: 24px;
   }
 
-  .calendar-container .icon {
+  .calendar-popup-form .icon {
     font-size: 40px;
   }
 
-  .calendar-container h2 {
+  .calendar-popup-form h2 {
     font-size: 16px;
     font-weight: bold;
   }
 
-  .calendar-container p {
+  .calendar-popup-form p {
     font-size: 14px;
   }
 
-  .calendar-container button {
+  .calendar-popup-form button {
     font-size: 14px;
     padding: 10px 20px;
   }
@@ -907,27 +902,27 @@ select {
     padding: 10px;
   }
 
-  .calendar-container .close {
+  .calendar-popup-form .close {
     top: 10px;
     right: 20px;
     font-size: 28px;
   }
 
-  .calendar-container .icon {
+  .calendar-popup-form .icon {
     font-size: 55px;
     font-weight: bold;
   }
 
-  .calendar-container h2 {
+  .calendar-popup-form h2 {
     font-size: 16px;
     margin-bottom: 0;
   }
 
-  .calendar-container p {
+  .calendar-popup-form p {
     font-size: 14px;
   }
 
-  .calendar-container button {
+  .calendar-popup-form button {
     font-size: 12px;
     padding: 10px 20px;
   }
