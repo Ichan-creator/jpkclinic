@@ -773,7 +773,7 @@ select {
 }
 
 .calendar-container {
-  width: 250px;
+  width: 350px;
   background: #ffffff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.44);
   border-radius: 12px;
@@ -785,8 +785,8 @@ select {
 .calendar-container .close {
   position: absolute;
   top: 10px;
-  right: 10px;
-  font-size: 22px;
+  right: 15px;
+  font-size: 30px;
   color: #999;
   cursor: pointer;
 }
@@ -796,30 +796,32 @@ select {
 }
 
 .calendar-container .icon {
-  font-size: 50px;
+  font-size: 70px;
   color: #f15353;
   margin-bottom: 5px;
   margin-top: 8px;
 }
 
 .calendar-container h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 0;
   color: #333;
 }
 
 .calendar-container p {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 15px;
+  font-size: 18px;
+  color: #282828;
+  margin-bottom: 30px;
 }
 
 .calendar-container button {
   background-color: #eafaf1;
-  color: #333;
-  font-size: 12px;
+  color: #000000;
+  font-size: 16px;
   border: none;
-  padding: 8px 18px;
+  padding: 10px 20px;
+  margin-bottom: 12px;
   border-radius: 8px;
   cursor: pointer;
   outline: none;
@@ -827,6 +829,114 @@ select {
 }
 
 .calendar-container button:hover {
-  background-color: #1cc88a;
+  background-color: #04aa6d;
   color: #ffffff;
+}
+
+@media screen and (min-width: 992px) {
+  .calendar-container {
+    width: 30%;
+    padding: 15px;
+    margin-bottom: 60rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .calendar-container {
+    width: 30%;
+    padding: 15px;
+    margin-bottom: 80rem;
+  }
+
+  .calendar-container {
+    width: 45%;
+    padding: 20px;
+  }
+
+  .calendar-container .close {
+    top: 15px;
+    right: 15px;
+    font-size: 34px;
+  }
+
+  .calendar-container .icon {
+    font-size: 70px;
+  }
+
+  .calendar-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .calendar-container p {
+    font-size: 22px;
+  }
+
+  .calendar-container button {
+    font-size: 22px;
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    width: 80%;
+    padding: 10px;
+  }
+
+  .calendar-container .close {
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+  }
+
+  .calendar-container .icon {
+    font-size: 40px;
+  }
+
+  .calendar-container h2 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .calendar-container p {
+    font-size: 14px;
+  }
+
+  .calendar-container button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-container {
+    width: 60%;
+    padding: 10px;
+  }
+
+  .calendar-container .close {
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+  }
+
+  .calendar-container .icon {
+    font-size: 55px;
+    font-weight: bold;
+  }
+
+  .calendar-container h2 {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+
+  .calendar-container p {
+    font-size: 14px;
+  }
+
+  .calendar-container button {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
 }
