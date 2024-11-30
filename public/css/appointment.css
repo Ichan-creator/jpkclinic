@@ -244,7 +244,7 @@ select {
     font-size: 10px;
     padding: 6px;
   }
- 
+
   .fc-daygrid-day {
     width: 14%;
     height: 40px;
@@ -295,7 +295,7 @@ select {
   cursor: pointer;
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
   .modal-appointment-content {
     width: 75%;
     top: 5%;
@@ -373,11 +373,11 @@ select {
     font-size: 18px;
     cursor: pointer;
   }
-  
+
   .gridjs-wrapper {
     padding: 8px;
     height: 400px;
-    text-align: center
+    text-align: center;
   }
 
   .gridjs-wrapper table {
@@ -527,22 +527,22 @@ select {
 }
 
 .confirm-button {
-  background-color: #87CEFA;
+  background-color: #87cefa;
   color: white;
 }
 
 .confirm-button:hover {
-  background-color: #1E90FF;
+  background-color: #1e90ff;
 }
 
 .cancel-button {
   background-color: #ffffff;
-  color: #1E90FF;
-  border: 1px solid #1E90FF;
+  color: #1e90ff;
+  border: 1px solid #1e90ff;
 }
 
 .cancel-button:hover {
-  background-color: #1E90FF;
+  background-color: #1e90ff;
   color: white;
 }
 
@@ -755,4 +755,78 @@ select {
 
 .close-popup-icon {
   pointer-events: none;
+}
+
+.calendar-modal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-container {
+  width: 250px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.44);
+  border-radius: 12px;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+}
+
+.calendar-container .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 22px;
+  color: #999;
+  cursor: pointer;
+}
+
+.calendar-container .close:hover {
+  color: #333;
+}
+
+.calendar-container .icon {
+  font-size: 50px;
+  color: #f15353;
+  margin-bottom: 5px;
+  margin-top: 8px;
+}
+
+.calendar-container h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.calendar-container p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.calendar-container button {
+  background-color: #eafaf1;
+  color: #333;
+  font-size: 12px;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.calendar-container button:hover {
+  background-color: #1cc88a;
+  color: #ffffff;
 }

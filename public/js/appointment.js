@@ -175,8 +175,9 @@ appointmentDateInput.addEventListener("input", function () {
   const selectedDate = new Date(appointmentDateInput.value);
   const day = selectedDate.getUTCDay();
   if (day === 0) {
-    alert("Sundays are not allowed. Please choose another day.");
+    document.querySelector(".calendar-modal").style.display = "flex";
     appointmentDateInput.value = "";
+    appointmentDateInput.blur();
   }
 });
 
@@ -530,4 +531,8 @@ function handleCancelAppointment() {
 function handleCloseCancelAppointment() {
   document.querySelector(".cancel-appointment-modal").style.display = "none";
   appointmentId = null;
+}
+
+function handleCloseCalendarModal() {
+  document.querySelector(".calendar-modal").style.display = "none";
 }
