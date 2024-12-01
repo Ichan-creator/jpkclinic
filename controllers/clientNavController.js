@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Appointments, Notifications, User } from "../models/index.models.js";
+import { Op } from "sequelize";
 
 dayjs.extend(relativeTime);
 
@@ -42,4 +43,22 @@ async function handleClientNav(req, res) {
   });
 }
 
-export default handleClientNav;
+async function handleGetUpcomingAppointmentsList(req, res) {
+  const userId = req.user.id;
+
+  const appointmentsList = await Appointments.findAll({
+    attributes: ["id", "appointmentDate", "service", "dateApproved"],
+    where: {
+      userId,
+      dateApproved: { [Op.ne]: "cancelled" },
+      medicalRecordStatus: { [Op.ne]: "COMPLETE" },
+    },
+    raw: true,
+  });
+
+  if (!appointmentsList) return res.status(404).json([]);
+
+  res.json(appointmentsList);
+}
+
+export { handleClientNav, handleGetUpcomingAppointmentsList };

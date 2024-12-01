@@ -56,7 +56,10 @@ async function handleGetAppointmentsList(req, res) {
 
   const appointmentsList = await Appointments.findAll({
     attributes: ["id", "appointmentDate", "service", "dateApproved"],
-    where: { userId, dateApproved: { [Op.ne]: "cancelled" } },
+    where: {
+      userId,
+      dateApproved: { [Op.ne]: "cancelled" },
+    },
     raw: true,
   });
 

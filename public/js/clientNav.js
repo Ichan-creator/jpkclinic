@@ -151,7 +151,7 @@ window.addEventListener("load", () => {
     ],
     width: "100%",
     server: {
-      url: "/appointments-list",
+      url: "/upcoming-appointments-list",
       method: "GET",
       then: (data) =>
         data.map((item) => [
