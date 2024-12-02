@@ -331,17 +331,17 @@ select {
 
 @media screen and (max-width: 480px) {
   .cancel-appointment {
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
-    padding-left: 0.6rem;
-    padding-right: 0.6rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
     font-size: 7px;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.7rem;
   }
 
   .reschedule-appointment {
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
     padding-left: 0.6rem;
     padding-right: 0.6rem;
     font-size: 8px;
@@ -349,7 +349,7 @@ select {
   }
 }
 
-@media (max-width: 480px) and (min-width: 768px) {
+@media (max-width: 1024px) and (min-width: 768px) {
   .cancel-appointment {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -364,7 +364,7 @@ select {
     padding-bottom: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 0.8rem;
   }
 }
@@ -724,6 +724,12 @@ select {
   background-color: #d32f2f;
 }
 
+@media (max-width: 1024px) and (min-width: 768px) {
+  .cancel-modal {
+    margin-bottom: 60rem;
+  }
+}
+
 @media (max-width: 480px) {
   .modal-log-out {
     width: 65%;
@@ -879,7 +885,7 @@ select {
   .new-date-form {
     width: 40%;
     padding: 15px;
-    margin-bottom: 80rem;
+    margin-bottom: 70rem;
   }
 
   .calendar-popup-form .close,
@@ -896,7 +902,7 @@ select {
 
   .calendar-popup-form h2,
   .new-date-form h2 {
-    font-size: 28px;
+    font-size: 25px;
     font-weight: bold;
   }
 
@@ -908,7 +914,7 @@ select {
   .calendar-popup-form button,
   .new-date-form button {
     font-size: 22px;
-    padding: 12px 25px;
+    padding: 10px 30px;
   }
 }
 
@@ -983,6 +989,6 @@ select {
   .calendar-popup-form button,
   .new-date-form button {
     font-size: 12px;
-    padding: 10px 20px;
+    padding: 10px 30px;
   }
 }
