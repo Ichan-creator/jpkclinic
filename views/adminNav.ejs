@@ -155,7 +155,7 @@
         <div class="cancel-button-container">
           <button
             class="cancelled-button button-confirmed"
-            onclick="handleCancelAppointment()"
+            onclick="handleCancelAppointmentConfirm()"
           >
             Confirm
           </button>
@@ -167,6 +167,13 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div id="toast-cancel" class="cancel-notification">
+      <span class="icon">✖</span>
+      <span class="cancel-notification-message"
+        >Appointment Schedule Cancelled</span
+      >
     </div>
 
     <div id="logoutModal" class="modal-logout">

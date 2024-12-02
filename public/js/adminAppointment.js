@@ -224,62 +224,12 @@ window.addEventListener("load", () => {
                 modal.dataset.appointmentDate = row.cells[3].data;
                 modal.dataset.service = row.cells[4].data;
                 modal.dataset.petNames = row.cells[5].data;
-                // if (approveAppointment) {
-                //   axios
-                //     .post("/approve-appointment", {
-                //       appointmentId: row.cells[0].data,
-                //       userId: row.cells[1].data,
-                //       appointmentDate: row.cells[3].data,
-                //       service: row.cells[4].data,
-                //       petNames: row.cells[5].data,
-                //       type: "approved",
-                //     })
-                //     .then((res) => {
-                //       const toast = document.getElementById("toast");
-                //       toast.classList.add("show");
-
-                //       setTimeout(() => {
-                //         toast.classList.remove("show");
-                //         window.location.reload();
-                //       }, 3000);
-                //     })
-                //     .catch((error) => {
-                //       console.error(error);
-                //     });
-                // }
               },
             },
             "Approve Appointment"
           );
 
-          const rejectAppointment = h(
-            "button",
-            {
-              className: `${
-                isApproved
-                  ? "disabled-reject-appointment"
-                  : "reject-appointment"
-              }`,
-              disabled: isApproved ? true : false,
-              onClick: () => {
-                document.querySelector(".reject-confirm-modal").style.display =
-                  "flex";
-
-                const modal = document.querySelector(".reject-confirm-modal");
-                modal.dataset.appointmentId = row.cells[0].data;
-                modal.dataset.userId = row.cells[1].data;
-                modal.dataset.appointmentDate = row.cells[3].data;
-                modal.dataset.service = row.cells[4].data;
-                modal.dataset.petNames = row.cells[5].data;
-                // if (rejectAppointment) {
-                //
-                // }
-              },
-            },
-            "Reject Appointment"
-          );
-
-          return [approveAppointment, rejectAppointment];
+          return approveAppointment;
         },
       },
     ],
@@ -392,44 +342,6 @@ function handleApproveConfirm() {
     });
 }
 
-function handleRejectConfirm() {
-  const modal = document.querySelector(".reject-confirm-modal");
-  const appointmentId = modal.dataset.appointmentId;
-  const userId = modal.dataset.userId;
-  const appointmentDate = modal.dataset.appointmentDate;
-  const service = modal.dataset.service;
-  const petNames = modal.dataset.petNames;
-
-  axios
-    .post("/reject-appointment", {
-      appointmentId,
-      userId,
-      appointmentDate,
-      service,
-      petNames,
-      type: "rejected",
-    })
-    .then((res) => {
-      const rejectToast = document.getElementById("toast-reject");
-      rejectToast.classList.add("show");
-
-      setTimeout(() => {
-        rejectToast.classList.remove("show");
-        window.location.reload();
-      }, 3000);
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-    .finally(() => {
-      document.querySelector(".reject-confirm-modal").style.display = "none";
-    });
-}
-
 function handleApproveCancelConfirm() {
   document.querySelector(".approve-confirm-modal").style.display = "none";
-}
-
-function handleRejectCancelConfirm() {
-  document.querySelector(".reject-confirm-modal").style.display = "none";
 }

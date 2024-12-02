@@ -94,27 +94,9 @@ async function handleApproveAppointment(req, res) {
   res.status(200).json({ message: "Successfully approved appointment" });
 }
 
-async function handleRejectAppointment(req, res) {
-  const { appointmentId, dateAndTime, userId, service, type } = req.body;
-
-  await sendNotificationEmail(service, dateAndTime, type, userId);
-
-  await Notifications.create({
-    service,
-    dateAndTime: dayjs(Date.now()).format("MMMM D, YYYY - h:mm A"),
-    type: "rejected",
-    userId,
-  });
-
-  await Appointments.destroy({ where: { id: appointmentId } });
-
-  res.status(200).json({ message: "Appointment successfully rejected" });
-}
-
 export {
   handleAdminAppointment,
   handleGetAdminAppointmentsCalendar,
   handleGetAdminAppointmentsList,
   handleApproveAppointment,
-  handleRejectAppointment,
 };

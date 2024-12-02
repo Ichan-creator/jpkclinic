@@ -91,9 +91,14 @@ window.addEventListener("load", () => {
                       ? "disabled-cancel-appointment"
                       : "cancel-appointment",
                   onClick: () => {
-                    document.querySelector(
+                    const cancelModal = document.querySelector(
                       ".cancel-appointment-modal"
-                    ).style.display = "flex";
+                    );
+                    cancelModal.style.display = "flex";
+                    cancelModal.dataset.appointmentId = row.cells[0].data;
+                    cancelModal.dataset.userId = row.cells[8].data;
+                    cancelModal.dataset.appointmentDate = row.cells[6].data;
+                    cancelModal.dataset.service = row.cells[9].data;
 
                     appointmentId = row.cells[0].data;
                   },
@@ -101,32 +106,15 @@ window.addEventListener("load", () => {
                 "Cancel"
               )
             : null;
-
-          // return appointmentStatus !== "PENDING"
-          //   ? h(
-          //       "button",
-          //       {
-          //         disabled: row.cells[7].data === "CANCELLED" ? true : false,
-          //         className:
-          //           row.cells[7].data === "CANCELLED"
-          //             ? "disabled-cancel-appointment"
-          //             : "cancel-appointment",
-          //         onClick: () => {
-          //           document.querySelector(
-          //             ".cancel-appointment-modal"
-          //           ).style.display = "flex";
-
-          //           appointmentId = row.cells[0].data;
-          //         },
-          //       },
-          //       "Cancel"
-          //     )
-          //   : null;
         },
       },
+      {
+        name: "User ID",
+        hidden: true,
+      },
+      { name: "Service", hidden: true },
     ],
     width: "100%",
-    // height: "300px",
     server: {
       url: "/admin-appointment-requests",
       method: "GET",
@@ -141,6 +129,8 @@ window.addEventListener("load", () => {
             item.veterinarian,
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.appointmentStatus,
+            item["pet.user.id"],
+            item.service,
           ];
         }),
       handle: (res) => {
@@ -267,18 +257,40 @@ function handleCancelLogout() {
   logoutModal.style.display = "none";
 }
 
-function handleCancelAppointment() {
-  axios
-    .post("/admin-cancel-appointment", { appointmentId })
-    .then((res) => {
-      location.reload();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
-
 function handleCloseCancelAppointment() {
   document.querySelector(".cancel-appointment-modal").style.display = "none";
   appointmentId = null;
+}
+
+function handleCancelAppointmentConfirm() {
+  const modal = document.querySelector(".cancel-appointment-modal");
+  const appointmentId = modal.dataset.appointmentId;
+  const userId = modal.dataset.userId;
+  const appointmentDate = modal.dataset.appointmentDate;
+  const service = modal.dataset.service;
+
+  axios
+    .post("/admin-cancel-appointment", {
+      appointmentId,
+      userId,
+      appointmentDate,
+      service,
+      type: "cancelled",
+    })
+    .then((res) => {
+      const cancelToast = document.getElementById("toast-cancel");
+      cancelToast.classList.add("show");
+
+      setTimeout(() => {
+        cancelToast.classList.remove("show");
+        window.location.reload();
+      }, 3000);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      document.querySelector(".cancel-appointment-modal").style.display =
+        "none";
+    });
 }

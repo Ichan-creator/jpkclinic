@@ -304,7 +304,8 @@ window.addEventListener("load", () => {
         formatter: (cell, row) => {
           const statusCol = row.cells[3].data;
 
-          const isApproved = statusCol !== "Pending";
+          const isApproved =
+            statusCol !== "Pending" && statusCol !== "CANCELLED";
 
           const actionArr = [
             h(
@@ -339,8 +340,10 @@ window.addEventListener("load", () => {
           ];
 
           return isApproved
-            ? statusCol === "Cancelled" && actionArr[1]
-            : actionArr[0];
+            ? null
+            : statusCol === "CANCELLED"
+            ? actionArr[1]
+            : actionArr;
         },
       },
     ],
@@ -351,17 +354,18 @@ window.addEventListener("load", () => {
       method: "GET",
       then: (data) =>
         data.map((item) => {
+          const dateApproved = item.dateApproved;
+          const appointmentStatus = item.appointmentStatus;
+
           return [
             item.id,
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.service,
-            item.dateApproved
-              ? item.dateApproved !== "Pending"
-                ? item.dateApproved !== "cancelled"
-                  ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
-                  : "Cancelled"
-                : "Pending"
-              : "",
+            dateApproved !== "Pending" && dateApproved !== "CANCELLED"
+              ? item.appointmentStatus === "CANCELLED"
+                ? "CANCELLED"
+                : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
+              : "Pending",
             null,
           ];
         }),

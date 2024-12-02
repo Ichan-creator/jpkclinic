@@ -55,9 +55,17 @@ async function handleGetAppointmentsList(req, res) {
   const userId = req.user.id;
 
   const appointmentsList = await Appointments.findAll({
-    attributes: ["id", "appointmentDate", "service", "dateApproved"],
+    attributes: [
+      "id",
+      "appointmentDate",
+      "service",
+      "dateApproved",
+      "appointmentStatus",
+    ],
     where: {
       userId,
+      dateApproved: { [Op.ne]: "CANCELLED" },
+      // appointmentStatus: { [Op.ne]: "CANCELLED" },
     },
     raw: true,
   });
@@ -127,7 +135,11 @@ async function handleCancelAppointment(req, res) {
   const { appointmentId } = req.body;
 
   await Appointments.update(
-    { dateApproved: "cancelled", appointmentStatus: "CANCELLED" },
+    {
+      dateApproved: "CANCELLED",
+      appointmentStatus: "CANCELLED",
+      medicalRecordStatus: "NO RECORD",
+    },
     { where: { id: appointmentId } }
   );
 

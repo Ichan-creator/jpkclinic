@@ -4,7 +4,6 @@ import {
   handleApproveAppointment,
   handleGetAdminAppointmentsCalendar,
   handleGetAdminAppointmentsList,
-  handleRejectAppointment,
 } from "../controllers/adminAppointmentController.js";
 
 const adminAppointmentRouter = express.Router();
@@ -19,6 +18,5 @@ adminAppointmentRouter.get(
   handleGetAdminAppointmentsList
 );
 adminAppointmentRouter.post("/approve-appointment", handleApproveAppointment);
-adminAppointmentRouter.post("/reject-appointment", handleRejectAppointment);
 
 export default adminAppointmentRouter;

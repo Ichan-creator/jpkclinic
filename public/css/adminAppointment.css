@@ -343,27 +343,26 @@ p {
 }
 
 .confirm-button {
-  background-color: #87CEFA;
+  background-color: #87cefa;
   color: white;
 }
 
 .confirm-button:hover {
-  background-color: #1E90FF;
+  background-color: #1e90ff;
 }
 
 .cancel-button {
   background-color: #ffffff;
-  color: #1E90FF;
-  border: 1px solid #1E90FF;
+  color: #1e90ff;
+  border: 1px solid #1e90ff;
 }
 
 .cancel-button:hover {
-  background-color: #1E90FF;
+  background-color: #1e90ff;
   color: white;
 }
 
-.notification, 
-.reject-notification {
+.notification {
   position: fixed;
   width: auto;
   top: 50px;

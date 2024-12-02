@@ -1,9 +1,9 @@
 import express from "express";
 import {
   handleAdminNav,
-  handleCancelAppointment,
   handleGetAdminAppointmentRequests,
   handleGetAdminMedicalRecords,
+  handleCancelAppointment,
 } from "../controllers/adminNavController.js";
 
 const adminNavRouter = express.Router();

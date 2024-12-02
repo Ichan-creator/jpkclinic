@@ -597,3 +597,51 @@ p {
   background-color: #727272;
   cursor: not-allowed;
 }
+
+.cancel-notification {
+  position: fixed;
+  width: auto;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 18px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.274);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+.cancel-notification {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 2px solid #f5c6cb;
+}
+
+.cancel-notification.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cancel-notification .icon {
+  width: 24px;
+  height: 24px;
+  background-color: #f55968;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.cancel-notification-message {
+  font-weight: normal;
+  color: #721c24;
+}
