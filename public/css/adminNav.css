@@ -586,8 +586,14 @@ p {
   border-width: 1px;
   border-radius: 0.375rem;
   color: #ececec;
-  background-color: #f21c1c;
+  background-color: #f21c1c7f;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cancel-appointment:hover {
+  color: #ffffff;
+  background-color: #f21c1c;
 }
 
 .disabled-cancel-appointment {
