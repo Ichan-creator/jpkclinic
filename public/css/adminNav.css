@@ -473,7 +473,8 @@ p {
   color: white;
 }
 
-.cancel-appointment-modal {
+.cancel-appointment-modal,
+.delete-record-modal {
   display: none;
   position: fixed;
   z-index: 100;
@@ -488,7 +489,8 @@ p {
   align-items: center;
 }
 
-.cancel-modal {
+.cancel-modal,
+.delete-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -500,7 +502,8 @@ p {
   position: relative;
 }
 
-.cancel-modal-header {
+.cancel-modal-header,
+.delete-record-modal-header {
   font-size: 24px;
   font-weight: bold;
   color: #212121;
@@ -509,14 +512,16 @@ p {
   text-align: center;
 }
 
-.cancel-modal-message {
+.cancel-modal-message,
+.delete-record-modal-message {
   font-size: 16px;
   color: #1f1f1f;
   text-align: center;
   margin-bottom: 20px;
 }
 
-.cancel-button-container {
+.cancel-button-container,
+.delete-record-button-container {
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -598,7 +603,8 @@ p {
   cursor: not-allowed;
 }
 
-.cancel-notification {
+.cancel-notification,
+.existing-record-toast {
   position: fixed;
   width: auto;
   top: 50px;
@@ -617,18 +623,21 @@ p {
   z-index: 9999;
 }
 
-.cancel-notification {
+.cancel-notification,
+.existing-record-toast {
   background-color: #f8d7da;
   color: #721c24;
   border: 2px solid #f5c6cb;
 }
 
-.cancel-notification.show {
+.cancel-notification.show,
+.existing-record-toast.show {
   opacity: 1;
   visibility: visible;
 }
 
-.cancel-notification .icon {
+.cancel-notification .icon,
+.existing-record-toast .icon {
   width: 24px;
   height: 24px;
   background-color: #f55968;
@@ -641,7 +650,8 @@ p {
   margin-right: 10px;
 }
 
-.cancel-notification-message {
+.cancel-notification-message,
+.existing-record-message-toast {
   font-weight: normal;
   color: #721c24;
 }
@@ -658,8 +668,8 @@ p {
   border-width: 1px;
   border-radius: 0.375rem;
   border: none;
-  color: #2575f6;
-  background-color: #ffffff00;
+  color: #fff;
+  background-color: #007bff;
   cursor: pointer;
   display: inline-flex;
   justify-content: center;
@@ -669,11 +679,12 @@ p {
 }
 
 .add-record-btn:hover {
-  background-color: #2575f6;
+  background-color: #0056b3;
   color: #ffffff;
 }
 
-.add-record-modal {
+.add-record-modal,
+.edit-record-modal {
   display: none;
   position: fixed;
   z-index: 200;
@@ -688,7 +699,8 @@ p {
   align-items: center;
 }
 
-.close-add-record-form {
+.close-add-record-form,
+.close-edit-record-form {
   color: #aaa;
   float: right;
   font-size: 28px;
@@ -696,13 +708,16 @@ p {
 }
 
 .close-add-record-form:hover,
-.close-add-record-form:focus {
+.close-edit-record-form:hover,
+.close-add-record-form:focus,
+.close-edit-record-form:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
 
-.add-record-form {
+.add-record-form,
+.edit-record-form {
   position: relative;
   width: 30%;
   height: auto;
@@ -713,31 +728,36 @@ p {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.add-record-form-header {
+.add-record-form-header,
+.edit-record-form-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.add-record-content {
+.add-record-content,
+.edit-record-content {
   display: flex;
   flex-direction: column;
 }
 
-.add-record-input-group {
-  display: grid; /* Use grid layout for better control */
-  grid-template-columns: 1fr 3fr; /* Label takes 1 part, input takes 2 parts */
-  align-items: center; /* Vertically align the label and input */
-  margin-bottom: 15px; /* Spacing between input groups */
+.add-record-input-group,
+.edit-record-input-group {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.add-record-input-group label {
+.add-record-input-group label,
+.edit-record-input-group label {
   font-size: 16px;
   font-weight: 500;
   color: #2e2e2e;
 }
 
-.add-record-input-group input {
+.add-record-input-group input,
+.edit-record-input-group input {
   outline: none;
   font-size: 14px;
   font-weight: 400;
@@ -748,17 +768,28 @@ p {
   height: 42px;
 }
 
-.add-record-input-group input:focus {
+.edit-record-input-group input:disabled {
+  background-color: #f0f0f0;
+  color: #a1a1a1;
+  border: 1px solid #dcdcdc;
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+.add-record-input-group input:focus,
+.edit-record-input-group input:focus {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
 }
 
-.add-record-button {
+.add-record-button,
+.edit-record-button {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
 
-.add-record-button button {
+.add-record-button button,
+.edit-record-button button {
   padding: 10px 20px;
   font-size: 14px;
   background-color: #007bff;
@@ -768,11 +799,14 @@ p {
   cursor: pointer;
 }
 
-.add-record-button button:hover {
+.add-record-button button:hover,
+.edit-record-button button:hover {
   background-color: #0056b3;
 }
 
-.add-record-toast {
+.add-record-toast,
+.edit-record-toast,
+.delete-record-toast {
   position: fixed;
   width: auto;
   top: 50px;
@@ -791,18 +825,24 @@ p {
   z-index: 9999;
 }
 
-.add-record-toast {
+.add-record-toast,
+.edit-record-toast,
+.delete-record-toast {
   background-color: #e5f7e5;
   color: #4b8a4b;
   border: 2px solid #cce0cc;
 }
 
-.add-record-toast.show {
+.add-record-toast.show,
+.edit-record-toast.show,
+.delete-record-toast.show {
   opacity: 1;
   visibility: visible;
 }
 
-.add-record-toast .icon {
+.add-record-toast .icon,
+.edit-record-toast .icon,
+.delete-record-toast .icon {
   color: #7cd17c;
   font-size: 16px;
   margin-right: 10px;

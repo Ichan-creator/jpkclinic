@@ -3,6 +3,8 @@ import {
   handleAdminEmployeeRecords,
   handleGetAdminEmployeesList,
   handlePostAddRecord,
+  handlePostEditRecord,
+  handlePostDeleteRecord,
 } from "../controllers/adminEmployeeRecords.js";
 
 const adminEmployeeRecordsRouter = express.Router();
@@ -16,5 +18,7 @@ adminEmployeeRecordsRouter.get(
   handleGetAdminEmployeesList
 );
 adminEmployeeRecordsRouter.post("/add-record", handlePostAddRecord);
+adminEmployeeRecordsRouter.post("/edit-record", handlePostEditRecord);
+adminEmployeeRecordsRouter.post("/delete-record", handlePostDeleteRecord);
 
 export default adminEmployeeRecordsRouter;

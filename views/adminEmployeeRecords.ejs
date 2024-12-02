@@ -175,9 +175,116 @@
       </div>
     </div>
 
+    <div class="edit-record-modal">
+      <div class="edit-record-form">
+        <div class="edit-record-form-header">
+          <h2>Edit Record</h2>
+          <span class="close-edit-record-form" onclick="handleCloseEditRecord()"
+            >&times;</span
+          >
+        </div>
+        <form id="editRecordForm" class="edit-record-content">
+          <div class="edit-record-input-group">
+            <label for="editRecordId">ID:</label>
+            <input
+              id="editRecordId"
+              name="editRecordId"
+              type="text"
+              placeholder="ID"
+              disabled
+            />
+          </div>
+          <div class="edit-record-input-group">
+            <label for="editRecordUsername">Username:</label>
+            <input
+              id="editRecordUsername"
+              name="editRecordUsername"
+              type="text"
+              placeholder="Username"
+              disabled
+            />
+          </div>
+          <div class="edit-record-input-group">
+            <label for="editRecordUserType">User Type:</label>
+            <input
+              id="editRecordUserType"
+              name="editRecordUserType"
+              type="text"
+              placeholder="User Type"
+              disabled
+            />
+          </div>
+          <div class="edit-record-input-group">
+            <label for="editRecordName">Name:</label>
+            <input
+              id="editRecordName"
+              name="editRecordName"
+              type="text"
+              placeholder="Name"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="edit-record-input-group">
+            <label for="editRecordEmail">Email:</label>
+            <input
+              id="editRecordEmail"
+              name="editRecordEmail"
+              type="text"
+              placeholder="Email"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="edit-record-button">
+            <button type="submit">Edit Record</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="delete-record-modal">
+      <div class="delete-modal">
+        <div class="close-popup-icon">✕</div>
+        <div class="delete-record-modal-header">Delete Record</div>
+        <div class="delete-record-modal-message">
+          Are you sure you want to delete this record?
+        </div>
+        <div class="delete-record-button-container">
+          <button
+            class="cancelled-button button-confirmed"
+            onclick="handleDeleteRecordConfirm()"
+          >
+            Confirm
+          </button>
+          <button
+            class="cancelled-button button-cancelled"
+            onclick="handleCloseDeleteRecord()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div id="add-record-toast" class="add-record-toast">
       <span class="icon">✔</span>
       <span>New Record Added</span>
+    </div>
+
+    <div id="existing-record-toast" class="existing-record-toast">
+      <span class="icon">✖</span>
+      <span class="existing-record-message-toast"></span>
+    </div>
+
+    <div id="edit-record-toast" class="edit-record-toast">
+      <span class="icon">✔</span>
+      <span>Record Edited</span>
+    </div>
+
+    <div id="delete-record-toast" class="delete-record-toast">
+      <span class="icon">✔</span>
+      <span>Record Deleted</span>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -69,17 +69,6 @@ async function handleGetAdminMedicalRecords(req, res) {
   res.json(adminMedicalRecords);
 }
 
-// async function handleCancelAppointment(req, res) {
-//   const { appointmentId } = req.body;
-
-//   await Appointments.update(
-// { dateApproved: "cancelled", appointmentStatus: "CANCELLED" },
-// { where: { id: appointmentId } }
-//   );
-
-//   res.status(200).json({ message: "Appointment cancelled" });
-// }
-
 async function handleCancelAppointment(req, res) {
   const { appointmentId, appointmentDate, userId, service, type } = req.body;
 
