@@ -340,12 +340,12 @@ select {
   }
 
   .reschedule-appointment {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.8rem;
-    padding-right: 0.8rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
     font-size: 8px;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem;
   }
 }
 
@@ -355,7 +355,7 @@ select {
     padding-bottom: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    font-size: 13px;
+    font-size: 10px;
     margin-bottom: 0.8rem;
   }
 
