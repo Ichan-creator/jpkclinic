@@ -645,3 +645,230 @@ p {
   font-weight: normal;
   color: #721c24;
 }
+
+.add-record-btn {
+  font-size: 16px;
+  font-family: var(--body-font);
+  font-weight: bold;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin: 0.1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  border: none;
+  color: #2575f6;
+  background-color: #ffffff00;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.add-record-btn:hover {
+  background-color: #2575f6;
+  color: #ffffff;
+}
+
+.add-record-modal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.close-add-record-form {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-add-record-form:hover,
+.close-add-record-form:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.add-record-form {
+  position: relative;
+  width: 30%;
+  height: auto;
+  border-radius: 6px;
+  padding: 10px 30px 20px;
+  margin: 7% auto;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-record-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-record-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-record-input-group {
+  display: grid; /* Use grid layout for better control */
+  grid-template-columns: 1fr 3fr; /* Label takes 1 part, input takes 2 parts */
+  align-items: center; /* Vertically align the label and input */
+  margin-bottom: 15px; /* Spacing between input groups */
+}
+
+.add-record-input-group label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+
+.add-record-input-group input {
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  height: 42px;
+}
+
+.add-record-input-group input:focus {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+
+.add-record-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.add-record-button button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-record-button button:hover {
+  background-color: #0056b3;
+}
+
+.add-record-toast {
+  position: fixed;
+  width: auto;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 18px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.274);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+.add-record-toast {
+  background-color: #e5f7e5;
+  color: #4b8a4b;
+  border: 2px solid #cce0cc;
+}
+
+.add-record-toast.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.add-record-toast .icon {
+  color: #7cd17c;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.edit-button,
+.delete-button {
+  font-size: 16px;
+  font-family: var(--body-font);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin: 0.1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  border: none;
+  color: #fff;
+  background-color: #2575f6;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.edit-button:hover {
+  background-color: #095be0;
+}
+
+.delete-button {
+  background-color: #f54747;
+}
+
+.delete-button:hover {
+  background-color: #ee2a2a;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  .add-record-form {
+    width: 95%;
+  }
+
+  .add-record-input-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .add-record-input-group label {
+    margin-bottom: 5px;
+  }
+
+  .add-record-input-group input {
+    width: 90%;
+    box-sizing: border-box;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .add-record-form {
+    width: 85%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .add-record-form {
+    width: 45%;
+  }
+}
