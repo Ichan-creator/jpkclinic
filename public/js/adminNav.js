@@ -31,9 +31,12 @@ linkColor.forEach((l) => l.addEventListener("click", colorLink));
 
 const { h } = window.gridjs;
 
+let appointmentId = null;
+
 window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
+      { name: "id", hidden: true },
       "#",
       "Client Name",
       "Pet Name",
@@ -43,7 +46,7 @@ window.addEventListener("load", () => {
       {
         name: "Status",
         formatter: (cell, row) => {
-          const status = row.cells[6].data;
+          const status = row.cells[7].data;
 
           let statusClassName = "";
 
@@ -64,7 +67,61 @@ window.addEventListener("load", () => {
               statusClassName = "";
           }
 
-          return h("statusData", { className: statusClassName }, status);
+          return h(
+            "statusData",
+            {
+              className: statusClassName,
+            },
+            status
+          );
+        },
+      },
+      {
+        name: "Action",
+        formatter: (cell, row) => {
+          const appointmentStatus = row.cells[7].data;
+
+          return appointmentStatus === "COMPLETE"
+            ? h(
+                "button",
+                {
+                  disabled: row.cells[7].data === "CANCELLED" ? true : false,
+                  className:
+                    row.cells[7].data === "CANCELLED"
+                      ? "disabled-cancel-appointment"
+                      : "cancel-appointment",
+                  onClick: () => {
+                    document.querySelector(
+                      ".cancel-appointment-modal"
+                    ).style.display = "flex";
+
+                    appointmentId = row.cells[0].data;
+                  },
+                },
+                "Cancel"
+              )
+            : null;
+
+          // return appointmentStatus !== "PENDING"
+          //   ? h(
+          //       "button",
+          //       {
+          //         disabled: row.cells[7].data === "CANCELLED" ? true : false,
+          //         className:
+          //           row.cells[7].data === "CANCELLED"
+          //             ? "disabled-cancel-appointment"
+          //             : "cancel-appointment",
+          //         onClick: () => {
+          //           document.querySelector(
+          //             ".cancel-appointment-modal"
+          //           ).style.display = "flex";
+
+          //           appointmentId = row.cells[0].data;
+          //         },
+          //       },
+          //       "Cancel"
+          //     )
+          //   : null;
         },
       },
     ],
@@ -76,12 +133,13 @@ window.addEventListener("load", () => {
       then: (data) =>
         data.map((item, index) => {
           return [
+            item.id,
             index + 1,
             item["pet.user.fullName"],
             item["pet.name"],
             item["pet.animalType"],
             item.veterinarian,
-            dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),  
+            dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.appointmentStatus,
           ];
         }),
@@ -207,4 +265,20 @@ function handleConfirmLogout() {
 
 function handleCancelLogout() {
   logoutModal.style.display = "none";
+}
+
+function handleCancelAppointment() {
+  axios
+    .post("/admin-cancel-appointment", { appointmentId })
+    .then((res) => {
+      location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+function handleCloseCancelAppointment() {
+  document.querySelector(".cancel-appointment-modal").style.display = "none";
+  appointmentId = null;
 }

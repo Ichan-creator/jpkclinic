@@ -6,6 +6,7 @@ import {
   handleGetAppointmentsList,
   handleBookAppointment,
   handleCancelAppointment,
+  handleRescheduleAppointment,
 } from "../controllers/appointmentController.js";
 import isClient from "../middlewares/isClient.js";
 import isAuthenticated from "../utils/isAuthenticated.js";
@@ -30,6 +31,11 @@ appointmentRouter.post(
   "/cancel-appointment",
   isClient,
   handleCancelAppointment
+);
+appointmentRouter.post(
+  "/reschedule-appointment",
+  isClient,
+  handleRescheduleAppointment
 );
 
 export default appointmentRouter;

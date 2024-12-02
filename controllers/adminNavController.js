@@ -34,7 +34,7 @@ async function handleAdminNav(req, res) {
 
 async function handleGetAdminAppointmentRequests(req, res) {
   const appointmentRequests = await Appointments.findAll({
-    attributes: ["veterinarian", "appointmentStatus", "appointmentDate"],
+    attributes: ["id", "veterinarian", "appointmentStatus", "appointmentDate"],
     include: {
       model: Pets,
       attributes: ["name", "animalType"],
@@ -60,8 +60,20 @@ async function handleGetAdminMedicalRecords(req, res) {
   res.json(adminMedicalRecords);
 }
 
+async function handleCancelAppointment(req, res) {
+  const { appointmentId } = req.body;
+
+  await Appointments.update(
+    { dateApproved: "cancelled", appointmentStatus: "CANCELLED" },
+    { where: { id: appointmentId } }
+  );
+
+  res.status(200).json({ message: "Appointment cancelled" });
+}
+
 export {
   handleAdminNav,
   handleGetAdminAppointmentRequests,
   handleGetAdminMedicalRecords,
+  handleCancelAppointment,
 };

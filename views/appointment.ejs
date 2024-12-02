@@ -97,8 +97,14 @@
                   class="notification-item text-gray-600 text-sm mx-2 px-4 py-3 border-b hover:bg-gray-100 -mx-2 cursor-pointer"
                 >
                   Your appointment for
-                  <span class="font-bold text-blue-500"><%= notification.service %></span>
-                  at <span class="font-bold text-gray-600"><%= notification.dateAndTime %></span> has been
+                  <span class="font-bold text-blue-500"
+                    ><%= notification.service %></span
+                  >
+                  at
+                  <span class="font-bold text-gray-600"
+                    ><%= notification.dateAndTime %></span
+                  >
+                  has been
                   <span
                     class="<%= notification.type === 'approved' ? 'text-green-500' : 'text-red-500' %>"
                   >
@@ -366,11 +372,25 @@
       </div>
     </div>
 
+    <div class="reschedule-success-modal">
+      <div class="popup">
+        <div onclick="handleCloseRescheduleSuccess()">
+          <span class="close-btn">&times;</span>
+        </div>
+        <div class="icon-container">
+          <span class="icon">✔</span>
+        </div>
+        <p class="title">Reschedule Success</p>
+        <p class="message">
+          Your appointment has been successfully rescheduled.
+        </p>
+        <button class="ok-btn" onclick="handleRescheduleOkClick()">OK</button>
+      </div>
+    </div>
+
     <div class="cancel-appointment-modal">
       <div class="cancel-modal">
-        <div class="close-popup-icon">
-          ✕
-        </div>
+        <div class="close-popup-icon">✕</div>
         <div class="cancel-modal-header">Cancel Appointment</div>
         <div class="cancel-modal-message">
           Are you sure you want to cancel this appointment?
@@ -398,6 +418,25 @@
         <h2>Sundays are not allowed!</h2>
         <p>Please choose another day.</p>
         <button onclick="handleCloseCalendarModal()">Try another date</button>
+      </div>
+    </div>
+
+    <div class="new-date-modal">
+      <div class="new-date-form">
+        <span class="close" onclick="handleCloseNewDateModal()">&times;</span>
+        <i class="fas fa-calendar-alt icon"></i>
+        <h2>New Appointment Date</h2>
+        <form id="reschedule-form">
+          <div class="input-field">
+            <input
+              id="newAppointmentDate"
+              name="newAppointmentDate"
+              type="datetime-local"
+              required
+            />
+          </div>
+          <button onclick="">Submit</button>
+        </form>
       </div>
     </div>
 

@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
 import { Appointments, Notifications, Pets } from "../models/index.models.js";
 
 dayjs.extend(relativeTime);
@@ -58,7 +58,6 @@ async function handleGetAppointmentsList(req, res) {
     attributes: ["id", "appointmentDate", "service", "dateApproved"],
     where: {
       userId,
-      dateApproved: { [Op.ne]: "cancelled" },
     },
     raw: true,
   });
@@ -135,10 +134,28 @@ async function handleCancelAppointment(req, res) {
   res.status(200).json({ message: "Appointment cancelled" });
 }
 
+async function handleRescheduleAppointment(req, res) {
+  const { appointmentId, newDate } = req.body;
+
+  console.log({ appointmentId, newDate });
+
+  await Appointments.update(
+    {
+      appointmentDate: newDate,
+      dateApproved: "Pending",
+      appointmentStatus: "PENDING",
+    },
+    { where: { id: appointmentId } }
+  );
+
+  res.status(200).json({ message: "Appointment rescheduled" });
+}
+
 export {
   handleAppointment,
   handleGetAppointmentsCalendar,
   handleGetAppointmentsList,
   handleBookAppointment,
   handleCancelAppointment,
+  handleRescheduleAppointment,
 };

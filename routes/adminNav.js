@@ -1,6 +1,7 @@
 import express from "express";
 import {
   handleAdminNav,
+  handleCancelAppointment,
   handleGetAdminAppointmentRequests,
   handleGetAdminMedicalRecords,
 } from "../controllers/adminNavController.js";
@@ -13,5 +14,6 @@ adminNavRouter.get(
   handleGetAdminAppointmentRequests
 );
 adminNavRouter.get("/admin-medical-records", handleGetAdminMedicalRecords);
+adminNavRouter.post("/admin-cancel-appointment", handleCancelAppointment);
 
 export default adminNavRouter;

@@ -169,7 +169,9 @@ const recurringEvents = [
 ];
 
 const appointmentDateInput = document.getElementById("appointmentDate");
+const newAppointmentDateInput = document.getElementById("newAppointmentDate");
 appointmentDateInput.setAttribute("min", dayjs().format("YYYY-MM-DDTHH:mm"));
+newAppointmentDateInput.setAttribute("min", dayjs().format("YYYY-MM-DDTHH:mm"));
 
 appointmentDateInput.addEventListener("input", function () {
   const selectedDate = new Date(appointmentDateInput.value);
@@ -178,6 +180,17 @@ appointmentDateInput.addEventListener("input", function () {
     document.querySelector(".calendar-modal").style.display = "flex";
     appointmentDateInput.value = "";
     appointmentDateInput.blur();
+  }
+});
+
+newAppointmentDateInput.addEventListener("input", function () {
+  const selectedDate = new Date(newAppointmentDateInput.value);
+  const day = selectedDate.getUTCDay();
+  if (day === 0) {
+    document.querySelector(".new-date-modal").style.display = "none";
+    document.querySelector(".calendar-modal").style.display = "flex";
+    newAppointmentDateInput.value = "";
+    newAppointmentDateInput.blur();
   }
 });
 
@@ -276,6 +289,8 @@ window.addEventListener("load", () => {
   calendar.render();
 });
 
+let newAppointmentScheduleId = null;
+
 window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
@@ -287,25 +302,45 @@ window.addEventListener("load", () => {
         id: "action",
         name: "",
         formatter: (cell, row) => {
-          const isApproved = row.cells[3].data !== "Pending";
+          const statusCol = row.cells[3].data;
 
-          return h(
-            "button",
-            {
-              className: `${
-                isApproved ? "approved-appointment" : "cancel-appointment"
-              }`,
-              disabled: isApproved ? true : false,
-              onClick: () => {
-                document.querySelector(
-                  ".cancel-appointment-modal"
-                ).style.display = "flex";
+          const isApproved = statusCol !== "Pending";
 
-                appointmentId = row.cells[0].data;
+          const actionArr = [
+            h(
+              "button",
+              {
+                className: `${
+                  isApproved ? "approved-appointment" : "cancel-appointment"
+                }`,
+                disabled: isApproved ? true : false,
+                onClick: () => {
+                  document.querySelector(
+                    ".cancel-appointment-modal"
+                  ).style.display = "flex";
+
+                  appointmentId = row.cells[0].data;
+                },
               },
-            },
-            "Cancel Appointment"
-          );
+              "Cancel Appointment"
+            ),
+            h(
+              "button",
+              {
+                className: "reschedule-appointment",
+                onClick: () => {
+                  newAppointmentScheduleId = row.cells[0].data;
+                  document.querySelector(".new-date-modal").style.display =
+                    "flex";
+                },
+              },
+              "Reschedule"
+            ),
+          ];
+
+          return isApproved
+            ? statusCol === "Cancelled" && actionArr[1]
+            : actionArr[0];
         },
       },
     ],
@@ -315,17 +350,21 @@ window.addEventListener("load", () => {
       url: "/appointments-list",
       method: "GET",
       then: (data) =>
-        data.map((item) => [
-          item.id,
-          dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
-          item.service,
-          item.dateApproved
-            ? item.dateApproved !== "Pending"
-              ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
-              : "Pending"
-            : "",
-          null,
-        ]),
+        data.map((item) => {
+          return [
+            item.id,
+            dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+            item.service,
+            item.dateApproved
+              ? item.dateApproved !== "Pending"
+                ? item.dateApproved !== "cancelled"
+                  ? dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A")
+                  : "Cancelled"
+                : "Pending"
+              : "",
+            null,
+          ];
+        }),
       handle: (res) => {
         if (res.status === 404) return { data: [] };
         if (res.ok) return res.json();
@@ -343,6 +382,11 @@ window.addEventListener("load", () => {
 });
 
 window.addEventListener("load", () => {
+  if (localStorage.getItem("rescheduleSuccess") === "true") {
+    localStorage.removeItem("rescheduleSuccess");
+    document.querySelector(".reschedule-success-modal").style.display = "flex";
+  }
+
   if (localStorage.getItem("viewAllAppointments") === "true") {
     document
       .querySelector(
@@ -512,9 +556,17 @@ function handleOkClick() {
   window.location.reload();
 }
 
+function handleRescheduleOkClick() {
+  document.querySelector(".reschedule-success-modal").style.display = "none";
+}
+
 function handleCloseAppointmentSuccess() {
   document.querySelector(".appointment-success-modal").style.display = "none";
   window.location.reload();
+}
+
+function handleCloseRescheduleSuccess() {
+  document.querySelector(".reschedule-success-modal").style.display = "none";
 }
 
 function handleCancelAppointment() {
@@ -536,3 +588,26 @@ function handleCloseCancelAppointment() {
 function handleCloseCalendarModal() {
   document.querySelector(".calendar-modal").style.display = "none";
 }
+
+function handleCloseNewDateModal() {
+  newAppointmentDateInput.value = null;
+  document.querySelector(".new-date-modal").style.display = "none";
+}
+
+const rescheduleForm = document.getElementById("reschedule-form");
+rescheduleForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  axios
+    .post("/reschedule-appointment", {
+      appointmentId: newAppointmentScheduleId,
+      newDate: rescheduleForm.newAppointmentDate.value,
+    })
+    .then((res) => {
+      localStorage.setItem("rescheduleSuccess", "true");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});

@@ -316,8 +316,22 @@ select {
   cursor: pointer;
 }
 
+.reschedule-appointment {
+  font-weight: bold;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  color: #ececec;
+  background-color: #2c83f5;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 480px) {
-  .cancel-appointment {
+  .cancel-appointment,
+  .reschedule-appointment {
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
     padding-left: 0.6rem;
@@ -328,7 +342,8 @@ select {
 }
 
 @media screen and (min-width: 768px) {
-  .cancel-appointment {
+  .cancel-appointment,
+  .reschedule-appointment {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1rem;
@@ -547,6 +562,7 @@ select {
 }
 
 .appointment-success-modal,
+.reschedule-success-modal,
 .appointment-cancel-modal,
 .cancel-appointment-modal {
   display: none;
@@ -757,7 +773,8 @@ select {
   pointer-events: none;
 }
 
-.calendar-modal {
+.calendar-modal,
+.new-date-modal {
   display: none;
   position: fixed;
   z-index: 200;
@@ -772,7 +789,8 @@ select {
   align-items: center;
 }
 
-.calendar-popup-form {
+.calendar-popup-form,
+.new-date-form {
   width: 350px;
   background: #ffffff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.44);
@@ -782,7 +800,8 @@ select {
   position: relative;
 }
 
-.calendar-popup-form .close {
+.calendar-popup-form .close,
+.new-date-form .close {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -791,31 +810,36 @@ select {
   cursor: pointer;
 }
 
-.calendar-popup-form .close:hover {
+.calendar-popup-form .close:hover,
+.new-date-form .close:hover {
   color: #333;
 }
 
-.calendar-popup-form .icon {
+.calendar-popup-form .icon,
+.new-date-form .icon {
   font-size: 70px;
   color: #f15353;
   margin-bottom: 5px;
   margin-top: 8px;
 }
 
-.calendar-popup-form h2 {
+.calendar-popup-form h2,
+.new-date-form h2 {
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 0;
   color: #333;
 }
 
-.calendar-popup-form p {
+.calendar-popup-form p,
+.new-date-form p {
   font-size: 18px;
   color: #282828;
   margin-bottom: 30px;
 }
 
-.calendar-popup-form button {
+.calendar-popup-form button,
+.new-date-form button {
   background-color: #eafaf1;
   color: #000000;
   font-size: 16px;
@@ -828,101 +852,120 @@ select {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.calendar-popup-form button:hover {
+.calendar-popup-form button:hover,
+.new-date-form button:hover {
   background-color: #04aa6d;
   color: #ffffff;
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
-  .calendar-popup-form {
+  .calendar-popup-form,
+  .new-date-form {
     width: 40%;
     padding: 15px;
     margin-bottom: 80rem;
   }
 
-  .calendar-popup-form .close {
+  .calendar-popup-form .close,
+  .new-date-form .close {
     top: 15px;
     right: 15px;
     font-size: 34px;
   }
 
-  .calendar-popup-form .icon {
+  .calendar-popup-form .icon,
+  .new-date-form .icon {
     font-size: 70px;
   }
 
-  .calendar-popup-form h2 {
+  .calendar-popup-form h2,
+  .new-date-form h2 {
     font-size: 28px;
     font-weight: bold;
   }
 
-  .calendar-popup-form p {
+  .calendar-popup-form p,
+  .new-date-form p {
     font-size: 22px;
   }
 
-  .calendar-popup-form button {
+  .calendar-popup-form button,
+  .new-date-form button {
     font-size: 22px;
     padding: 12px 25px;
   }
 }
 
 @media (max-width: 768px) {
-  .calendar-popup-form {
+  .calendar-popup-form,
+  .new-date-form {
     width: 80%;
     padding: 10px;
   }
 
-  .calendar-popup-form .close {
+  .calendar-popup-form .close,
+  .new-date-form .close {
     top: 10px;
     right: 15px;
     font-size: 24px;
   }
 
-  .calendar-popup-form .icon {
+  .calendar-popup-form .icon,
+  .new-date-form .icon {
     font-size: 40px;
   }
 
-  .calendar-popup-form h2 {
+  .calendar-popup-form h2,
+  .new-date-form h2 {
     font-size: 16px;
     font-weight: bold;
   }
 
-  .calendar-popup-form p {
+  .calendar-popup-form p,
+  .new-date-form p {
     font-size: 14px;
   }
 
-  .calendar-popup-form button {
+  .calendar-popup-form button,
+  .new-date-form button {
     font-size: 14px;
     padding: 10px 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .calendar-popup-form {
+  .calendar-popup-form,
+  .new-date-form {
     width: 60%;
     padding: 10px;
   }
 
-  .calendar-popup-form .close {
+  .calendar-popup-form .close,
+  .new-date-form .close {
     top: 10px;
     right: 20px;
     font-size: 28px;
   }
 
-  .calendar-popup-form .icon {
+  .calendar-popup-form .icon,
+  .new-date-form .icon {
     font-size: 55px;
     font-weight: bold;
   }
 
-  .calendar-popup-form h2 {
+  .calendar-popup-form h2,
+  .new-date-form h2 {
     font-size: 16px;
     margin-bottom: 0;
   }
 
-  .calendar-popup-form p {
+  .calendar-popup-form p,
+  .new-date-form p {
     font-size: 14px;
   }
 
-  .calendar-popup-form button {
+  .calendar-popup-form button,
+  .new-date-form button {
     font-size: 12px;
     padding: 10px 20px;
   }
