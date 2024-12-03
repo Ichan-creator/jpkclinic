@@ -50,8 +50,8 @@ async function handleGetUpcomingAppointmentsList(req, res) {
     attributes: ["id", "appointmentDate", "service", "dateApproved"],
     where: {
       userId,
-      dateApproved: { [Op.ne]: "cancelled" },
-      medicalRecordStatus: { [Op.ne]: "COMPLETE" },
+      dateApproved: { [Op.ne]: "CANCELLED" },
+      appointmentStatus: "COMPLETE",
     },
     raw: true,
   });
