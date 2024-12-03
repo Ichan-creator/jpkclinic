@@ -65,7 +65,6 @@ async function handleGetAppointmentsList(req, res) {
     where: {
       userId,
       dateApproved: { [Op.ne]: "CANCELLED" },
-      // appointmentStatus: { [Op.ne]: "CANCELLED" },
     },
     raw: true,
   });

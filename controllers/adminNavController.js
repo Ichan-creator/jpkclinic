@@ -84,7 +84,6 @@ async function handleCancelAppointment(req, res) {
   await Appointments.update(
     {
       appointmentStatus: "CANCELLED",
-      medicalRecordStatus: "NO RECORD",
     },
     { where: { id: appointmentId } }
   );
