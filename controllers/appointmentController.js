@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
-import { Op, where } from "sequelize";
+import { Op } from "sequelize";
 import { Appointments, Notifications, Pets } from "../models/index.models.js";
 
 dayjs.extend(relativeTime);
@@ -37,7 +37,10 @@ async function handleAppointment(req, res) {
 async function handleGetAppointmentsCalendar(req, res) {
   const appointmentsCalendar = await Appointments.findAll({
     attributes: ["service", "appointmentDate"],
-    where: { userId: req.user.id, dateApproved: { [Op.ne]: "cancelled" } },
+    where: {
+      userId: req.user.id,
+      dateApproved: { [Op.notIn]: ["CANCELLED", "Pending"] },
+    },
     raw: true,
   });
 
@@ -138,6 +141,7 @@ async function handleCancelAppointment(req, res) {
       dateApproved: "CANCELLED",
       appointmentStatus: "CANCELLED",
       medicalRecordStatus: "NO RECORD",
+      treatmentDateDone: "CANCELLED",
     },
     { where: { id: appointmentId } }
   );

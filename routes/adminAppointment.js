@@ -3,7 +3,8 @@ import {
   handleAdminAppointment,
   handleApproveAppointment,
   handleGetAdminAppointmentsCalendar,
-  handleGetAdminAppointmentsList,
+  handleGetAdminPendingAppointmentsList,
+  handleGetAdminApprovedAppointmentsList,
 } from "../controllers/adminAppointmentController.js";
 
 const adminAppointmentRouter = express.Router();
@@ -14,8 +15,12 @@ adminAppointmentRouter.get(
   handleGetAdminAppointmentsCalendar
 );
 adminAppointmentRouter.get(
-  "/admin-appointment-list",
-  handleGetAdminAppointmentsList
+  "/admin-pending-appointment-list",
+  handleGetAdminPendingAppointmentsList
+);
+adminAppointmentRouter.get(
+  "/admin-approved-appointment-list",
+  handleGetAdminApprovedAppointmentsList
 );
 adminAppointmentRouter.post("/approve-appointment", handleApproveAppointment);
 

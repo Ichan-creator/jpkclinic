@@ -492,3 +492,23 @@ p {
   background-color: #f44336;
   color: white;
 }
+
+.appointment-toggles button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.appointment-toggles button:hover {
+  background-color: #0056b3;
+}
+
+.appointment-toggles button.active {
+  border: 2px solid #007bff;
+  background-color: #0056b3;
+  color: #eaeaea;
+}

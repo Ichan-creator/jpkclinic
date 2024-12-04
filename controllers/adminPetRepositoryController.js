@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { Appointments, Pets, User } from "../models/index.models.js";
+import { Op } from "sequelize";
 
 function handleAdminPetRepository(req, res) {
   res.render("adminPetRepository");
@@ -78,9 +79,11 @@ async function handleGetAdminVisitationHistory(req, res) {
       "treatmentDateDone",
       "medicalRecordStatus",
     ],
-    where: { petId },
+    where: { petId, dateApproved: { [Op.ne]: "PENDING" } },
     raw: true,
   });
+
+  console.log(petVisitationHistory);
 
   const newPetVisitationHistory = petVisitationHistory.map((item) => {
     return {
@@ -88,9 +91,10 @@ async function handleGetAdminVisitationHistory(req, res) {
       appointmentDate: dayjs(item.appointmentDate).format(
         "MMMM DD, YYYY hh:mm A"
       ),
-      treatmentDateDone: item.treatmentDateDone
-        ? dayjs(item.treatmentDateDone).format("MMMM DD, YYYY")
-        : "",
+      treatmentDateDone:
+        item.treatmentDateDone !== "CANCELLED"
+          ? dayjs(item.treatmentDateDone).format("MMMM DD, YYYY")
+          : item.treatmentDateDone,
     };
   });
 
@@ -122,6 +126,7 @@ async function handlePostAdminUpdatePetRecord(req, res) {
       respiratoryRate,
       observation,
       prescription,
+      medicalRecordStatus: "COMPLETE",
     },
     { where: { id: appointmentId } }
   );

@@ -92,11 +92,23 @@
       <div id="appointmentModal" class="modal-appointment">
         <div class="modal-appointment-content">
           <div>
-            <span
-              class="close-appointment"
-              onclick="handleCloseAppointmentList()"
-              >&times;</span
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
             >
+              <div class="appointment-toggles">
+                <button id="pendingToggle" class="active">Pending List</button>
+                <button id="approvedToggle">Approved List</button>
+              </div>
+              <span
+                class="close-appointment"
+                onclick="handleCloseAppointmentList()"
+                >&times;</span
+              >
+            </div>
             <div id="appointments"></div>
           </div>
         </div>

@@ -155,7 +155,6 @@ window.addEventListener("load", () => {
       method: "GET",
       then: (data) =>
         data.map((item) => {
-          console.log(item);
           return [
             item.id,
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),

@@ -189,84 +189,90 @@ window.addEventListener("load", () => {
   calendar.render();
 });
 
-window.addEventListener("load", () => {
-  new gridjs.Grid({
-    columns: [
-      { name: "id", hidden: true },
-      { name: "userId", hidden: true },
-      "Client Name",
-      { name: "Date & Time", sort: true },
-      "Service",
-      { name: "petNames", hidden: true },
-      { name: "Date Approved", sort: true },
-      {
-        id: "action",
-        name: "",
-        formatter: (cell, row) => {
-          const isApproved = row.cells[6].data !== "Pending";
+let appointmentsListTable = new gridjs.Grid({
+  columns: [
+    { name: "id", hidden: true },
+    { name: "userId", hidden: true },
+    "Client Name",
+    { name: "Date & Time", sort: true },
+    "Service",
+    { name: "petNames", hidden: true },
+    { name: "Date Approved", sort: true },
+    {
+      id: "action",
+      name: "",
+      formatter: (cell, row) => {
+        const isApproved = row.cells[6].data !== "Pending";
 
-          const approveAppointment = h(
-            "button",
-            {
-              className: `${
-                isApproved
-                  ? "disabled-approve-appointment"
-                  : "approve-appointment"
-              }`,
-              disabled: isApproved ? true : false,
-              onClick: () => {
-                document.querySelector(".approve-confirm-modal").style.display =
-                  "flex";
+        const buttonText = isApproved ? "Approved" : "Approve Appointment";
 
-                const modal = document.querySelector(".approve-confirm-modal");
-                modal.dataset.appointmentId = row.cells[0].data;
-                modal.dataset.userId = row.cells[1].data;
-                modal.dataset.appointmentDate = row.cells[3].data;
-                modal.dataset.service = row.cells[4].data;
-                modal.dataset.petNames = row.cells[5].data;
-              },
+        const approveAppointment = h(
+          "button",
+          {
+            className: `${
+              isApproved
+                ? "disabled-approve-appointment"
+                : "approve-appointment"
+            }`,
+            disabled: isApproved ? true : false,
+            onClick: () => {
+              document.querySelector(".approve-confirm-modal").style.display =
+                "flex";
+
+              const modal = document.querySelector(".approve-confirm-modal");
+              modal.dataset.appointmentId = row.cells[0].data;
+              modal.dataset.userId = row.cells[1].data;
+              modal.dataset.appointmentDate = row.cells[3].data;
+              modal.dataset.service = row.cells[4].data;
+              modal.dataset.petNames = row.cells[5].data;
             },
-            "Approve Appointment"
-          );
+          },
+          `${buttonText}`
+        );
 
-          return approveAppointment;
-        },
-      },
-    ],
-    width: "100%",
-    height: "430px",
-    server: {
-      url: "/admin-appointment-list",
-      method: "GET",
-      then: (data) =>
-        data.map((item) => {
-          return [
-            item.id,
-            item["user.id"],
-            item["user.fullName"],
-            dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
-            item.service,
-            item.petNames,
-            item.dateApproved === "Pending"
-              ? "Pending"
-              : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
-            null,
-          ];
-        }),
-      handle: (res) => {
-        if (res.status === 404) return { data: [] };
-        if (res.ok) return res.json();
-
-        throw Error("oh no :(");
+        return approveAppointment;
       },
     },
-    fixedHeader: true,
-    pagination: {
-      limit: 10,
-      summary: true,
-      resetPageOnUpdate: true,
+  ],
+  width: "100%",
+  height: "430px",
+  server: getServerConfig("/admin-pending-appointment-list"),
+  fixedHeader: true,
+  pagination: {
+    limit: 10,
+    summary: true,
+    resetPageOnUpdate: true,
+  },
+});
+
+function getServerConfig(url) {
+  return {
+    url: url,
+    method: "GET",
+    then: (data) =>
+      data.map((item) => [
+        item.id,
+        item["user.id"],
+        item["user.fullName"],
+        dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+        item.service,
+        item.petNames,
+        item.dateApproved === "Pending"
+          ? "Pending"
+          : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
+        null,
+      ]),
+    handle: (res) => {
+      if (res.status === 404) return { data: [] };
+      if (res.ok) return res.json();
+
+      throw Error("oh no :(");
     },
-  }).render(document.getElementById("appointments"));
+  };
+}
+
+window.addEventListener("load", () => {
+  appointmentsListTable.render(document.getElementById("appointments"));
 });
 
 window.addEventListener("click", (event) => {
@@ -345,3 +351,32 @@ function handleApproveConfirm() {
 function handleApproveCancelConfirm() {
   document.querySelector(".approve-confirm-modal").style.display = "none";
 }
+
+document.querySelectorAll(".appointment-toggles button").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.classList.contains("active")) {
+      return;
+    }
+
+    document
+      .querySelectorAll(".appointment-toggles button")
+      .forEach((btn) => btn.classList.remove("active"));
+    button.classList.add("active");
+
+    if (button.id === "pendingToggle") {
+      appointmentsListTable
+        .updateConfig({
+          server: getServerConfig("/admin-pending-appointment-list"),
+          noRecordsFound: "No matching records found",
+        })
+        .forceRender();
+    } else if ((button.id = "approvedToggle")) {
+      appointmentsListTable
+        .updateConfig({
+          server: getServerConfig("/admin-approved-appointment-list"),
+          noRecordsFound: "No matching records found",
+        })
+        .forceRender();
+    }
+  });
+});

@@ -44,3 +44,19 @@ form.addEventListener("submit", (event) => {
       console.error(error);
     });
 });
+
+const togglePasswordIcon = document.getElementById("span-confirm-password");
+const passwordField = document.getElementById("password-field");
+const confirmPasswordField = document.getElementById("confirm-password-field");
+
+togglePasswordIcon.addEventListener("click", () => {
+  if (passwordField.type === "password") {
+    togglePasswordIcon.textContent = "visibility_off";
+    passwordField.type = "text";
+    confirmPasswordField.type = "text";
+  } else {
+    togglePasswordIcon.textContent = "visibility";
+    passwordField.type = "password";
+    confirmPasswordField.type = "password";
+  }
+});

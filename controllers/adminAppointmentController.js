@@ -29,7 +29,32 @@ async function handleGetAdminAppointmentsCalendar(req, res) {
   res.json(appointments);
 }
 
-async function handleGetAdminAppointmentsList(req, res) {
+async function handleGetAdminPendingAppointmentsList(req, res) {
+  const adminPendingAppointmentsList = await Appointments.findAll({
+    attributes: [
+      "id",
+      "appointmentDate",
+      "service",
+      "dateApproved",
+      "petNames",
+    ],
+    include: {
+      model: User,
+      attributes: ["id", "fullName"],
+    },
+    where: {
+      dateApproved: "Pending",
+    },
+    raw: true,
+    order: [["createdAt", "DESC"]],
+  });
+
+  if (!adminPendingAppointmentsList) return res.status(404).json([]);
+
+  res.json(adminPendingAppointmentsList);
+}
+
+async function handleGetAdminApprovedAppointmentsList(req, res) {
   const adminAppointmentsList = await Appointments.findAll({
     attributes: [
       "id",
@@ -43,7 +68,7 @@ async function handleGetAdminAppointmentsList(req, res) {
       attributes: ["id", "fullName"],
     },
     where: {
-      dateApproved: { [Op.ne]: "cancelled" },
+      dateApproved: { [Op.notIn]: ["PENDING", "CANCELLED"] },
     },
     raw: true,
   });
@@ -97,6 +122,7 @@ async function handleApproveAppointment(req, res) {
 export {
   handleAdminAppointment,
   handleGetAdminAppointmentsCalendar,
-  handleGetAdminAppointmentsList,
+  handleGetAdminPendingAppointmentsList,
+  handleGetAdminApprovedAppointmentsList,
   handleApproveAppointment,
 };

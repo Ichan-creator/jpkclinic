@@ -47,6 +47,9 @@ function handleLogout(event) {
     });
 }
 
+const treatmentDateDone = document.getElementById("treatmentDateDone");
+treatmentDateDone.setAttribute("min", dayjs().format("YYYY-MM-DD"));
+
 const { h } = window.gridjs;
 
 const currentPath = window.location.pathname;
@@ -122,11 +125,25 @@ window.addEventListener("load", () => {
         id: "action",
         name: "",
         formatter: (cell, row) => {
+          const status = row.cells[4].data;
+          const isComplete =
+            status === "PENDING" ||
+            status === "ONGOING" ||
+            status === "COMPLETE";
+
           const editStatusButton = h(
             "editStatusButton",
             {
-              className: "edit-status-button",
+              className: `${
+                isComplete
+                  ? "disabled-edit-status-button"
+                  : "edit-status-button"
+              }`,
               onClick: () => {
+                if (isComplete) {
+                  return;
+                }
+
                 appointmentId = row.cells[0].data;
 
                 petStatusModal.style.display = "flex";
@@ -191,7 +208,9 @@ window.addEventListener("load", () => {
             "View Report"
           );
 
-          return [editStatusButton, viewReportButton];
+          return status === "NO RECORD"
+            ? null
+            : [editStatusButton, viewReportButton];
         },
       },
     ],
