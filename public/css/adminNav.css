@@ -259,6 +259,7 @@ p {
   gap: 20px;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin: 40px 0
 }
 
 .reports-item {
@@ -268,7 +269,7 @@ p {
   background-color: #f1f1f1;
   border-radius: 8px;
   padding: 20px 20px;
-  width: 150px;
+  width: 180px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
