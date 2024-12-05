@@ -274,7 +274,7 @@ select {
   color: #fff;
   border-radius: 5px;
   margin: 25px 0;
-  background-color: green;
+  background-color: rgba(0, 128, 0, 0.588);
   transition: all 0.3s linear;
   cursor: pointer;
 }
@@ -285,7 +285,7 @@ select {
 }
 
 .edit-profile-modal form button:hover {
-  background-color: darkgreen;
+  background-color: rgb(0, 123, 0);
 }
 .edit-profile-modal form button i,
 .edit-profile-modal form .backBtn i {
@@ -405,7 +405,7 @@ select {
   justify-content: center;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 10px;
+
 }
 
 .header__img img {

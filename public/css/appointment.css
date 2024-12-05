@@ -128,7 +128,7 @@ select {
   color: #fff;
   border-radius: 5px;
   margin: 25px 0;
-  background-color: green;
+  background-color: rgba(0, 128, 0, 0.588);
   transition: all 0.3s linear;
   cursor: pointer;
 }
@@ -137,7 +137,7 @@ select {
   font-weight: 400;
 }
 .container form button:hover {
-  background-color: darkgreen;
+  background-color: rgb(0, 123, 0);
 }
 .container form button i,
 .container form .backBtn i {
@@ -312,8 +312,13 @@ select {
   border-width: 1px;
   border-radius: 0.375rem;
   color: #ececec;
-  background-color: #f21c1c;
+  background-color: #f21c1c94;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cancel-appointment:hover {
+  background-color: #f21c1c;
 }
 
 .reschedule-appointment {
@@ -325,8 +330,13 @@ select {
   border-width: 1px;
   border-radius: 0.375rem;
   color: #ececec;
-  background-color: #2c83f5;
+  background-color: #2c83f598;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reschedule-appointment:hover {
+  background-color: #2c83f5;
 }
 
 @media screen and (max-width: 480px) {

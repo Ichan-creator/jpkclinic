@@ -5,13 +5,29 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId);
 
   if (toggle && nav && bodypd && headerpd) {
+
+    nav.addEventListener("mouseenter", () => {
+      if (window.innerWidth > 768) {
+        nav.classList.add("show");
+        toggle.classList.add("bx-x");
+        bodypd.classList.add("body-pd");
+        headerpd.classList.add("body-pd");
+      }
+    });
+
+    nav.addEventListener("mouseleave", () => {
+      if (window.innerWidth > 768) {
+        nav.classList.remove("show");
+        toggle.classList.remove("bx-x");
+        bodypd.classList.remove("body-pd");
+        headerpd.classList.remove("body-pd");
+      }
+    });
+
     toggle.addEventListener("click", () => {
       nav.classList.toggle("show");
-
       toggle.classList.toggle("bx-x");
-
       bodypd.classList.toggle("body-pd");
-
       headerpd.classList.toggle("body-pd");
     });
   }

@@ -4,15 +4,23 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     bodypd = document.getElementById(bodyId),
     headerpd = document.getElementById(headerId);
 
-  if (toggle && nav && bodypd && headerpd) {
-    toggle.addEventListener("click", () => {
-      nav.classList.toggle("show");
+  if (nav && bodypd && headerpd) {
+      nav.addEventListener("mouseenter", () => {
+      nav.classList.add("show");
 
-      toggle.classList.toggle("bx-x");
+      toggle.classList.add("bx-x");
 
-      bodypd.classList.toggle("body-pd");
+      bodypd.classList.add("body-pd");
+      headerpd.classList.add("body-pd");
+    });
 
-      headerpd.classList.toggle("body-pd");
+      nav.addEventListener("mouseleave", () => {
+      nav.classList.remove("show");
+
+      toggle.classList.remove("bx-x");
+
+      bodypd.classList.remove("body-pd");
+      headerpd.classList.remove("body-pd");
     });
   }
 };
