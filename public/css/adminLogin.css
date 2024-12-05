@@ -22,14 +22,14 @@ body {
   max-width: 500px;
   width: 100%;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 30px;
   box-shadow: 0px 8px 20px 2px rgba(0, 0, 0, 0.5);
 }
 
 .wrapper .title {
   height: 120px;
   background: #b2d9c4;
-  border-radius: 5px 5px 0 0;
+  border-radius: 30px 30px 0 0;
   color: #fff;
   font-size: 30px;
   font-weight: 600;
@@ -53,7 +53,7 @@ body {
   width: 100%;
   outline: none;
   padding-left: 70px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid lightgrey;
   font-size: 18px;
   transition: all 0.3s ease;
@@ -75,7 +75,7 @@ form .row input::placeholder {
   font-size: 22px;
   background: #44916f;
   border: 1px solid #44916f;
-  border-radius: 5px 0 0 5px;
+  border-radius: 10px 0 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,6 +100,7 @@ form .row input::placeholder {
   color: #fff;
   font-size: 20px;
   font-weight: 500;
+  border-radius: 20px;
   padding-left: 0px;
   background: #b2d9c4;
   border: 1px solid #b2d9c4;
