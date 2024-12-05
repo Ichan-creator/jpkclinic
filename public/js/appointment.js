@@ -173,8 +173,9 @@ const newAppointmentDateInput = document.getElementById("newAppointmentDate");
 appointmentDateInput.setAttribute("min", dayjs().format("YYYY-MM-DDTHH:mm"));
 newAppointmentDateInput.setAttribute("min", dayjs().format("YYYY-MM-DDTHH:mm"));
 
-appointmentDateInput.addEventListener("input", function () {
+appointmentDateInput.addEventListener("input", function (event) {
   const selectedDate = new Date(appointmentDateInput.value);
+
   const day = selectedDate.getUTCDay();
   if (day === 0) {
     document.querySelector(".calendar-modal").style.display = "flex";
@@ -449,22 +450,25 @@ appointmentForm.addEventListener("submit", (event) => {
   const petBreed = appointmentForm.petBreed.value;
 
   axios
-    .post("/book-appointment", {
-      userId,
-      petNames,
-      service,
-      gender,
-      concern,
-      contactNumber,
-      email,
-      appointmentDate,
-      veterinarian,
-      petProfileName,
-      petBirthdate,
-      animalType,
-      petBreed,
-    })
+    .post("/check-availability", { appointmentDate, veterinarian })
     .then((res) => {
+      return axios.post("/book-appointment", {
+        userId,
+        petNames,
+        service,
+        gender,
+        concern,
+        contactNumber,
+        email,
+        appointmentDate,
+        veterinarian,
+        petProfileName,
+        petBirthdate,
+        animalType,
+        petBreed,
+      });
+    })
+    .then((res2) => {
       formModal.style.display = "none";
 
       setTimeout(() => {
@@ -473,8 +477,38 @@ appointmentForm.addEventListener("submit", (event) => {
       }, 600);
     })
     .catch((error) => {
-      console.log(error);
+      document.querySelector(".availability-modal").style.display = "flex";
+      console.error(error);
+      return;
     });
+
+  // axios
+  //   .post("/book-appointment", {
+  //     userId,
+  //     petNames,
+  //     service,
+  //     gender,
+  //     concern,
+  //     contactNumber,
+  //     email,
+  //     appointmentDate,
+  //     veterinarian,
+  //     petProfileName,
+  //     petBirthdate,
+  //     animalType,
+  //     petBreed,
+  //   })
+  //   .then((res) => {
+  //     formModal.style.display = "none";
+
+  //     setTimeout(() => {
+  //       document.querySelector(".appointment-success-modal").style.display =
+  //         "flex";
+  //     }, 600);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 });
 
 const petNameInput = document.getElementById("petNames");
@@ -615,6 +649,10 @@ function handleCloseCancelAppointment() {
 
 function handleCloseCalendarModal() {
   document.querySelector(".calendar-modal").style.display = "none";
+}
+
+function handleCloseAvailabilityModal() {
+  document.querySelector(".availability-modal").style.display = "none";
 }
 
 function handleCloseNewDateModal() {

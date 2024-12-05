@@ -196,6 +196,27 @@ async function handleRescheduleAppointment(req, res) {
   res.status(200).json({ message: "Appointment rescheduled" });
 }
 
+async function handleCheckAvailability(req, res) {
+  const { appointmentDate, veterinarian } = req.body;
+
+  const isAppointmentConflict = await Appointments.findOne({
+    where: {
+      appointmentDate,
+      veterinarian,
+    },
+  });
+
+  if (isAppointmentConflict) {
+    res.status(400).json({
+      message:
+        "Appoinment date and/or veterinarian is in conflict with another appointment",
+    });
+    return;
+  }
+
+  return res.status(200).json({ message: "Appointment available" });
+}
+
 export {
   handleAppointment,
   handleGetAppointmentsCalendar,
@@ -203,4 +224,5 @@ export {
   handleBookAppointment,
   handleCancelAppointment,
   handleRescheduleAppointment,
+  handleCheckAvailability,
 };

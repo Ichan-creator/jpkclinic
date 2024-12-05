@@ -796,6 +796,7 @@ select {
 }
 
 .calendar-modal,
+.availability-modal,
 .new-date-modal {
   display: none;
   position: fixed;
