@@ -52,7 +52,7 @@ setInterval(() => {
     currentIndex = 1;
   }
   moveSlider(currentIndex);
-}, 3000);
+}, 5000);
 
 bullets.forEach((bullet) => {
   bullet.addEventListener("click", function () {
