@@ -123,7 +123,7 @@ async function handleBookAppointment(req, res) {
 
     const message = `
     You have one new <span class="font-bold text-blue-500"><strong>${service}</strong></span> 
-    appointment at <span class="font-bold text-gray-600"><strong>${dayjs(
+    appointment on <span class="font-bold text-gray-600"><strong>${dayjs(
       appointmentDate
     ).format("MMMM DD, YYYY hh:mm A")}</strong></span> 
     from <strong>${req.user.fullName}</strong>`;

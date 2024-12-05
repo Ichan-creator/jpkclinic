@@ -93,7 +93,7 @@ async function handleCancelAppointment(req, res) {
 
   const message = `Your appointment for
   <span class="font-bold text-blue-500"><strong>${service}</strong></span>
-  at <span class="font-bold text-gray-600"><strong>${appointmentDate}</strong></span>
+  on <span class="font-bold text-gray-600"><strong>${appointmentDate}</strong></span>
   has been <span class="${
     type === "approved" ? "text-green-500" : "text-red-500"
   }">${type}</span>.`;

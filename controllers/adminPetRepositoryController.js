@@ -141,7 +141,7 @@ async function handlePostAdminUpdatePetRecord(req, res) {
 
   const message = `The status of your
   <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment
-  at <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
+  on <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
   is now <span style="color: green"><strong>completed</strong></span>.`;
 
   sendStatusUpdate(message, userId, "Completed");
@@ -173,7 +173,7 @@ async function handlePostAdminUpdatePetStatus(req, res) {
 
   const message = `The status of your
   <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment
-  at <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
+  on <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
   is now <span style="color: #ffae42"><strong>ongoing</strong></span>.`;
 
   sendStatusUpdate(message, userId, "Ongoing");
