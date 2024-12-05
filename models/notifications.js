@@ -10,6 +10,9 @@ const Notifications = sequelize.define(
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
+    message: {
+      type: DataTypes.TEXT,
+    },
     service: {
       type: DataTypes.STRING,
     },

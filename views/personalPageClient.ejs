@@ -83,13 +83,7 @@
               notifications.forEach(notification => { %>
               <p
                 class="notification-item text-gray-600 text-sm mx-2 px-4 py-3 border-b hover:bg-gray-100 -mx-2 cursor-pointer">
-                Your appointment for
-                <span class="font-bold text-blue-500"><%= notification.service %></span>
-                at <span class="font-bold"><%= notification.dateAndTime %></span> has been
-                <span
-                  class="<%= notification.type === 'approved' ? 'text-green-500' : 'text-red-500' %>">
-                  <%= notification.type %>.
-                </span>
+                <%- notification.message %>
                 <br />
                 - <%= notification.timeAgo %>
               </p>

@@ -4,14 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
-    <link href="https://unpkg.com/tailwindcss@1.7.0/dist/tailwind.min.css" rel="stylesheet" />
-    <script 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@1.7.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
-      defer >
-    </script>
-    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+      defer
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
     <link rel="stylesheet" />
     <link rel="stylesheet" href="/css/clientNav.css" />
     <link rel="stylesheet" href="/css/clinicDirectory.css" />
@@ -47,30 +59,36 @@
           align-items: center;
           justify-content: space-between;
           gap: 20px;
-        ">
+        "
+      >
         <a href="/personal-page" class="header-name"
           ><%= fullName %>
           <img
             id="profileIcon"
             class="header__img"
             src="<%= avatar %>"
-            alt="Profile Icon"/>
-          </a>
+            alt="Profile Icon"
+          />
+        </a>
         <div class="flex">
           <div x-data="{ dropdownOpen: false }" class="relative my-32">
             <button
               @click="dropdownOpen = !dropdownOpen"
-              class="relative z-10 block rounded-md bg-white p-2 focus:outline-none" >
+              class="relative z-10 block rounded-md bg-white p-2 focus:outline-none"
+            >
               <svg
                 class="h-5 w-5 text-gray-800"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
-                fill="currentColor" >
+                fill="currentColor"
+              >
                 <path
-                  d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                  d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+                />
               </svg>
               <span
-                class="badge absolute top-0 right-0 transform translate-x-1 -translate-y-1" >
+                class="badge absolute top-0 right-0 transform translate-x-1 -translate-y-1"
+              >
                 <%= notifications.filter(n => !n.isRead).length %>
               </span>
             </button>
@@ -78,24 +96,20 @@
               x-show="dropdownOpen"
               onclick="handleCloseNotif()"
               @click="dropdownOpen = false"
-              class="fixed inset-0 h-full w-full z-10" >
-            </div>
+              class="fixed inset-0 h-full w-full z-10"
+            ></div>
             <div
               x-show="dropdownOpen"
               class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20"
-              style="width: 20rem" >
+              style="width: 20rem"
+            >
               <div class="py-2 notifications-container">
                 <% if (notifications.length > 0) { %> <%
                 notifications.forEach(notification => { %>
                 <p
-                  class="notification-item text-gray-600 text-sm mx-2 px-4 py-3 border-b hover:bg-gray-100 -mx-2 cursor-pointer" >
-                  Your appointment for
-                  <span class="font-bold text-blue-500"><%= notification.service %></span>
-                  at <span class="font-bold"><%= notification.dateAndTime %></span> has been
-                  <span
-                    class="<%= notification.type === 'approved' ? 'text-green-500' : 'text-red-500' %>" >
-                    <%= notification.type %>.
-                  </span>
+                  class="notification-item text-gray-600 text-sm mx-2 px-4 py-3 border-b hover:bg-gray-100 -mx-2 cursor-pointer"
+                >
+                  <%- notification.message %>
                   <br />
                   - <%= notification.timeAgo %>
                 </p>
@@ -111,9 +125,11 @@
                   display: flex;
                   align-items: center;
                   justify-content: space-evenly;
-                ">
+                "
+              >
                 <a class="text-white text-center font-bold py-2"
-                  >Your notifications</a>
+                  >Your notifications</a
+                >
                 <span class="text-white text-center font-bold py-2">—</span>
                 <a
                   href="#"
@@ -123,7 +139,8 @@
                     align-items: center;
                     text-decoration: none;
                   "
-                  onclick="handleReadAllNotifications(event)" >
+                  onclick="handleReadAllNotifications(event)"
+                >
                   <span class="text-white text-center font-bold">
                     Mark all as read
                   </span>
@@ -141,8 +158,15 @@
       <nav class="nav">
         <div>
           <p class="nav__logo">
-            <img src="/images/jpk_logo.jpg" alt="JPK Veterinary Clinic Logo" class="nav__logo-icon">
-            <span class="nav__logo-name">JPK VETERINARY</br> CLINIC</span>
+            <img
+              src="/images/jpk_logo.jpg"
+              alt="JPK Veterinary Clinic Logo"
+              class="nav__logo-icon"
+            />
+            <span class="nav__logo-name"
+              >JPK VETERINARY<br />
+              CLINIC</span
+            >
           </p>
           <div class="nav__list">
             <a href="/" class="nav__link">
@@ -178,7 +202,8 @@
           margin-top: 20px;
           font-weight: bold;
           font-size: 24px;
-        ">
+        "
+      >
         VETERINARIANS
       </h2>
       <div class="card-body">
@@ -213,8 +238,12 @@
         <h2>Log-out Confirmation</h2>
         <p>Are you sure you want to log-out?</p>
         <div class="button-container">
-          <button class="button confirm-button" onclick="handleConfirmLogout()">Confirm</button>
-          <button class="button cancel-button" onclick="handleCancelLogout()">Cancel</button>
+          <button class="button confirm-button" onclick="handleConfirmLogout()">
+            Confirm
+          </button>
+          <button class="button cancel-button" onclick="handleCancelLogout()">
+            Cancel
+          </button>
         </div>
       </div>
     </div>

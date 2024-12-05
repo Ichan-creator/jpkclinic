@@ -83,6 +83,9 @@ window.addEventListener("click", (event) => {
 });
 
 let appointmentId = null;
+let treatmentDate = null;
+let service = null;
+let userId = null;
 
 window.addEventListener("load", () => {
   new gridjs.Grid({
@@ -121,6 +124,7 @@ window.addEventListener("load", () => {
           return h("statusData", { className: statusClassName }, status);
         },
       },
+      { name: "User ID", hidden: true },
       {
         id: "action",
         name: "",
@@ -146,6 +150,9 @@ window.addEventListener("load", () => {
 
                 appointmentId = row.cells[0].data;
 
+                treatmentDate = row.cells[1].data;
+                userId = row.cells[5].data;
+                service = row.cells[2].data;
                 petStatusModal.style.display = "flex";
 
                 document.getElementById("newPetStatus").value =
@@ -161,6 +168,9 @@ window.addEventListener("load", () => {
               className: "view-report-button",
               onClick: () => {
                 const appointmentId = row.cells[0].data;
+                userId = row.cells[5].data;
+                service = row.cells[2].data;
+                treatmentDate = row.cells[1].data;
 
                 axios
                   .get(`/admin-pet-record/${appointmentId}`)
@@ -226,6 +236,7 @@ window.addEventListener("load", () => {
             item.service,
             item.treatmentDateDone,
             item.medicalRecordStatus,
+            item.userId,
           ];
         }),
       handle: (res) => {
@@ -271,6 +282,9 @@ petRecordForm.addEventListener("submit", (event) => {
       respiratoryRate,
       observation,
       prescription,
+      userId,
+      service,
+      treatmentDate,
     })
     .then((res) => {
       window.location.reload();
@@ -287,7 +301,14 @@ editStatusForm.addEventListener("submit", (event) => {
   const newPetStatus = editStatusForm.newPetStatus.value;
 
   axios
-    .post("/admin-update-pet-status", { appointmentId, newPetStatus })
+    .post("/admin-update-pet-status", {
+      appointmentId,
+      newPetStatus,
+      treatmentDate,
+      userId,
+      service,
+      treatmentDate,
+    })
     .then((res) => {
       window.location.reload();
     })

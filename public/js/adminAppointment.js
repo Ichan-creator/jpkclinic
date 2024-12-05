@@ -259,6 +259,8 @@ function getServerConfig(url) {
         item.petNames,
         item.dateApproved === "Pending"
           ? "Pending"
+          : item.dateApproved === "CANCELLED"
+          ? "CANCELLED"
           : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
         null,
       ]),
@@ -370,13 +372,33 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
           noRecordsFound: "No matching records found",
         })
         .forceRender();
-    } else if ((button.id = "approvedToggle")) {
+    } else if (button.id === "approvedToggle") {
       appointmentsListTable
         .updateConfig({
           server: getServerConfig("/admin-approved-appointment-list"),
           noRecordsFound: "No matching records found",
         })
         .forceRender();
+    } else if (button.id === "cancelledToggle") {
+      appointmentsListTable
+        .updateConfig({
+          server: getServerConfig("/admin-cancelled-appointment-list"),
+          noRecordsFound: "No matching records found",
+        })
+        .forceRender();
     }
   });
 });
+
+function handleReadAllNotifications(event) {
+  event.preventDefault();
+
+  axios
+    .post("/read-all-notifications")
+    .then((res) => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}

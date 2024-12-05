@@ -294,3 +294,16 @@ function handleCancelAppointmentConfirm() {
         "none";
     });
 }
+
+function handleReadAllNotifications(event) {
+  event.preventDefault();
+
+  axios
+    .post("/read-all-notifications")
+    .then((res) => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}

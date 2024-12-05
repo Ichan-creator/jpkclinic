@@ -9,7 +9,7 @@ async function handleAppointment(req, res) {
   const userDetails = req.user;
 
   const userPets = await Pets.findAll({
-    attributes: ["name", "gender"],
+    attributes: ["name", "gender", "birthday", "animalType", "breed"],
     where: { userId: req.user.id },
     raw: true,
   });
@@ -88,6 +88,10 @@ async function handleBookAppointment(req, res) {
     email,
     appointmentDate,
     veterinarian,
+    petProfileName,
+    petBirthdate,
+    animalType,
+    petBreed,
   } = req.body;
 
   let existingPetRecord = await Pets.findOne({
@@ -100,7 +104,10 @@ async function handleBookAppointment(req, res) {
   if (!existingPetRecord) {
     existingPetRecord = await Pets.create({
       userId,
-      name: petNames,
+      name: petProfileName,
+      birthday: petBirthdate,
+      animalType,
+      breed: petBreed,
       gender,
     });
   }
@@ -121,6 +128,19 @@ async function handleBookAppointment(req, res) {
       petId: existingPetRecord.id,
     });
 
+    const message = `
+    You have one new <span class="font-bold text-blue-500"><strong>${service}</strong></span> 
+    appointment at <span class="font-bold text-gray-600"><strong>${dayjs(
+      appointmentDate
+    ).format("MMMM DD, YYYY hh:mm A")}</strong></span> 
+    from <strong>${req.user.fullName}</strong>`;
+
+    await Notifications.create({
+      message,
+      dateAndTime: appointmentDate,
+      type: "admin",
+    });
+
     return res.status(201).json({
       message: "Appointment created",
       hasExistingPetRecord: hasExistingPetRecord ? true : false,
@@ -134,7 +154,7 @@ async function handleBookAppointment(req, res) {
 }
 
 async function handleCancelAppointment(req, res) {
-  const { appointmentId } = req.body;
+  const { appointmentId, dateAndTime, service } = req.body;
 
   await Appointments.update(
     {
@@ -145,6 +165,16 @@ async function handleCancelAppointment(req, res) {
     },
     { where: { id: appointmentId } }
   );
+
+  const message = `<strong>${req.user.fullName}</strong> has 
+  <span style="color: red"><strong>cancelled</strong></span> their 
+  <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment 
+  at ${dateAndTime}.`;
+
+  await Notifications.create({
+    message,
+    type: "admin",
+  });
 
   res.status(200).json({ message: "Appointment cancelled" });
 }

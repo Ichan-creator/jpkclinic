@@ -205,10 +205,14 @@ async function handleIsExistingUser(req, res) {
 }
 
 async function handleReadAllNotifications(req, res) {
-  await Notifications.update(
-    { isRead: true },
-    { where: { userId: req.user.id } }
-  );
+  if (req.user.role === "admin") {
+    await Notifications.update({ isRead: true }, { where: { type: "admin" } });
+  } else {
+    await Notifications.update(
+      { isRead: true },
+      { where: { userId: req.user.id } }
+    );
+  }
 
   res.json({ message: "Successfully read all notifications" });
 }

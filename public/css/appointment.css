@@ -42,7 +42,7 @@
 .container form {
   position: relative;
   margin-top: 16px;
-  min-height: 490px;
+  min-height: 570px;
   background-color: #fff;
   overflow: hidden;
 }
@@ -991,4 +991,11 @@ select {
     font-size: 12px;
     padding: 10px 30px;
   }
+}
+
+.disabled-pet-profile-name {
+  background-color: #f2f2f2;
+  color: #a9a9a9;
+  border: 1px solid #dcdcdc;
+  cursor: not-allowed;
 }

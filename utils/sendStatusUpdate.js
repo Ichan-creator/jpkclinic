@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import { User } from "../models/index.models.js";
 
-async function sendNotificationEmail(messsage, type, userId) {
+async function sendStatusUpdate(message, userId, status) {
   const user = await User.findByPk(userId, {
     attributes: ["email", "fullName"],
     raw: true,
@@ -22,13 +22,12 @@ async function sendNotificationEmail(messsage, type, userId) {
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <h2 style="color: ${
-              type === "approved" ? "#4CAF50" : "red"
-            }">Appointment ${type}</h2>
+              status === "Completed" ? "green" : "#ffae42"
+            }">Appointment ${status}</h2>
             <p style="font-size: 16px;">Hi <strong>${
               user.fullName
             }!</strong>,</p>
-            <p style="font-size: 16px;">${messsage}
-            </p>
+            <p style="font-size: 16px;">${message}</p>
         </div>
     `,
   };
@@ -39,10 +38,8 @@ async function sendNotificationEmail(messsage, type, userId) {
       throw Error(error);
     }
 
-    console.log(
-      "Appointment Approved notification email sent: " + info.response
-    );
+    console.log("Status update notification email sent: " + info.response);
   });
 }
 
-export default sendNotificationEmail;
+export default sendStatusUpdate;

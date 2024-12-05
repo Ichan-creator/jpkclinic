@@ -1,9 +1,31 @@
 import dayjs from "dayjs";
-import { Appointments, Pets, User } from "../models/index.models.js";
+import {
+  Appointments,
+  Notifications,
+  Pets,
+  User,
+} from "../models/index.models.js";
 import { Op } from "sequelize";
+import sendStatusUpdate from "../utils/sendStatusUpdate.js";
 
-function handleAdminPetRepository(req, res) {
-  res.render("adminPetRepository");
+async function handleAdminPetRepository(req, res) {
+  const notifications = await Notifications.findAll({
+    where: { type: "admin" },
+    order: [["createdAt", "DESC"]],
+    raw: true,
+  });
+
+  const formattedNotifications = notifications.map((notification) => {
+    return {
+      ...notification,
+      timeAgo: dayjs(notification.createdAt).fromNow(),
+    };
+  });
+
+  res.render("adminPetRepository", {
+    notifications: formattedNotifications,
+    adminName: req.user.fullName,
+  });
 }
 
 async function handleGetAdminPetsList(req, res) {
@@ -78,12 +100,11 @@ async function handleGetAdminVisitationHistory(req, res) {
       "service",
       "treatmentDateDone",
       "medicalRecordStatus",
+      "userId",
     ],
     where: { petId, dateApproved: { [Op.ne]: "PENDING" } },
     raw: true,
   });
-
-  console.log(petVisitationHistory);
 
   const newPetVisitationHistory = petVisitationHistory.map((item) => {
     return {
@@ -92,7 +113,7 @@ async function handleGetAdminVisitationHistory(req, res) {
         "MMMM DD, YYYY hh:mm A"
       ),
       treatmentDateDone:
-        item.treatmentDateDone !== "CANCELLED"
+        item.treatmentDateDone && item.treatmentDateDone !== "CANCELLED"
           ? dayjs(item.treatmentDateDone).format("MMMM DD, YYYY")
           : item.treatmentDateDone,
     };
@@ -113,7 +134,19 @@ async function handlePostAdminUpdatePetRecord(req, res) {
     respiratoryRate,
     observation,
     prescription,
+    userId,
+    service,
+    treatmentDate,
   } = req.body;
+
+  const message = `The status of your
+  <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment
+  at <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
+  is now <span style="color: green"><strong>completed</strong></span>.`;
+
+  sendStatusUpdate(message, userId, "Completed");
+
+  await Notifications.create({ message, userId });
 
   await Appointments.update(
     {
@@ -135,12 +168,22 @@ async function handlePostAdminUpdatePetRecord(req, res) {
 }
 
 async function handlePostAdminUpdatePetStatus(req, res) {
-  const { appointmentId, newPetStatus } = req.body;
+  const { appointmentId, newPetStatus, treatmentDate, userId, service } =
+    req.body;
+
+  const message = `The status of your
+  <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment
+  at <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
+  is now <span style="color: #ffae42"><strong>ongoing</strong></span>.`;
+
+  sendStatusUpdate(message, userId, "Ongoing");
 
   await Appointments.update(
     { medicalRecordStatus: newPetStatus },
     { where: { id: appointmentId } }
   );
+
+  await Notifications.create({ message, userId });
 
   res.json({ message: "Successfully update new pet status" });
 }

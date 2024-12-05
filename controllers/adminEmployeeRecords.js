@@ -1,9 +1,26 @@
-import { User } from "../models/index.models.js";
+import dayjs from "dayjs";
+import { User, Notifications } from "../models/index.models.js";
 import hashPassword from "../utils/hashPassword.js";
 import { v4 as uuidv4 } from "uuid";
 
-function handleAdminEmployeeRecords(req, res) {
-  res.render("adminEmployeeRecords", { adminName: req.user.fullName });
+async function handleAdminEmployeeRecords(req, res) {
+  const notifications = await Notifications.findAll({
+    where: { type: "admin" },
+    order: [["createdAt", "DESC"]],
+    raw: true,
+  });
+
+  const formattedNotifications = notifications.map((notification) => {
+    return {
+      ...notification,
+      timeAgo: dayjs(notification.createdAt).fromNow(),
+    };
+  });
+
+  res.render("adminEmployeeRecords", {
+    notifications: formattedNotifications,
+    adminName: req.user.fullName,
+  });
 }
 
 async function handleGetAdminEmployeesList(req, res) {
@@ -21,11 +38,9 @@ async function handlePostAddRecord(req, res) {
   const existingUser = await User.findOne({ where: { name: recordUsername } });
 
   if (existingUser) {
-    return res
-      .status(409)
-      .json({
-        message: "There is already an existing account with that username.",
-      });
+    return res.status(409).json({
+      message: "There is already an existing account with that username.",
+    });
   }
 
   const hashedPassword = await hashPassword(recordPassword);

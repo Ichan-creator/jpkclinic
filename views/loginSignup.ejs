@@ -147,7 +147,7 @@
                     id="signUpPassword"
                     name="signUpPassword"
                     type="password"
-                    minlength="12"
+                    minlength="8"
                     class="input-field"
                     autocomplete="off"
                     required
@@ -159,7 +159,7 @@
                     id="signUpConfirmPassword"
                     name="signUpConfirmPassword"
                     type="password"
-                    minlength="12"
+                    minlength="8"
                     class="input-field"
                     autocomplete="off"
                     required
@@ -171,6 +171,12 @@
                   style="color: red; font-size: 0.8em; margin-bottom: 10px"
                 >
                   Passwords do not match.
+                </p>
+                <p
+                  class="password-hidden"
+                  style="color: red; font-size: 0.8em; margin-bottom: 10px"
+                >
+                  Password must be at least 8 characters long.
                 </p>
                 <input
                   type="button"

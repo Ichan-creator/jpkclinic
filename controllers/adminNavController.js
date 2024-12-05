@@ -1,7 +1,11 @@
 import { Op } from "sequelize";
-import { Appointments, Pets, User } from "../models/index.models.js";
+import {
+  Appointments,
+  Pets,
+  User,
+  Notifications,
+} from "../models/index.models.js";
 import sendNotificationEmail from "../utils/sendNotification.js";
-import { Notifications } from "../models/index.models.js";
 import dayjs from "dayjs";
 
 async function handleAdminNav(req, res) {
@@ -28,10 +32,25 @@ async function handleAdminNav(req, res) {
     raw: true,
   });
 
+  const notifications = await Notifications.findAll({
+    where: { type: "admin" },
+    order: [["createdAt", "DESC"]],
+    raw: true,
+  });
+
+  const formattedNotifications = notifications.map((notification) => {
+    return {
+      ...notification,
+      timeAgo: dayjs(notification.createdAt).fromNow(),
+    };
+  });
+
   res.render("adminNav", {
     pendingAppointments,
     confirmedAppointments,
     cancelledAppointments,
+    notifications: formattedNotifications,
+    adminName: req.user.fullName,
   });
 }
 

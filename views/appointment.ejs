@@ -96,20 +96,7 @@
                 <p
                   class="notification-item text-gray-600 text-sm mx-2 px-4 py-3 border-b hover:bg-gray-100 -mx-2 cursor-pointer"
                 >
-                  Your appointment for
-                  <span class="font-bold text-blue-500"
-                    ><%= notification.service %></span
-                  >
-                  at
-                  <span class="font-bold text-gray-600"
-                    ><%= notification.dateAndTime %></span
-                  >
-                  has been
-                  <span
-                    class="<%= notification.type === 'approved' ? 'text-green-500' : 'text-red-500' %>"
-                  >
-                    <%= notification.type %>.
-                  </span>
+                  <%- notification.message %>
                   <br />
                   - <%= notification.timeAgo %>
                 </p>
@@ -208,7 +195,7 @@
             <div class="form first">
               <div class="information">
                 <span class="title"
-                  >Fill out the details indicated below:
+                  >Fill out the appointment details indicated below:
                 </span>
                 <div class="fields">
                   <div class="input-field">
@@ -261,7 +248,7 @@
                     <label>Gender</label>
                     <select id="gender" name="gender" required>
                       <option value="" disabled selected>
-                        Select a Gender
+                        Select Pet Gender
                       </option>
                       <option>Male</option>
                       <option>Female</option>
@@ -317,6 +304,52 @@
                       <option>Francis Katalbas</option>
                       <option>Francisella Katalbas</option>
                     </select>
+                  </div>
+                </div>
+
+                <span class="title">Pet Details: </span>
+                <div class="fields">
+                  <div class="input-field">
+                    <label>Pet Name</label>
+                    <input
+                      id="petProfileName"
+                      class="disabled-pet-profile-name"
+                      name="petProfileName"
+                      type="text"
+                      placeholder="Enter pet name"
+                      required
+                      readonly
+                      disabled
+                    />
+                  </div>
+                  <div class="input-field">
+                    <label>Date of Birth</label>
+                    <input
+                      id="petBirthdate"
+                      name="petBirthdate"
+                      type="date"
+                      required
+                    />
+                  </div>
+                  <div class="input-field">
+                    <label>Animal Type</label>
+                    <select id="animalType" name="animalType" required>
+                      <option value="" disabled selected>
+                        Select Animal Type
+                      </option>
+                      <option value="Cat">Cat</option>
+                      <option value="Dog">Dog</option>
+                    </select>
+                  </div>
+                  <div class="input-field">
+                    <label>Breed</label>
+                    <input
+                      id="petBreed"
+                      name="petBreed"
+                      type="text"
+                      placeholder="Enter pet breed"
+                      required
+                    />
                   </div>
                 </div>
                 <button class="submit">

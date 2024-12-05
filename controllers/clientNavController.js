@@ -34,8 +34,6 @@ async function handleClientNav(req, res) {
     };
   });
 
-  console.log(user["appointments.appointmentDate"]);
-
   res.render("clientNav", {
     notifications: formattedNotifications,
     fullName: user.fullName,

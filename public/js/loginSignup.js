@@ -88,6 +88,7 @@ const signUpEmail = document.getElementById("signUpEmail");
 const signUpPassword = document.getElementById("signUpPassword");
 const signUpConfirmPassword = document.getElementById("signUpConfirmPassword");
 const signUpError = document.querySelector(".hidden");
+const passwordError = document.querySelector(".password-hidden");
 const isExistingUserError = document.querySelector(".existing-hidden");
 
 let usernameDebounceTimer;
@@ -155,6 +156,35 @@ function checkExistingEmail() {
       console.error(error);
     });
 }
+
+let passwordDebounce;
+let confirmPasswordDebounce;
+
+signUpPassword.addEventListener("input", () => {
+  clearTimeout(passwordDebounce);
+  passwordDebounce = setTimeout(() => {
+    if (!passwordError.classList.contains("password-hidden")) {
+      passwordError.classList.add("password-hidden");
+    }
+
+    if (signUpPassword.value.length < 8) {
+      passwordError.classList.remove("password-hidden");
+    }
+  }, 400);
+});
+
+signUpConfirmPassword.addEventListener("input", () => {
+  clearTimeout(confirmPasswordDebounce);
+  confirmPasswordDebounce = setTimeout(() => {
+    if (!passwordError.classList.contains("password-hidden")) {
+      passwordError.classList.add("password-hidden");
+    }
+
+    if (signUpConfirmPassword.value.length < 8) {
+      passwordError.classList.remove("password-hidden");
+    }
+  }, 400);
+});
 
 signUpEmail.addEventListener("input", () => {
   clearTimeout(emailDebounceTimer);

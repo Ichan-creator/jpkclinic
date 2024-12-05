@@ -1,8 +1,24 @@
 import dayjs from "dayjs";
-import { User } from "../models/index.models.js";
+import { User, Notifications } from "../models/index.models.js";
 
-function handleAdminClientPage(req, res) {
-  res.render("adminClientPage");
+async function handleAdminClientPage(req, res) {
+  const notifications = await Notifications.findAll({
+    where: { type: "admin" },
+    order: [["createdAt", "DESC"]],
+    raw: true,
+  });
+
+  const formattedNotifications = notifications.map((notification) => {
+    return {
+      ...notification,
+      timeAgo: dayjs(notification.createdAt).fromNow(),
+    };
+  });
+
+  res.render("adminClientPage", {
+    notifications: formattedNotifications,
+    adminName: req.user.fullName,
+  });
 }
 
 async function handleAdminClientPersonalPage(req, res) {

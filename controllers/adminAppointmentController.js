@@ -8,8 +8,24 @@ import sendReminder from "../utils/sendReminder.js";
 
 dayjs.extend(customParseFormat);
 
-function handleAdminAppointment(req, res) {
-  res.render("adminAppointment");
+async function handleAdminAppointment(req, res) {
+  const notifications = await Notifications.findAll({
+    where: { type: "admin" },
+    order: [["createdAt", "DESC"]],
+    raw: true,
+  });
+
+  const formattedNotifications = notifications.map((notification) => {
+    return {
+      ...notification,
+      timeAgo: dayjs(notification.createdAt).fromNow(),
+    };
+  });
+
+  res.render("adminAppointment", {
+    notifications: formattedNotifications,
+    adminName: req.user.fullName,
+  });
 }
 
 async function handleGetAdminAppointmentsCalendar(req, res) {
@@ -78,6 +94,31 @@ async function handleGetAdminApprovedAppointmentsList(req, res) {
   res.json(adminAppointmentsList);
 }
 
+async function handleGetAdminCancelledAppointmentsList(req, res) {
+  const adminAppointmentsList = await Appointments.findAll({
+    attributes: [
+      "id",
+      "appointmentDate",
+      "service",
+      "dateApproved",
+      "petNames",
+    ],
+    include: {
+      model: User,
+      attributes: ["id", "fullName"],
+    },
+    where: {
+      dateApproved: "CANCELLED",
+      appointmentStatus: "CANCELLED",
+    },
+    raw: true,
+  });
+
+  if (!adminAppointmentsList) return res.status(404).json([]);
+
+  res.json(adminAppointmentsList);
+}
+
 async function handleApproveAppointment(req, res) {
   const { appointmentId, userId, appointmentDate, service, petNames, type } =
     req.body;
@@ -99,11 +140,20 @@ async function handleApproveAppointment(req, res) {
     });
   }
 
-  await sendNotificationEmail(service, appointmentDate, type, userId);
+  const message = `Your appointment for
+  <span class="font-bold text-blue-500"><strong>${service}</strong></span>
+  at <span class="font-bold text-gray-600"><strong>${appointmentDate}</strong></span>
+  has been <span class="${
+    type === "approved" ? "text-green-500" : "text-red-500"
+  }">${type}</span>.`;
+
+  const notificationMessage = `Your appointment for ${service}
+  at ${appointmentDate} has been ${type}.`;
+
+  await sendNotificationEmail(message, type, userId);
 
   await Notifications.create({
-    service,
-    dateAndTime: appointmentDate,
+    message,
     type,
     userId,
   });
@@ -124,5 +174,6 @@ export {
   handleGetAdminAppointmentsCalendar,
   handleGetAdminPendingAppointmentsList,
   handleGetAdminApprovedAppointmentsList,
+  handleGetAdminCancelledAppointmentsList,
   handleApproveAppointment,
 };
