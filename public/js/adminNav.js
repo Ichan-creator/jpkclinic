@@ -5,7 +5,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId);
 
   if (nav && bodypd && headerpd) {
-      nav.addEventListener("mouseenter", () => {
+    nav.addEventListener("mouseenter", () => {
       nav.classList.add("show");
 
       toggle.classList.add("bx-x");
@@ -14,7 +14,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
       headerpd.classList.add("body-pd");
     });
 
-      nav.addEventListener("mouseleave", () => {
+    nav.addEventListener("mouseleave", () => {
       nav.classList.remove("show");
 
       toggle.classList.remove("bx-x");
@@ -88,6 +88,18 @@ window.addEventListener("load", () => {
         name: "Action",
         formatter: (cell, row) => {
           const appointmentStatus = row.cells[7].data;
+          const appointmentDate = dayjs(
+            row.cells[6].data,
+            "MMMM DD, YYYY - hh:mm A"
+          ).toDate();
+          const currentDate = new Date();
+
+          const timeDifference = currentDate - appointmentDate;
+          const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+          if (daysDifference > 1) {
+            return null;
+          }
 
           return appointmentStatus === "COMPLETE"
             ? h(

@@ -5,7 +5,6 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId);
 
   if (toggle && nav && bodypd && headerpd) {
-
     nav.addEventListener("mouseenter", () => {
       if (window.innerWidth > 768) {
         nav.classList.add("show");
@@ -107,6 +106,10 @@ closeEditProfilelBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("click", (event) => {
+  if (event.target == document.querySelector(".add-pet-modal")) {
+    document.querySelector(".add-pet-modal").style.display = "none";
+  }
+
   if (event.target == profileModal) {
     profileModal.style.display = "none";
   }
@@ -139,7 +142,7 @@ editProfileForm.addEventListener("submit", (event) => {
       window.location.reload();
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 });
 
@@ -361,3 +364,37 @@ function handleReadAllNotifications(event) {
       console.error(error);
     });
 }
+
+function handleClickAddPet() {
+  document.querySelector(".add-pet-modal").style.display = "flex";
+}
+
+function handleClickCloseAddPet() {
+  document.querySelector(".add-pet-modal").style.display = "none";
+}
+
+const addPetForm = document.getElementById("add-pet-form");
+addPetForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const petName = addPetForm.petName.value;
+  const petBirthdate = addPetForm.petBirthdate.value;
+  const animalType = addPetForm.animalType.value;
+  const petBreed = addPetForm.petBreed.value;
+  const petGender = addPetForm.petGender.value;
+
+  axios
+    .post("/add-pet", {
+      petName,
+      petBirthdate,
+      animalType,
+      petBreed,
+      petGender,
+    })
+    .then((res) => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});

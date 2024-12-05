@@ -10,6 +10,7 @@ import {
   handleEditProfile,
   handleIsProfileComplete,
   handleUpdateIsFirstTimeLogin,
+  handlePostAddPet,
 } from "../controllers/personalPageController.js";
 import isClient from "../middlewares/isClient.js";
 import isAuthenticated from "../utils/isAuthenticated.js";
@@ -75,5 +76,6 @@ personalPageRouter.post(
     }
   }
 );
+personalPageRouter.post("/add-pet", handlePostAddPet);
 
 export default personalPageRouter;

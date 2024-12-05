@@ -5,7 +5,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId);
 
   if (nav && bodypd && headerpd) {
-      nav.addEventListener("mouseenter", () => {
+    nav.addEventListener("mouseenter", () => {
       nav.classList.add("show");
 
       toggle.classList.add("bx-x");
@@ -14,7 +14,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
       headerpd.classList.add("body-pd");
     });
 
-      nav.addEventListener("mouseleave", () => {
+    nav.addEventListener("mouseleave", () => {
       nav.classList.remove("show");
 
       toggle.classList.remove("bx-x");
@@ -215,7 +215,7 @@ function handleDeleteRecordConfirm() {
       window.location.reload();
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 }
 
@@ -275,7 +275,7 @@ editRecordForm.addEventListener("submit", (event) => {
       window.location.reload();
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 });
 

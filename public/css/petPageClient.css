@@ -171,7 +171,8 @@ select {
     text-align: center;
   }
 
-  .button2, .button1,
+  .button2,
+  .button1,
   #visitation-table button,
   #visitation-table .button {
     font-size: 12px;
@@ -213,7 +214,7 @@ select {
 
   .student-profile .card p {
     font-size: 12px;
-    text-align: center  ;
+    text-align: center;
   }
 
   .student-profile .table th,
@@ -224,7 +225,8 @@ select {
     padding: 4px 6px;
   }
 
-  .button2, .button1,
+  .button2,
+  .button1,
   #visitation-table button,
   #visitation-table .button {
     font-size: 7px;
@@ -578,7 +580,8 @@ textarea :focus .input-field select:focus {
     margin-bottom: 50%;
   }
 
-  .button2, .button1,
+  .button2,
+  .button1,
   #visitation-table button,
   #visitation-table .button {
     font-size: 12px;
@@ -591,13 +594,15 @@ textarea :focus .input-field select:focus {
     border-collapse: collapse;
   }
 
-  table th, table td {
+  table th,
+  table td {
     padding: 8px;
     text-align: left;
     font-size: 10px;
   }
 
-  table th, table td {
+  table th,
+  table td {
     word-wrap: break-word;
     white-space: normal;
   }
@@ -630,7 +635,8 @@ textarea :focus .input-field select:focus {
     margin-bottom: 10%;
   }
 
-  .button2, .button1,
+  .button2,
+  .button1,
   #visitation-table button,
   #visitation-table .button {
     font-size: 12px;
@@ -652,13 +658,15 @@ textarea :focus .input-field select:focus {
     border-collapse: collapse;
   }
 
-  table th, table td {
+  table th,
+  table td {
     padding: 8px;
     text-align: left;
     font-size: 10px;
   }
 
-  table th, table td {
+  table th,
+  table td {
     word-wrap: break-word;
     white-space: normal;
   }
@@ -744,14 +752,14 @@ textarea {
     height: 32px;
   }
 
-  .pending-status, 
-  .complete-status, 
-  .ongoing-status, 
+  .pending-status,
+  .complete-status,
+  .ongoing-status,
   .cancelled-status {
-    padding-left: 0.30rem;
-    padding-right: 0.30rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
     font-size: 5px;
-    margin-bottom: 0.30rem;
+    margin-bottom: 0.3rem;
   }
 }
 
@@ -762,14 +770,14 @@ textarea {
     height: 40px;
   }
 
-  .pending-status, 
-  .complete-status, 
-  .ongoing-status, 
+  .pending-status,
+  .complete-status,
+  .ongoing-status,
   .cancelled-status {
     padding-left: 2em;
     padding-right: 1rem;
     font-size: 7px;
-    margin-bottom: 0.30rem;
+    margin-bottom: 0.3rem;
   }
 }
 
@@ -869,21 +877,21 @@ textarea {
 }
 
 .confirm-button {
-  background-color: #87CEFA;
+  background-color: #87cefa;
   color: white;
 }
 
 .confirm-button:hover {
-  background-color: #1E90FF;
+  background-color: #1e90ff;
 }
 
 .cancel-button {
   background-color: #ffffff;
-  color: #1E90FF;
-  border: 1px solid #1E90FF;
+  color: #1e90ff;
+  border: 1px solid #1e90ff;
 }
 
 .cancel-button:hover {
-  background-color: #1E90FF;
+  background-color: #1e90ff;
   color: white;
 }

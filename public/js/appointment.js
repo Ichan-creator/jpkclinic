@@ -5,7 +5,6 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId);
 
   if (toggle && nav && bodypd && headerpd) {
-
     nav.addEventListener("mouseenter", () => {
       if (window.innerWidth > 768) {
         nav.classList.add("show");
@@ -407,6 +406,26 @@ window.addEventListener("load", () => {
 });
 
 window.addEventListener("load", () => {
+  if (localStorage.getItem("updatePetProfile") === "true") {
+    const intro = introJs();
+    intro.setOptions({
+      steps: [
+        {
+          title: "Pet Profile Update Required",
+          intro:
+            "Pet information needs to be updated after making an appointment with a new pet.",
+        },
+      ],
+      exitOnEsc: false,
+      exitOnOverlayClick: false,
+    });
+    intro.onexit(() => {
+      window.location.href = "/personal-page";
+    });
+    localStorage.removeItem("updatePetProfile");
+    intro.start();
+  }
+
   if (localStorage.getItem("rescheduleSuccess") === "true") {
     localStorage.removeItem("rescheduleSuccess");
     document.querySelector(".reschedule-success-modal").style.display = "flex";
@@ -433,18 +452,7 @@ window.addEventListener("click", function (event) {
   }
 });
 
-let petProfileNameDebounce;
-
 const petNames = document.getElementById("petNames");
-
-function fillPetProfileNameInput() {
-  document.getElementById("petProfileName").value = petNames.value;
-}
-
-petNames.addEventListener("input", () => {
-  clearTimeout(petProfileNameDebounce);
-  petProfileNameDebounce = setTimeout(fillPetProfileNameInput, 400);
-});
 
 const appointmentForm = document.getElementById("appointment-form");
 appointmentForm.addEventListener("submit", (event) => {
@@ -460,11 +468,6 @@ appointmentForm.addEventListener("submit", (event) => {
   const appointmentDate = appointmentForm.appointmentDate.value;
   const veterinarian = appointmentForm.veterinarian.value;
 
-  const petProfileName = appointmentForm.petProfileName.value;
-  const petBirthdate = appointmentForm.petBirthdate.value;
-  const animalType = appointmentForm.animalType.value;
-  const petBreed = appointmentForm.petBreed.value;
-
   axios
     .post("/check-availability", { appointmentDate, veterinarian })
     .then((res) => {
@@ -478,13 +481,13 @@ appointmentForm.addEventListener("submit", (event) => {
         email,
         appointmentDate,
         veterinarian,
-        petProfileName,
-        petBirthdate,
-        animalType,
-        petBreed,
       });
     })
     .then((res2) => {
+      if (!res2.data.hasExistingPetRecord) {
+        localStorage.setItem("updatePetProfile", "true");
+      }
+
       formModal.style.display = "none";
 
       setTimeout(() => {
@@ -497,75 +500,10 @@ appointmentForm.addEventListener("submit", (event) => {
       console.error(error);
       return;
     });
-
-  // axios
-  //   .post("/book-appointment", {
-  //     userId,
-  //     petNames,
-  //     service,
-  //     gender,
-  //     concern,
-  //     contactNumber,
-  //     email,
-  //     appointmentDate,
-  //     veterinarian,
-  //     petProfileName,
-  //     petBirthdate,
-  //     animalType,
-  //     petBreed,
-  //   })
-  //   .then((res) => {
-  //     formModal.style.display = "none";
-
-  //     setTimeout(() => {
-  //       document.querySelector(".appointment-success-modal").style.display =
-  //         "flex";
-  //     }, 600);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
 });
 
 const petNameInput = document.getElementById("petNames");
 const genderInput = document.getElementById("gender");
-const petBirthdate = document.getElementById("petBirthdate");
-const animalType = document.getElementById("animalType");
-const petBreed = document.getElementById("petBreed");
-
-petNameInput.addEventListener("change", () => {
-  const selectedPet = userPets.find((pet) => pet.name === petNameInput.value);
-
-  if (selectedPet) {
-    genderInput.value = selectedPet.gender;
-    petBirthdate.value = selectedPet.birthday;
-    animalType.value = selectedPet.animalType;
-    petBreed.value = selectedPet.breed;
-
-    genderInput.disabled = true;
-    petBirthdate.disabled = true;
-    animalType.disabled = true;
-    petBreed.disabled = true;
-
-    petBirthdate.classList.add("disabled-pet-profile-name");
-    animalType.classList.add("disabled-pet-profile-name");
-    petBreed.classList.add("disabled-pet-profile-name");
-  } else {
-    genderInput.value = "";
-    petBirthdate.value = "";
-    animalType.value = "";
-    petBreed.value = "";
-
-    genderInput.disabled = false;
-    petBirthdate.disabled = false;
-    animalType.disabled = false;
-    petBreed.disabled = false;
-
-    petBirthdate.classList.remove("disabled-pet-profile-name");
-    animalType.classList.remove("disabled-pet-profile-name");
-    petBreed.classList.remove("disabled-pet-profile-name");
-  }
-});
 
 function handleReadAllNotifications(event) {
   event.preventDefault();
@@ -654,7 +592,7 @@ function handleCancelAppointment() {
       location.reload();
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 }
 

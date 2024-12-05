@@ -98,13 +98,11 @@
                               </div>
                               <div class="input-field">
                                 <label>Animal Type</label>
-                                <input
-                                  id="animalType"
-                                  name="animalType"
-                                  type="text"
-                                  placeholder="Animal Type"
-                                  required
-                                  value="<%= animalType %>" />
+                                <select id="animalType" name="animalType" required>
+                                  <option value="" disabled selected>Select Animal Type</option>
+                                  <option value="Cat" <%= animalType === 'Cat' ? 'selected' : '' %>>Cat</option>
+                                  <option value="Dog" <%= animalType === 'Dog' ? 'selected' : '' %>>Dog</option>
+                                </select>
                               </div>
                               <div class="input-field">
                                 <label>Breed</label>

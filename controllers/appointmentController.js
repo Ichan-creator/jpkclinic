@@ -88,10 +88,6 @@ async function handleBookAppointment(req, res) {
     email,
     appointmentDate,
     veterinarian,
-    petProfileName,
-    petBirthdate,
-    animalType,
-    petBreed,
   } = req.body;
 
   let existingPetRecord = await Pets.findOne({
@@ -104,10 +100,7 @@ async function handleBookAppointment(req, res) {
   if (!existingPetRecord) {
     existingPetRecord = await Pets.create({
       userId,
-      name: petProfileName,
-      birthday: petBirthdate,
-      animalType,
-      breed: petBreed,
+      name: petNames,
       gender,
     });
   }
@@ -181,8 +174,6 @@ async function handleCancelAppointment(req, res) {
 
 async function handleRescheduleAppointment(req, res) {
   const { appointmentId, newDate } = req.body;
-
-  console.log({ appointmentId, newDate });
 
   await Appointments.update(
     {

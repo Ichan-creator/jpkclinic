@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
-import { Notifications, User } from "../models/index.models.js";
+import { Notifications, Pets, User } from "../models/index.models.js";
 
 dayjs.extend(relativeTime);
 
@@ -127,10 +127,26 @@ async function handleUpdateIsFirstTimeLogin(req, res) {
   res.json({ message: "Update success" });
 }
 
+async function handlePostAddPet(req, res) {
+  const { petName, petBirthdate, animalType, petBreed, petGender } = req.body;
+
+  await Pets.create({
+    name: petName,
+    birthday: petBirthdate,
+    animalType,
+    breed: petBreed,
+    gender: petGender,
+    userId: req.user.id,
+  });
+
+  res.status(201).json({ message: "Pet added" });
+}
+
 export {
   handlePersonalPage,
   handlePetPage,
   handleEditProfile,
   handleIsProfileComplete,
   handleUpdateIsFirstTimeLogin,
+  handlePostAddPet,
 };

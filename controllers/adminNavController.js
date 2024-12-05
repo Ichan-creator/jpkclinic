@@ -91,12 +91,20 @@ async function handleGetAdminMedicalRecords(req, res) {
 async function handleCancelAppointment(req, res) {
   const { appointmentId, appointmentDate, userId, service, type } = req.body;
 
-  await sendNotificationEmail(service, appointmentDate, type, userId);
+  const message = `Your appointment for
+  <span class="font-bold text-blue-500"><strong>${service}</strong></span>
+  at <span class="font-bold text-gray-600"><strong>${appointmentDate}</strong></span>
+  has been <span class="${
+    type === "approved" ? "text-green-500" : "text-red-500"
+  }">${type}</span>.`;
+
+  const notificationMessage = `Your appointment for ${service}
+  at ${appointmentDate} has been ${type}.`;
+
+  await sendNotificationEmail(notificationMessage, type, userId);
 
   await Notifications.create({
-    service,
-    appointmentDate: dayjs(Date.now()).format("MMMM D, YYYY - h:mm A"),
-    type: "cancelled",
+    message,
     userId,
   });
 
