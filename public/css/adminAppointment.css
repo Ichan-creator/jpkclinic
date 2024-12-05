@@ -548,3 +548,7 @@ p {
   min-width: 20px;
   height: 20px;
 }
+
+.fc-toolbar-chunk:nth-child(3) {
+  z-index: 100;
+}
