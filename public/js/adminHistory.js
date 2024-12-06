@@ -78,12 +78,19 @@ function handleCloseNotif() {
 
 const adminHistoryTable = new gridjs.Grid({
   columns: [
-    { name: "Admin ID", width: 200 },
-    { name: "Username", hidden: true },
-    { name: "Password", hidden: true },
-    "Name",
-    "User Type",
-    "Email",
+    "Pet Name",
+    "Animal Type",
+    "Breed",
+    "Treatment Date",
+    "Service",
+    "Weight (kg)",
+    "Temperature",
+    "PPM",
+    "CBC",
+    "Urinalysis Result",
+    "Respiratory Rate",
+    "Observation",
+    "Prescription",
   ],
   width: "100%",
   fixedHeader: true,
@@ -99,17 +106,25 @@ const adminHistoryTable = new gridjs.Grid({
     },
   },
   server: {
-    url: `/admin-pending-appointment-list`,
+    url: `/admin-pet-records-list`,
     method: "GET",
     then: (data) =>
       data.map((item) => {
+        console.log(item);
         return [
-          item.id,
-          item.name,
-          item.password,
-          item.fullName,
-          item.role,
-          item.email,
+          item.petNames,
+          item["user.pets.animalType"],
+          item["user.pets.breed"],
+          dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
+          item.service,
+          item.petWeight,
+          item.temperature,
+          item.ppm,
+          item.cbc,
+          item.urinalysisResult,
+          item.respiratoryRate,
+          item.observation,
+          item.prescription,
         ];
       }),
     handle: (res) => {
@@ -126,54 +141,151 @@ window.addEventListener("load", () => {
 });
 
 function getServerConfig(url) {
-  return {
-    url: url,
-    method: "GET",
-    then: (data) =>
-      data.map((item) => [
-        item.id,
-        item["user.id"],
-        item["user.fullName"],
-        dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
-        item.service,
-        item.petNames,
-        item.dateApproved === "Pending"
-          ? "Pending"
-          : item.dateApproved === "CANCELLED"
-          ? "CANCELLED"
-          : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
-        null,
-      ]),
-    handle: (res) => {
-      if (res.status === 404) return { data: [] };
-      if (res.ok) return res.json();
+  let serverConfig = null;
 
-      throw Error("oh no :(");
-    },
-  };
+  switch (url) {
+    case "/admin-pet-records-list":
+      serverConfig = {
+        url: `/admin-pet-records-list`,
+        method: "GET",
+        then: (data) =>
+          data.map((item) => {
+            return [
+              item.petNames,
+              item["user.pets.animalType"],
+              item["user.pets.breed"],
+              item.service,
+              item.petWeight,
+              item.temperature,
+              item.ppm,
+              item.cbc,
+              item.urinalysisResult,
+              item.respiratoryRate,
+              item.observation,
+              item.prescription,
+            ];
+          }),
+        handle: (res) => {
+          if (res.status === 404) return { data: [] };
+          if (res.ok) return res.json();
+
+          throw Error("oh no :(");
+        },
+      };
+      break;
+    case "/admin-approved-appointment-list":
+      serverConfig = {
+        url: `/admin-approved-appointment-list`,
+        method: "GET",
+        then: (data) =>
+          data.map((item) => {
+            return [
+              item.id,
+              item.service,
+              dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
+              item.dateApproved,
+            ];
+          }),
+        handle: (res) => {
+          if (res.status === 404) return { data: [] };
+          if (res.ok) return res.json();
+
+          throw Error("oh no :(");
+        },
+      };
+      break;
+    case "/admin-cancelled-appointment-list":
+      serverConfig = {
+        url: `/admin-cancelled-appointment-list`,
+        method: "GET",
+        then: (data) =>
+          data.map((item) => {
+            return [
+              item.id,
+              item.service,
+              dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
+              item.dateApproved,
+            ];
+          }),
+        handle: (res) => {
+          if (res.status === 404) return { data: [] };
+          if (res.ok) return res.json();
+
+          throw Error("oh no :(");
+        },
+      };
+      break;
+    case "/admin-completed-appointment-list":
+      serverConfig = {
+        url: url,
+        method: "GET",
+        then: (data) =>
+          data.map((item) => {
+            return [
+              item["user.fullName"],
+              item.petNames,
+              item["user.pets.animalType"],
+              item["user.pets.breed"],
+              item.veterinarian,
+              item.service,
+              dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
+            ];
+          }),
+        handle: (res) => {
+          if (res.status === 404) return { data: [] };
+          if (res.ok) return res.json();
+
+          throw Error("oh no :(");
+        },
+      };
+      break;
+  }
+
+  return serverConfig;
 }
 
 document.querySelectorAll(".appointment-toggles button").forEach((button) => {
   button.addEventListener("click", () => {
-    if (button.classList.contains("active")) {
+    if (button.classList.contains("active-history")) {
       return;
     }
 
     document
       .querySelectorAll(".appointment-toggles button")
-      .forEach((btn) => btn.classList.remove("active"));
-    button.classList.add("active");
+      .forEach((btn) => btn.classList.remove("active-history"));
+    button.classList.add("active-history");
 
-    if (button.id === "pendingToggle") {
+    if (button.id === "petRecordsToggle") {
       adminHistoryTable
         .updateConfig({
-          server: getServerConfig("/admin-pending-appointment-list"),
+          columns: [
+            "Pet Name",
+            "Animal Type",
+            "Breed",
+            "Treatment Date",
+            "Service",
+            "Weight (kg)",
+            "Temperature",
+            "PPM",
+            "CBC",
+            "Urinalysis Result",
+            "Respiratory Rate",
+            "Observation",
+            "Prescription",
+          ],
+          server: getServerConfig("/admin-pet-records-list"),
           noRecordsFound: "No matching records found",
         })
         .forceRender();
     } else if (button.id === "approvedToggle") {
       adminHistoryTable
         .updateConfig({
+          columns: [
+            "Appointment ID",
+            "Service",
+            "Appointment Date",
+            "Date Approved",
+          ],
           server: getServerConfig("/admin-approved-appointment-list"),
           noRecordsFound: "No matching records found",
         })
@@ -181,6 +293,12 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
     } else if (button.id === "cancelledToggle") {
       adminHistoryTable
         .updateConfig({
+          columns: [
+            "Appointment ID",
+            "Service",
+            "Appointment Date",
+            "Date Approved",
+          ],
           server: getServerConfig("/admin-cancelled-appointment-list"),
           noRecordsFound: "No matching records found",
         })
@@ -188,6 +306,15 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
     } else if (button.id === "completedToggle") {
       adminHistoryTable
         .updateConfig({
+          columns: [
+            "Client Name",
+            "Pet Name",
+            "Animal Type",
+            "Breed",
+            "Veterinarian",
+            "Service",
+            "Appointment Date",
+          ],
           server: getServerConfig("/admin-completed-appointment-list"),
           noRecordsFound: "No matching records found",
         })

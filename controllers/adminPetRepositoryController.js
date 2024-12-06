@@ -142,9 +142,9 @@ async function handlePostAdminUpdatePetRecord(req, res) {
   const message = `The status of your
   <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment
   on <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
-  is now <span style="color: green"><strong>completed</strong></span>.`;
+  is now <span style="color: green"><strong>COMPLETED</strong></span>.`;
 
-  sendStatusUpdate(message, userId, "Completed");
+  sendStatusUpdate(message, userId, "COMPLETE");
 
   await Notifications.create({ message, userId });
 
@@ -174,7 +174,7 @@ async function handlePostAdminUpdatePetStatus(req, res) {
   const message = `The status of your
   <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment
   on <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
-  is now <span style="color: gray"><strong>${newPetStatus}</strong></span>.`;
+  is now <span style="color: yellow"><strong>${newPetStatus}</strong></span>.`;
 
   sendStatusUpdate(message, userId, newPetStatus);
 

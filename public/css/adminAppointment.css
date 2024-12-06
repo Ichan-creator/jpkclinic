@@ -374,7 +374,7 @@ p {
   border: 2px solid #cce0cc;
 }
 
-.notification.show {
+.notification.notif-show {
   opacity: 1;
   visibility: visible;
 }

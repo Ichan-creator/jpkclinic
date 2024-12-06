@@ -1,7 +1,12 @@
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import schedule from "node-schedule";
-import { Appointments, Notifications, User } from "../models/index.models.js";
+import {
+  Appointments,
+  Notifications,
+  Pets,
+  User,
+} from "../models/index.models.js";
 import { Op } from "sequelize";
 import sendNotificationEmail from "../utils/sendNotification.js";
 import sendReminder from "../utils/sendReminder.js";
@@ -70,6 +75,43 @@ async function handleGetAdminPendingAppointmentsList(req, res) {
   res.json(adminPendingAppointmentsList);
 }
 
+async function handleGetAdminPetRecordsList(req, res) {
+  const adminPendingAppointmentsList = await Appointments.findAll({
+    attributes: [
+      "id",
+      "petNames",
+      "appointmentDate",
+      "service",
+      "petWeight",
+      "temperature",
+      "ppm",
+      "cbc",
+      "urinalysisResult",
+      "respiratoryRate",
+      "observation",
+      "prescription",
+    ],
+    include: {
+      model: User,
+      attributes: ["id", "fullName"],
+      include: {
+        model: Pets,
+        attributes: ["animalType", "breed"],
+      },
+    },
+    where: {
+      appointmentStatus: "COMPLETE",
+      medicalRecordStatus: "COMPLETE",
+    },
+    raw: true,
+    order: [["createdAt", "DESC"]],
+  });
+
+  if (!adminPendingAppointmentsList) return res.status(404).json([]);
+
+  res.json(adminPendingAppointmentsList);
+}
+
 async function handleGetAdminApprovedAppointmentsList(req, res) {
   const adminAppointmentsList = await Appointments.findAll({
     attributes: [
@@ -123,14 +165,18 @@ async function handleGetAdminCompletedAppointmentsList(req, res) {
   const adminAppointmentsList = await Appointments.findAll({
     attributes: [
       "id",
-      "appointmentDate",
-      "service",
-      "dateApproved",
       "petNames",
+      "veterinarian",
+      "service",
+      "appointmentDate",
     ],
     include: {
       model: User,
       attributes: ["id", "fullName"],
+      include: {
+        model: Pets,
+        attributes: ["animalType", "breed"],
+      },
     },
     where: {
       appointmentStatus: "COMPLETE",
@@ -195,6 +241,7 @@ export {
   handleAdminAppointment,
   handleGetAdminAppointmentsCalendar,
   handleGetAdminPendingAppointmentsList,
+  handleGetAdminPetRecordsList,
   handleGetAdminApprovedAppointmentsList,
   handleGetAdminCancelledAppointmentsList,
   handleGetAdminCompletedAppointmentsList,

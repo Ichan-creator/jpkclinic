@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Op } from "sequelize";
 import { Appointments, Notifications, Pets } from "../models/index.models.js";
-import sendNotificationEmail from "../utils/sendNotification.js";
 
 dayjs.extend(relativeTime);
 

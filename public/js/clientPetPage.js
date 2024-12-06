@@ -380,14 +380,25 @@ const animalIcon = document.getElementById("animalIcon");
 const animalType = document.getElementById("animalType").value.toLowerCase();
 const petBreed = editPetProfileForm.petBreed.value;
 
+const dogBreeds = breedIcons.dog;
+const catBreeds = breedIcons.cat;
+const dogKeys = Object.keys(dogBreeds);
+const catKeys = Object.keys(catBreeds);
+
+const randomDogBreed = dogKeys[Math.floor(Math.random() * dogKeys.length)];
+const randomCatBreed = catKeys[Math.floor(Math.random() * catKeys.length)];
+
+const randomDogIcon = dogBreeds[randomDogBreed];
+const randomCatIcon = catBreeds[randomCatBreed];
+
 if (animalType === "dog" && breedIcons.dog[petBreed]) {
   animalIcon.src = breedIcons.dog[petBreed];
 } else if (animalType === "cat" && breedIcons.cat[petBreed]) {
   animalIcon.src = breedIcons.cat[petBreed];
 } else if (animalType === "dog") {
-  animalIcon.src = dogIcons[Math.floor(Math.random() * dogIcons.length)];
+  animalIcon.src = randomDogIcon;
 } else if (animalType === "cat") {
-  animalIcon.src = catIcons[Math.floor(Math.random() * catIcons.length)];
+  animalIcon.src = randomCatIcon;
 } else {
   animalIcon.src = "/images/profile-icon.png";
 }

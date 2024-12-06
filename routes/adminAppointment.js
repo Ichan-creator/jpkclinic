@@ -4,6 +4,7 @@ import {
   handleApproveAppointment,
   handleGetAdminAppointmentsCalendar,
   handleGetAdminPendingAppointmentsList,
+  handleGetAdminPetRecordsList,
   handleGetAdminApprovedAppointmentsList,
   handleGetAdminCancelledAppointmentsList,
   handleGetAdminCompletedAppointmentsList,
@@ -19,6 +20,10 @@ adminAppointmentRouter.get(
 adminAppointmentRouter.get(
   "/admin-pending-appointment-list",
   handleGetAdminPendingAppointmentsList
+);
+adminAppointmentRouter.get(
+  "/admin-pet-records-list",
+  handleGetAdminPetRecordsList
 );
 adminAppointmentRouter.get(
   "/admin-approved-appointment-list",
