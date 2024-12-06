@@ -749,6 +749,7 @@ p {
 
 .add-record-input-group,
 .edit-record-input-group {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 3fr;
   align-items: center;

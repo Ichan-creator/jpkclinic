@@ -299,3 +299,16 @@ function handleClickOpenNotif() {
 function handleCloseNotif() {
   document.querySelector(".add-record-btn").style.zIndex = 100;
 }
+
+function togglePassword() {
+  const passwordField = document.getElementById("recordPassword");
+  const toggleIcon = document.querySelector(".password-toggle");
+
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    toggleIcon.innerHTML = "visibility_off";
+  } else {
+    passwordField.type = "password";
+    toggleIcon.innerHTML = "visibility";
+  }
+}

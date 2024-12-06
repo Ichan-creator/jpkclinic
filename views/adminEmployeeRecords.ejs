@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
     <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
       rel="stylesheet"
     />
@@ -238,11 +242,25 @@
             <input
               id="recordPassword"
               name="recordPassword"
-              type="text"
+              type="password"
               placeholder="Password"
               required
               autocomplete="off"
             />
+            <span
+              class="material-symbols-outlined password-toggle"
+              style="
+                color: rgb(171, 171, 171);
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                cursor: pointer;
+              "
+              onclick="togglePassword()"
+            >
+              visibility
+            </span>
           </div>
           <div class="add-record-input-group">
             <label for="recordName">Name:</label>
