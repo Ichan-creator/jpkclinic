@@ -18,11 +18,15 @@ async function sendNotificationEmail(messsage, type, userId) {
   const mailOptions = {
     from: "jpkveterinaryclinic@gmail.com",
     to: user.email,
-    subject: "JPK Veterinary Clinic - Appointment Status Updated",
+    subject: `JPK Veterinary Clinic - Appointment Status ${type}`,
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <h2 style="color: ${
-              type === "approved" ? "#4CAF50" : "red"
+              type === "approved"
+                ? "#4CAF50"
+                : type === "pending"
+                ? "gray"
+                : "red"
             }">Appointment ${type}</h2>
             <p style="font-size: 16px;">Hi <strong>${
               user.fullName

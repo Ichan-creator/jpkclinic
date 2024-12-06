@@ -291,3 +291,11 @@ function handleReadAllNotifications(event) {
       console.error(error);
     });
 }
+
+function handleClickOpenNotif() {
+  document.querySelector(".add-record-btn").style.zIndex = 1;
+}
+
+function handleCloseNotif() {
+  document.querySelector(".add-record-btn").style.zIndex = 100;
+}

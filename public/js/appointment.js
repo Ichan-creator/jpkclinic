@@ -225,6 +225,8 @@ window.addEventListener("load", () => {
       makeAppointmentBtn: {
         text: "Make Appointment",
         click: () => {
+          document.querySelectorAll(".fc-toolbar-chunk")[2].style.zIndex = 10;
+
           axios
             .get("/is-profile-complete")
             .then((res) => {
@@ -445,6 +447,7 @@ window.addEventListener("load", () => {
 
 window.addEventListener("click", function (event) {
   if (event.target == formModal) {
+    document.querySelectorAll(".fc-toolbar-chunk")[2].style.zIndex = 100;
     formModal.style.display = "none";
   }
   if (event.target == appointmentModal) {
@@ -504,6 +507,17 @@ appointmentForm.addEventListener("submit", (event) => {
 
 const petNameInput = document.getElementById("petNames");
 const genderInput = document.getElementById("gender");
+
+petNameInput.addEventListener("change", () => {
+  const selectedPet = userPets.find((pet) => pet.name === petNameInput.value);
+  if (selectedPet) {
+    genderInput.value = selectedPet.gender;
+    genderInput.disabled = true;
+  } else {
+    genderInput.value = "";
+    genderInput.disabled = false;
+  }
+});
 
 function handleReadAllNotifications(event) {
   event.preventDefault();

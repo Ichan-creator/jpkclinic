@@ -151,9 +151,6 @@ a {
   font-size: 1.25rem;
 }
 
-.show {
-  left: 0;
-}
 .body-pd {
   padding-left: calc(var(--nav-width) + 1rem);
 }
@@ -196,10 +193,6 @@ p {
   .l-navbar {
     left: 0;
     padding: 1rem 1rem 0 0;
-  }
-
-  .show {
-    width: calc(var(--nav-width) + 180px);
   }
 
   .body-pd {
@@ -390,6 +383,35 @@ p {
   color: #7cd17c;
   font-size: 16px;
   margin-right: 10px;
+}
+
+.reject-notification {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 2px solid #f5c6cb;
+}
+
+.reject-notification.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reject-notification .icon {
+  width: 24px;
+  height: 24px;
+  background-color: #f55968;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.reject-notification-message {
+  font-weight: normal;
+  color: #721c24;
 }
 
 .approve-confirm-modal,

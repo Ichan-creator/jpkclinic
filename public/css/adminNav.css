@@ -156,10 +156,6 @@ a {
   font-size: 1.4rem;
 }
 
-.show {
-  left: 0;
-}
-
 .body-pd {
   padding-left: calc(var(--nav-width) + 1rem);
 }
@@ -211,10 +207,6 @@ p {
     padding: 1rem 1rem 0 0;
   }
 
-  .show {
-    width: calc(var(--nav-width) + 156px);
-  }
-
   .body-pd {
     padding-left: calc(var(--nav-width) + 188px);
   }
@@ -259,7 +251,7 @@ p {
   gap: 20px;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 40px 0
+  margin: 40px 0;
 }
 
 .reports-item {
@@ -681,6 +673,7 @@ p {
   align-items: center;
   text-align: center;
   transition: background-color 0.3s ease, color 0.3s ease;
+  z-index: 100;
 }
 
 .add-record-btn:hover {

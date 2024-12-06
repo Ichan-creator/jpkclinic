@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Op } from "sequelize";
 import { Appointments, Notifications, Pets } from "../models/index.models.js";
+import sendNotificationEmail from "../utils/sendNotification.js";
 
 dayjs.extend(relativeTime);
 
@@ -121,12 +122,30 @@ async function handleBookAppointment(req, res) {
       petId: existingPetRecord.id,
     });
 
+    const emailMessage = `You have successfully successfully booked your ${service}
+    appointment on ${dayjs(appointmentDate).format(
+      "MMMM DD, YYYY hh:mm A"
+    )} and is now pending for approval.`;
+
+    await sendNotificationEmail(emailMessage, "pending", userId);
+
+    const notifMessage = `
+    You have successfully booked your 
+    <span class="font-bold text-blue-500">${service}</span> 
+    appointment on 
+    <span class="font-bold text-gray-600">${dayjs(appointmentDate).format(
+      "MMMM DD, YYYY hh:mm A"
+    )}</span> and is now pending for 
+    <span class="font-bold text-gray-600">approval</span>.`;
+
     const message = `
-    You have one new <span class="font-bold text-blue-500"><strong>${service}</strong></span> 
-    appointment on <span class="font-bold text-gray-600"><strong>${dayjs(
+    You have one new <span class="font-bold text-blue-500">${service}</span> 
+    appointment on <span class="font-bold text-gray-600">${dayjs(
       appointmentDate
-    ).format("MMMM DD, YYYY hh:mm A")}</strong></span> 
+    ).format("MMMM DD, YYYY hh:mm A")}</span> 
     from <strong>${req.user.fullName}</strong>`;
+
+    await Notifications.create({ message: notifMessage, userId });
 
     await Notifications.create({
       message,

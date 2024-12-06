@@ -65,7 +65,7 @@ window.addEventListener("load", () => {
             case "COMPLETE":
               statusClassName = "complete-status";
               break;
-            case "ONGOING":
+            case "ON-GOING":
               statusClassName = "ongoing-status";
               break;
             case "CANCELLED":
@@ -197,7 +197,7 @@ window.addEventListener("load", () => {
             case "COMPLETE":
               statusClassName = "complete-status";
               break;
-            case "ONGOING":
+            case "ON-GOING":
               statusClassName = "ongoing-status";
               break;
             case "CANCELLED":

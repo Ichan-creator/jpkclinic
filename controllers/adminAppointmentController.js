@@ -147,9 +147,6 @@ async function handleApproveAppointment(req, res) {
     type === "approved" ? "text-green-500" : "text-red-500"
   }">${type}</span>.`;
 
-  const notificationMessage = `Your appointment for ${service}
-  at ${appointmentDate} has been ${type}.`;
-
   await sendNotificationEmail(message, type, userId);
 
   await Notifications.create({

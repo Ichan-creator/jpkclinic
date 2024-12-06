@@ -5,7 +5,6 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId);
 
   if (toggle && nav && bodypd && headerpd) {
-
     nav.addEventListener("mouseenter", () => {
       if (window.innerWidth > 768) {
         nav.classList.add("show");
@@ -151,7 +150,7 @@ window.addEventListener("load", () => {
             case "COMPLETE":
               statusClassName = "complete-status";
               break;
-            case "ONGOING":
+            case "ON-GOING":
               statusClassName = "ongoing-status";
               break;
             case "CANCELLED":

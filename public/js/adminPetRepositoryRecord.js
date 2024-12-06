@@ -5,7 +5,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId);
 
   if (nav && bodypd && headerpd) {
-      nav.addEventListener("mouseenter", () => {
+    nav.addEventListener("mouseenter", () => {
       nav.classList.add("show");
 
       toggle.classList.add("bx-x");
@@ -14,7 +14,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
       headerpd.classList.add("body-pd");
     });
 
-      nav.addEventListener("mouseleave", () => {
+    nav.addEventListener("mouseleave", () => {
       nav.classList.remove("show");
 
       toggle.classList.remove("bx-x");
@@ -116,7 +116,7 @@ window.addEventListener("load", () => {
             case "COMPLETE":
               statusClassName = "complete-status";
               break;
-            case "ONGOING":
+            case "ON-GOING":
               statusClassName = "ongoing-status";
               break;
             case "CANCELLED":
@@ -140,7 +140,7 @@ window.addEventListener("load", () => {
           const status = row.cells[4].data;
           const isComplete =
             status === "PENDING" ||
-            status === "ONGOING" ||
+            status === "ON-GOING" ||
             status === "COMPLETE";
 
           const editStatusButton = h(
