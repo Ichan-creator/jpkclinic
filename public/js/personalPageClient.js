@@ -206,6 +206,10 @@ window.addEventListener("load", () => {
         intro:
           "This is where you can view your list of pets. After making an appointment, they are recorded here for your reference.",
       },
+      {
+        element: this.document.getElementById("step5"),
+        intro: "You can add your pets here.",
+      },
     ],
     dontShowAgain: true,
     showProgress: true,
