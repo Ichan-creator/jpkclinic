@@ -119,6 +119,31 @@ async function handleGetAdminCancelledAppointmentsList(req, res) {
   res.json(adminAppointmentsList);
 }
 
+async function handleGetAdminCompletedAppointmentsList(req, res) {
+  const adminAppointmentsList = await Appointments.findAll({
+    attributes: [
+      "id",
+      "appointmentDate",
+      "service",
+      "dateApproved",
+      "petNames",
+    ],
+    include: {
+      model: User,
+      attributes: ["id", "fullName"],
+    },
+    where: {
+      appointmentStatus: "COMPLETE",
+      medicalRecordStatus: "COMPLETE",
+    },
+    raw: true,
+  });
+
+  if (!adminAppointmentsList) return res.status(404).json([]);
+
+  res.json(adminAppointmentsList);
+}
+
 async function handleApproveAppointment(req, res) {
   const { appointmentId, userId, appointmentDate, service, petNames, type } =
     req.body;
@@ -172,5 +197,6 @@ export {
   handleGetAdminPendingAppointmentsList,
   handleGetAdminApprovedAppointmentsList,
   handleGetAdminCancelledAppointmentsList,
+  handleGetAdminCompletedAppointmentsList,
   handleApproveAppointment,
 };

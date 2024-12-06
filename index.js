@@ -24,6 +24,7 @@ import adminClientPageRouter from "./routes/adminClientPage.js";
 import adminPetPageRouter from "./routes/adminPetPage.js";
 import adminPetRepositoryRouter from "./routes/adminPetRepository.js";
 import adminEmployeeRecordsRouter from "./routes/adminEmployeeRecords.js";
+import adminHistoryRouter from "./routes/adminHistory.js";
 import hashPassword from "./utils/hashPassword.js";
 import isAdmin from "./middlewares/isAdmin.js";
 
@@ -88,6 +89,7 @@ app.use(adminClientPageRouter);
 app.use(adminPetPageRouter);
 app.use(adminPetRepositoryRouter);
 app.use(adminEmployeeRecordsRouter);
+app.use(adminHistoryRouter);
 
 // initDB().then(() => {
 //   app.listen(PORT, () => {

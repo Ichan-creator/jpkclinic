@@ -22,7 +22,11 @@ async function sendStatusUpdate(message, userId, status) {
     html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
             <h2 style="color: ${
-              status === "Completed" ? "green" : "#ffae42"
+              status === "Completed"
+                ? "green"
+                : status === "PENDING"
+                ? "gray"
+                : "black"
             }">Appointment ${status}</h2>
             <p style="font-size: 16px;">Hi <strong>${
               user.fullName

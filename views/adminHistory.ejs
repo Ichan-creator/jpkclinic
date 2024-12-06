@@ -3,16 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - Appointment | JPK Veterinary Clinic</title>
     <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
     <link
       href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/css/adminNav.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css"
       rel="stylesheet"
     />
+
     <link
       href="https://unpkg.com/tailwindcss@1.7.0/dist/tailwind.min.css"
       rel="stylesheet"
@@ -21,8 +22,7 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
-    <link rel="stylesheet" href="/css/adminAppointment.css" />
-    <link rel="stylesheet" href="/css/adminNav.css" />
+    <title>Admin - History Page | JPK Veterinary Clinic</title>
   </head>
   <body id="body-pd">
     <header class="header" id="header">
@@ -49,7 +49,7 @@
         <div class="flex">
           <div x-data="{ dropdownOpen: false }" class="relative my-32">
             <button
-              onclick="handleShowNotif()"
+              onclick="handleClickOpenNotif()"
               @click="dropdownOpen = !dropdownOpen"
               class="relative z-10 block rounded-md bg-white p-2 focus:outline-none"
             >
@@ -150,7 +150,7 @@
               <i class="bx bx-grid-alt nav__icon"></i>
               <span class="nav__name">Homepage</span>
             </a>
-            <a href="/admin-appointment" class="nav__link active">
+            <a href="/admin-appointment" class="nav__link">
               <i class="bx bx-stopwatch nav__icon"></i>
               <span class="nav__name">Appointment</span>
             </a>
@@ -166,51 +166,41 @@
               <i class="bx bx-list-ul nav__icon"></i>
               <span class="nav__name">Employee Records</span>
             </a>
-            <a href="/admin-history" class="nav__link">
+            <a href="/admin-history" class="nav__link active">
               <i class="bx bx-list-ul nav__icon"></i>
               <span class="nav__name">History</span>
             </a>
           </div>
         </div>
-        <form onsubmit="handleLogout(event)">
-          <button type="submit" class="nav__link">
-            <i class="bx bx-log-out nav__icon"></i>
-            <span class="nav__name">Log Out</span>
-          </button>
-        </form>
+        <a onclick="handleLogout(event)" class="nav__link">
+          <i class="bx bx-log-out nav__icon"></i>
+          <span class="nav__name">Log Out</span>
+        </a>
       </nav>
     </div>
-    <section>
-      <div id="adminCalendar" style="width: 100%"></div>
-      <div id="appointmentModal" class="modal-appointment">
-        <div class="modal-appointment-content">
-          <div>
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-              "
-            >
-              <div class="appointment-toggles">
-                <button id="pendingToggle" class="active">Pending List</button>
-                <button id="approvedToggle">Approved List</button>
-                <button id="cancelledToggle">Cancelled List</button>
-              </div>
-              <span
-                class="close-appointment"
-                onclick="handleCloseAppointmentList()"
-                >&times;</span
-              >
-            </div>
-            <div id="appointments"></div>
-          </div>
+    <section style="padding: 15px">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 70px;
+        "
+      >
+        <h2 style="margin-bottom: 15px; font-weight: bold; font-size: 25px">
+          Admin History
+        </h2>
+        <div class="appointment-toggles">
+          <button id="pendingToggle" class="active-history">
+            Pending List
+          </button>
+          <button id="approvedToggle">Approved List</button>
+          <button id="cancelledToggle">Cancelled List</button>
+          <button id="completedToggle">Completed List</button>
         </div>
       </div>
+      <div id="adminHistoryTable"></div>
     </section>
-    <div id="event-tooltip" class="tooltip">
-      <span id="event-tooltip-content"></span>
-    </div>
     <div id="logoutModal" class="modal-logout">
       <div class="popup">
         <h2>Logout Confirmation</h2>
@@ -226,34 +216,10 @@
       </div>
     </div>
 
-    <div id="toast" class="notification">
-      <span class="icon">✔</span>
-      <span>Appointment Successfully Scheduled</span>
-    </div>
-
-    <div class="approve-confirm-modal">
-      <div class="dialog-box">
-        <p>Are you sure you want to approve this appointment?</p>
-        <div class="button-group">
-          <button class="confirm-btn" onclick="handleApproveConfirm()">
-            Confirm
-          </button>
-          <button
-            class="approve-cancel-btn"
-            onclick="handleApproveCancelConfirm()"
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/rrule@2.6.4/dist/es5/rrule.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.15/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
-    <script src="/js/adminAppointment.js"></script>
+    <script src="/js/adminHistory.js"></script>
   </body>
 </html>
