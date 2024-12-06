@@ -11,7 +11,7 @@ function sendVerifyEmail(email, EMAIL_TOKEN_SECRET) {
     { email, iat: Math.floor(Date.now() / 1000) },
     EMAIL_TOKEN_SECRET,
     {
-      expiresIn: "2m",
+      expiresIn: "5m",
     }
   );
 
@@ -42,7 +42,7 @@ function sendVerifyEmail(email, EMAIL_TOKEN_SECRET) {
                Verify Email
             </a>
             <p style="font-size: 14px; color: #777; margin-top: 20px;">
-                This verify link expires in 2 minutes. <br />
+                This verify link expires in 5 minutes. <br />
                 If you didn't create an account, you can safely ignore this email.
             </p>
             <p style="font-size: 14px; color: #777;">
