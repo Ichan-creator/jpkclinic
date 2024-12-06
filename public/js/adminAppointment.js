@@ -343,7 +343,7 @@ function handleApproveConfirm() {
     })
     .then((res) => {
       const toast = document.getElementById("toast");
-      toast.classList.add("show");
+      toast.classList.add("notif-show");
 
       setTimeout(() => {
         toast.classList.remove("show");
