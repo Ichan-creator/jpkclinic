@@ -353,6 +353,7 @@ window.addEventListener("load", () => {
                 className: "reschedule-appointment",
                 onClick: () => {
                   newAppointmentScheduleId = row.cells[0].data;
+                  service = row.cells[2].data;
                   document.querySelector(".new-date-modal").style.display =
                     "flex";
                 },
@@ -636,6 +637,7 @@ rescheduleForm.addEventListener("submit", (event) => {
     .post("/reschedule-appointment", {
       appointmentId: newAppointmentScheduleId,
       newDate: rescheduleForm.newAppointmentDate.value,
+      service,
     })
     .then((res) => {
       localStorage.setItem("rescheduleSuccess", "true");

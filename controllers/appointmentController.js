@@ -122,30 +122,12 @@ async function handleBookAppointment(req, res) {
       petId: existingPetRecord.id,
     });
 
-    const emailMessage = `You have successfully successfully booked your ${service}
-    appointment on ${dayjs(appointmentDate).format(
-      "MMMM DD, YYYY hh:mm A"
-    )} and is now pending for approval.`;
-
-    await sendNotificationEmail(emailMessage, "pending", userId);
-
-    const notifMessage = `
-    You have successfully booked your 
-    <span class="font-bold text-blue-500">${service}</span> 
-    appointment on 
-    <span class="font-bold text-gray-600">${dayjs(appointmentDate).format(
-      "MMMM DD, YYYY hh:mm A"
-    )}</span> and is now pending for 
-    <span class="font-bold text-gray-600">approval</span>.`;
-
     const message = `
     You have one new <span class="font-bold text-blue-500">${service}</span> 
     appointment on <span class="font-bold text-gray-600">${dayjs(
       appointmentDate
     ).format("MMMM DD, YYYY hh:mm A")}</span> 
     from <strong>${req.user.fullName}</strong>`;
-
-    await Notifications.create({ message: notifMessage, userId });
 
     await Notifications.create({
       message,
@@ -192,7 +174,13 @@ async function handleCancelAppointment(req, res) {
 }
 
 async function handleRescheduleAppointment(req, res) {
-  const { appointmentId, newDate } = req.body;
+  const { appointmentId, newDate, service } = req.body;
+
+  const message = `${req.user.fullName} has <strong>rescheduled</strong> their 
+  <span class="font-bold text-blue-500">${service}</span> to 
+  <span class="font-bold text-gray-600">${newDate}</span>.`;
+
+  await Notifications.create({ message, type: "admin" });
 
   await Appointments.update(
     {

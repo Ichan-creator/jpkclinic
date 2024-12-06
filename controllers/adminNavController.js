@@ -96,10 +96,10 @@ async function handleCancelAppointment(req, res) {
   on <span class="font-bold text-gray-600"><strong>${appointmentDate}</strong></span>
   has been <span class="${
     type === "approved" ? "text-green-500" : "text-red-500"
-  }">${type}</span>.`;
+  }">${type}</span>. You may reschedule the said appointment.`;
 
   const notificationMessage = `Your appointment for ${service}
-  at ${appointmentDate} has been ${type}.`;
+  at ${appointmentDate} has been ${type}. You may now reschedule the said appointment.`;
 
   await sendNotificationEmail(notificationMessage, type, userId);
 
