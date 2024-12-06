@@ -212,7 +212,7 @@ p {
   }
 
   .show {
-    width: calc(var(--nav-width) + 156px);
+    width: calc(var(--nav-width) + 180px);
   }
 
   .body-pd {
@@ -725,7 +725,7 @@ p {
 .add-record-form,
 .edit-record-form {
   position: relative;
-  width: 30%;
+  width: 25%;
   height: auto;
   border-radius: 6px;
   padding: 10px 30px 20px;
@@ -919,7 +919,7 @@ p {
 
 @media only screen and (min-width: 768px) {
   .add-record-form {
-    width: 45%;
+    width: 25%;
   }
 }
 

@@ -1,3 +1,42 @@
+const showNavbar = (toggleId, navId, bodyId, headerId) => {
+  const toggle = document.getElementById(toggleId),
+    nav = document.getElementById(navId),
+    bodypd = document.getElementById(bodyId),
+    headerpd = document.getElementById(headerId);
+
+  if (nav && bodypd && headerpd) {
+    nav.addEventListener("mouseenter", () => {
+      nav.classList.add("show");
+
+      toggle.classList.add("bx-x");
+
+      bodypd.classList.add("body-pd");
+      headerpd.classList.add("body-pd");
+    });
+
+    nav.addEventListener("mouseleave", () => {
+      nav.classList.remove("show");
+
+      toggle.classList.remove("bx-x");
+
+      bodypd.classList.remove("body-pd");
+      headerpd.classList.remove("body-pd");
+    });
+  }
+};
+
+showNavbar("header-toggle", "nav-bar", "body-pd", "header");
+
+const linkColor = document.querySelectorAll(".nav__link");
+
+function colorLink() {
+  if (linkColor) {
+    linkColor.forEach((l) => l.classList.remove("active"));
+    this.classList.add("active");
+  }
+}
+linkColor.forEach((l) => l.addEventListener("click", colorLink));
+
 const { h } = window.gridjs;
 
 const logoutModal = document.getElementById("logoutModal");
