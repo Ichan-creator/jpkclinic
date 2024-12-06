@@ -156,6 +156,10 @@ a {
   font-size: 1.4rem;
 }
 
+.show {
+  left: 0;
+}
+
 .body-pd {
   padding-left: calc(var(--nav-width) + 1rem);
 }
@@ -205,6 +209,10 @@ p {
   .l-navbar {
     left: 0;
     padding: 1rem 1rem 0 0;
+  }
+
+  .show {
+    width: calc(var(--nav-width) + 156px);
   }
 
   .body-pd {
