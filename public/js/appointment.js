@@ -183,33 +183,6 @@ const recurringEvents = [
   },
 ];
 
-const appointmentDateInput = document.getElementById("appointmentDate");
-const newAppointmentDateInput = document.getElementById("newAppointmentDate");
-appointmentDateInput.setAttribute("min", dayjs().format("YYYY-MM-DDTHH:mm"));
-newAppointmentDateInput.setAttribute("min", dayjs().format("YYYY-MM-DDTHH:mm"));
-
-appointmentDateInput.addEventListener("input", function (event) {
-  const selectedDate = new Date(appointmentDateInput.value);
-
-  const day = selectedDate.getUTCDay();
-  if (day === 0) {
-    document.querySelector(".calendar-modal").style.display = "flex";
-    appointmentDateInput.value = "";
-    appointmentDateInput.blur();
-  }
-});
-
-newAppointmentDateInput.addEventListener("input", function () {
-  const selectedDate = new Date(newAppointmentDateInput.value);
-  const day = selectedDate.getUTCDay();
-  if (day === 0) {
-    document.querySelector(".new-date-modal").style.display = "none";
-    document.querySelector(".calendar-modal").style.display = "flex";
-    newAppointmentDateInput.value = "";
-    newAppointmentDateInput.blur();
-  }
-});
-
 const formModal = document.getElementById("formModal");
 const appointmentModal = document.getElementById("appointmentModal");
 
@@ -286,22 +259,14 @@ window.addEventListener("load", () => {
     events: recurringEvents,
     eventSources: ["/appointments-calendar"],
     eventMouseEnter: function (info) {
-      const tooltip = document.getElementById("event-tooltip");
-      const tooltipContent = document.getElementById("event-tooltip-content");
-
       const formattedAppointmentDate = dayjs(info.event.start).format(
         "MMMM D, YYYY - hh:mm A"
       );
 
-      tooltipContent.innerHTML = `Service: ${info.event.title}<br />Date: ${formattedAppointmentDate}`;
-
-      tooltip.style.display = "block";
-      tooltip.style.left = info.jsEvent.clientX + 10 + "px";
-      tooltip.style.top = info.jsEvent.clientY + 10 + "px";
-    },
-    eventMouseLeave: function (info) {
-      const tooltip = document.getElementById("event-tooltip");
-      tooltip.style.display = "none";
+      tippy(info.el, {
+        content: `Service: ${info.event.title}<br />Date: ${formattedAppointmentDate}`,
+        allowHTML: true,
+      });
     },
   });
   calendar.render();
@@ -646,4 +611,46 @@ rescheduleForm.addEventListener("submit", (event) => {
     .catch((error) => {
       console.error(error);
     });
+});
+
+function getValidDefaultDate() {
+  const now = new Date();
+  const [maxHours, maxMinutes] = "19:00".split(":").map(Number);
+  const [minHours, minMinutes] = "07:00".split(":").map(Number);
+
+  if (
+    now.getHours() > maxHours ||
+    (now.getHours() === maxHours && now.getMinutes() > maxMinutes)
+  ) {
+    now.setHours(maxHours, maxMinutes, 0, 0);
+  } else if (
+    now.getHours() < minHours ||
+    (now.getHours() === minHours && now.getMinutes() < minMinutes)
+  ) {
+    now.setHours(minHours, minMinutes, 0, 0);
+  }
+  return now;
+}
+
+flatpickr("#appointmentDate", {
+  enableTime: true,
+  minTime: "08:00",
+  maxTime: "19:00",
+  time_24hr: false,
+  dateFormat: "Y-m-d\\TH:i",
+  altInput: true,
+  altFormat: "M j, Y h:i K",
+  minDate: getValidDefaultDate(),
+  disable: [
+    (date) => {
+      return date.getDay() === 0;
+    },
+    (date) => {
+      return recurringEvents.some(
+        (recurringEvent) =>
+          date.getMonth() + 1 === recurringEvent.rrule.bymonth &&
+          date.getDate() === recurringEvent.rrule.bymonthday
+      );
+    },
+  ],
 });

@@ -242,7 +242,8 @@ window.addEventListener("load", () => {
 window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
-      { name: "Pet ID", width: "200" },
+      { name: "Full Pet ID", hidden: true },
+      "Pet ID",
       "Pet Name",
       "Animal",
       {
@@ -295,7 +296,13 @@ window.addEventListener("load", () => {
       url: "/owned-pets",
       method: "GET",
       then: (data) =>
-        data.map((item) => [item.id, item.name, item.animalType, item.breed]),
+        data.map((item) => [
+          item.id,
+          item.id.split("-")[0] + " ...",
+          item.name,
+          item.animalType,
+          item.breed,
+        ]),
       handle: (res) => {
         if (res.status === 404) return { data: [] };
         if (res.ok) return res.json();

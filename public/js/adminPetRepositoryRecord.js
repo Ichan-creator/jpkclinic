@@ -55,6 +55,22 @@ function handleLogout(event) {
     });
 }
 
+function validateField(input) {
+  if (input.value < 1) {
+    input.value = 1;
+  }
+}
+
+const petWeight = document.getElementById("petWeight");
+const temperature = document.getElementById("temperature");
+const ppm = document.getElementById("ppm");
+const cbc = document.getElementById("cbc");
+
+petWeight.addEventListener("input", () => validateField(petWeight));
+temperature.addEventListener("input", () => validateField(temperature));
+ppm.addEventListener("input", () => validateField(ppm));
+cbc.addEventListener("input", () => validateField(cbc));
+
 const treatmentDateDone = document.getElementById("treatmentDateDone");
 treatmentDateDone.setAttribute("min", dayjs().format("YYYY-MM-DD"));
 
@@ -487,9 +503,9 @@ if (animalType === "dog" && breedIcons.dog[petBreed]) {
 } else if (animalType === "cat" && breedIcons.cat[petBreed]) {
   animalIcon.src = breedIcons.cat[petBreed];
 } else if (animalType === "dog") {
-  animalIcon.src = dogIcons[Math.floor(Math.random() * dogIcons.length)];
+  animalIcon.src = "/images/defaultDog.jpg";
 } else if (animalType === "cat") {
-  animalIcon.src = catIcons[Math.floor(Math.random() * catIcons.length)];
+  animalIcon.src = "/images/defaultCat.jpg";
 } else {
   animalIcon.src = "/images/profile-icon.png";
 }

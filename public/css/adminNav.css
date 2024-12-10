@@ -473,10 +473,11 @@ p {
 }
 
 .cancel-appointment-modal,
-.delete-record-modal {
+.delete-record-modal,
+.delete-service-modal {
   display: none;
   position: fixed;
-  z-index: 100;
+  z-index: 500;
   left: 0;
   top: 0;
   width: 100%;
@@ -489,7 +490,8 @@ p {
 }
 
 .cancel-modal,
-.delete-modal {
+.delete-modal,
+.delete-service {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -502,7 +504,8 @@ p {
 }
 
 .cancel-modal-header,
-.delete-record-modal-header {
+.delete-record-modal-header,
+.delete-service-modal-header {
   font-size: 24px;
   font-weight: bold;
   color: #212121;
@@ -512,7 +515,8 @@ p {
 }
 
 .cancel-modal-message,
-.delete-record-modal-message {
+.delete-record-modal-message,
+.delete-service-modal-message {
   font-size: 16px;
   color: #1f1f1f;
   text-align: center;
@@ -520,7 +524,8 @@ p {
 }
 
 .cancel-button-container,
-.delete-record-button-container {
+.delete-record-button-container,
+.delete-service-button-container {
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -690,7 +695,8 @@ p {
 }
 
 .add-record-modal,
-.edit-record-modal {
+.edit-record-modal,
+.edit-services-modal {
   display: none;
   position: fixed;
   z-index: 200;
@@ -706,24 +712,29 @@ p {
 }
 
 .close-add-record-form,
-.close-edit-record-form {
+.close-edit-record-form,
+.close-edit-services-form {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  line-height: 1;
 }
 
 .close-add-record-form:hover,
 .close-edit-record-form:hover,
+.close-edit-services-form:hover,
 .close-add-record-form:focus,
-.close-edit-record-form:focus {
+.close-edit-record-form:focus,
+.close-edit-services-form:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
 
 .add-record-form,
-.edit-record-form {
+.edit-record-form,
+.edit-services-form {
   position: relative;
   width: 25%;
   height: auto;
@@ -734,21 +745,30 @@ p {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
+.edit-services-form {
+  width: 50%;
+}
+
 .add-record-form-header,
-.edit-record-form-header {
+.edit-record-form-header,
+.edit-services-form-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 10px 0;
 }
 
 .add-record-content,
-.edit-record-content {
+.edit-record-content,
+.edit-services-content {
   display: flex;
   flex-direction: column;
 }
 
 .add-record-input-group,
-.edit-record-input-group {
+.edit-record-input-group,
+.edit-services-input-group {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -757,14 +777,16 @@ p {
 }
 
 .add-record-input-group label,
-.edit-record-input-group label {
+.edit-record-input-group label,
+.edit-services-input-group label {
   font-size: 16px;
   font-weight: 500;
   color: #2e2e2e;
 }
 
 .add-record-input-group input,
-.edit-record-input-group input {
+.edit-record-input-group input,
+.edit-services-input-group input {
   outline: none;
   font-size: 14px;
   font-weight: 400;
@@ -784,7 +806,8 @@ p {
 }
 
 .add-record-input-group input:focus,
-.edit-record-input-group input:focus {
+.edit-record-input-group input:focus,
+.edit-services-input-group input:focus {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
 }
 
@@ -795,8 +818,15 @@ p {
   margin-top: 10px;
 }
 
+.edit-services-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
 .add-record-button button,
-.edit-record-button button {
+.edit-record-button button,
+.edit-services-button button {
   padding: 10px 20px;
   font-size: 14px;
   background-color: #007bff;
@@ -807,13 +837,15 @@ p {
 }
 
 .add-record-button button:hover,
-.edit-record-button button:hover {
+.edit-record-button button:hover,
+.edit-services-button .edit-button:hover {
   background-color: #0056b3;
 }
 
 .add-record-toast,
 .edit-record-toast,
-.delete-record-toast {
+.delete-record-toast,
+.delete-service-toast {
   position: fixed;
   width: auto;
   top: 50px;
@@ -834,7 +866,8 @@ p {
 
 .add-record-toast,
 .edit-record-toast,
-.delete-record-toast {
+.delete-record-toast,
+.delete-service-toast {
   background-color: #e5f7e5;
   color: #4b8a4b;
   border: 2px solid #cce0cc;
@@ -842,14 +875,16 @@ p {
 
 .add-record-toast.show,
 .edit-record-toast.show,
-.delete-record-toast.show {
+.delete-record-toast.show,
+.delete-service-toast.show {
   opacity: 1;
   visibility: visible;
 }
 
 .add-record-toast .icon,
 .edit-record-toast .icon,
-.delete-record-toast .icon {
+.delete-record-toast .icon,
+.delete-service-toast .icon {
   color: #7cd17c;
   font-size: 16px;
   margin-right: 10px;

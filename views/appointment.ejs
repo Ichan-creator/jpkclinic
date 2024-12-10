@@ -30,6 +30,10 @@
       href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
     <link rel="stylesheet" href="https://unpkg.com/intro.js/introjs.css" />
     <link rel="stylesheet" href="/css/clientNav.css" />
     <link rel="stylesheet" href="/css/appointment.css" />
@@ -230,18 +234,11 @@
                     <label>Service</label>
                     <select id="service" name="service" required>
                       <option disabled selected>Select a Service</option>
-                      <option>First vet of Vaccination or Deworming</option>
-                      <option>
-                        Vaccination and/or Deworming for 1-2 (No Consultation)
+                      <% services.forEach(service => { %>
+                      <option value="<%= service.serviceName %>">
+                        <%= service.serviceName %>
                       </option>
-                      <option>
-                        Vaccination and/or Deworming for 3 or more pets (No
-                        Consultation)
-                      </option>
-                      <option>Consultation for 1 pet</option>
-                      <option>
-                        Consultation for 2 or more pets in one visit
-                      </option>
+                      <% }); %>
                     </select>
                   </div>
                   <div class="input-field">
@@ -290,11 +287,17 @@
                   </div>
                   <div class="input-field">
                     <label>Appointment Date and Time</label>
-                    <input
+                    <!-- <input
                       id="appointmentDate"
                       name="appointmentDate"
                       type="datetime-local"
                       required
+                    /> -->
+                    <input
+                      id="appointmentDate"
+                      name="appointmentDate"
+                      type="text"
+                      placeholder="Select Date and Time"
                     />
                   </div>
                   <div class="input-field">
@@ -327,9 +330,6 @@
         </div>
       </div>
     </section>
-    <div id="event-tooltip" class="tooltip">
-      <span id="event-tooltip-content"></span>
-    </div>
     <div id="logoutModal" class="modal-logout">
       <div class="popup-log-out">
         <h2>Log-out Confirmation</h2>
@@ -407,7 +407,9 @@
         <i class="fas fa-calendar-alt icon"></i>
         <h2>Sunday not available!</h2>
         <p>Please choose another day.</p>
-        <button onclick="handleCloseCalendarModal()">Select another date</button>
+        <button onclick="handleCloseCalendarModal()">
+          Select another date
+        </button>
       </div>
     </div>
 
@@ -451,6 +453,9 @@
       const userPets = <%- JSON.stringify(userPets) %>;
     </script>
 
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/rrule@2.6.4/dist/es5/rrule.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>

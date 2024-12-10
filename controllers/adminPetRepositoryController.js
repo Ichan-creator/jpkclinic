@@ -171,19 +171,10 @@ async function handlePostAdminUpdatePetStatus(req, res) {
   const { appointmentId, newPetStatus, treatmentDate, userId, service } =
     req.body;
 
-  const message = `The status of your
-  <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment
-  on <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
-  is now <span style="color: yellow"><strong>${newPetStatus}</strong></span>.`;
-
-  sendStatusUpdate(message, userId, newPetStatus);
-
   await Appointments.update(
     { medicalRecordStatus: newPetStatus },
     { where: { id: appointmentId } }
   );
-
-  await Notifications.create({ message, userId });
 
   res.json({ message: "Successfully updated new pet status" });
 }

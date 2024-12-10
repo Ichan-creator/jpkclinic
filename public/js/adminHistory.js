@@ -110,11 +110,10 @@ const adminHistoryTable = new gridjs.Grid({
     method: "GET",
     then: (data) =>
       data.map((item) => {
-        console.log(item);
         return [
           item.petNames,
-          item["user.pets.animalType"],
-          item["user.pets.breed"],
+          item.pet.animalType,
+          item.pet.breed,
           dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
           item.service,
           item.petWeight,
@@ -152,8 +151,9 @@ function getServerConfig(url) {
           data.map((item) => {
             return [
               item.petNames,
-              item["user.pets.animalType"],
-              item["user.pets.breed"],
+              item.pet.animalType,
+              item.pet.breed,
+              dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
               item.service,
               item.petWeight,
               item.temperature,
@@ -222,10 +222,10 @@ function getServerConfig(url) {
         then: (data) =>
           data.map((item) => {
             return [
-              item["user.fullName"],
+              item.user.fullName,
               item.petNames,
-              item["user.pets.animalType"],
-              item["user.pets.breed"],
+              item.pet.animalType,
+              item.pet.breed,
               item.veterinarian,
               item.service,
               dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
@@ -274,7 +274,6 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
             "Prescription",
           ],
           server: getServerConfig("/admin-pet-records-list"),
-          noRecordsFound: "No matching records found",
         })
         .forceRender();
     } else if (button.id === "approvedToggle") {

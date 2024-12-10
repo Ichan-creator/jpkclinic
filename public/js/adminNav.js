@@ -41,6 +41,25 @@ const { h } = window.gridjs;
 
 let appointmentId = null;
 
+window.addEventListener("click", (event) => {
+  if (event.target === document.querySelector(".edit-services-modal")) {
+    document.querySelector(".edit-services-modal").style.display = "none";
+  }
+});
+
+window.addEventListener("load", () => {
+  if (localStorage.getItem("deleteServiceToast")) {
+    localStorage.removeItem("deleteServiceToast");
+
+    const deleteServiceToast = document.querySelector(".delete-service-toast");
+    deleteServiceToast.classList.add("show");
+
+    setTimeout(() => {
+      deleteServiceToast.classList.remove("show");
+    }, 3000);
+  }
+});
+
 window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
@@ -175,6 +194,8 @@ window.addEventListener("load", () => {
   }).render(document.getElementById("appointment-requests-table"));
 });
 
+let serviceId = null;
+
 window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
@@ -246,6 +267,56 @@ window.addEventListener("load", () => {
       resetPageOnUpdate: true,
     },
   }).render(document.getElementById("medical-records-table"));
+
+  new gridjs.Grid({
+    columns: [
+      { name: "id", hidden: true },
+      "Service",
+      {
+        id: "actions",
+        name: "",
+        formatter: (cell, row) => {
+          return h(
+            "button",
+            {
+              className: "delete-button",
+              onClick: () => {
+                serviceId = row.cells[0].data;
+                document.querySelector(".delete-service-modal").style.display =
+                  "flex";
+              },
+            },
+            "Delete"
+          );
+        },
+      },
+    ],
+    server: {
+      url: "/admin-services",
+      method: "GET",
+      then: (data) =>
+        data.map((item, index) => {
+          return [item.id, item.serviceName];
+        }),
+      handle: (res) => {
+        if (res.status === 404) return { data: [] };
+        if (res.ok) return res.json();
+
+        throw Error("oh no :(");
+      },
+    },
+    width: "100%",
+    fixedHeader: true,
+    language: {
+      pagination: {
+        previous: "<",
+        next: ">",
+      },
+    },
+    pagination: {
+      limit: 3,
+    },
+  }).render(document.getElementById("servicesTable"));
 });
 
 const logoutModal = document.getElementById("logoutModal");
@@ -321,6 +392,44 @@ function handleReadAllNotifications(event) {
   axios
     .post("/read-all-notifications")
     .then((res) => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function handleOpenEditServices() {
+  document.querySelector(".edit-services-modal").style.display = "flex";
+}
+
+function handleCloseEditServices() {
+  document.querySelector(".edit-services-modal").style.display = "none";
+}
+
+const editServiceForm = document.getElementById("editServicesForm");
+editServiceForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  axios
+    .post("/add-service", { newService: editServiceForm.newService.value })
+    .then((res) => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
+
+function handleCloseDeleteService() {
+  document.querySelector(".delete-service-modal").style.display = "none";
+}
+
+function handleDeleteServiceConfirm() {
+  axios
+    .post("/delete-service", { serviceId })
+    .then((res) => {
+      localStorage.setItem("deleteServiceToast", "true");
       window.location.reload();
     })
     .catch((error) => {

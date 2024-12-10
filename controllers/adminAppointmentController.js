@@ -76,7 +76,7 @@ async function handleGetAdminPendingAppointmentsList(req, res) {
 }
 
 async function handleGetAdminPetRecordsList(req, res) {
-  const adminPendingAppointmentsList = await Appointments.findAll({
+  const adminPetRecordsList = await Appointments.findAll({
     attributes: [
       "id",
       "petNames",
@@ -92,24 +92,19 @@ async function handleGetAdminPetRecordsList(req, res) {
       "prescription",
     ],
     include: {
-      model: User,
-      attributes: ["id", "fullName"],
-      include: {
-        model: Pets,
-        attributes: ["animalType", "breed"],
-      },
+      model: Pets,
+      attributes: ["animalType", "breed"],
     },
     where: {
       appointmentStatus: "COMPLETE",
       medicalRecordStatus: "COMPLETE",
     },
-    raw: true,
     order: [["createdAt", "DESC"]],
   });
 
-  if (!adminPendingAppointmentsList) return res.status(404).json([]);
+  if (!adminPetRecordsList) return res.status(404).json([]);
 
-  res.json(adminPendingAppointmentsList);
+  res.json(adminPetRecordsList);
 }
 
 async function handleGetAdminApprovedAppointmentsList(req, res) {
@@ -128,7 +123,6 @@ async function handleGetAdminApprovedAppointmentsList(req, res) {
     where: {
       dateApproved: { [Op.notIn]: ["PENDING", "CANCELLED"] },
     },
-    raw: true,
   });
 
   if (!adminAppointmentsList) return res.status(404).json([]);
@@ -170,19 +164,20 @@ async function handleGetAdminCompletedAppointmentsList(req, res) {
       "service",
       "appointmentDate",
     ],
-    include: {
-      model: User,
-      attributes: ["id", "fullName"],
-      include: {
+    include: [
+      {
+        model: User,
+        attributes: ["fullName"],
+      },
+      {
         model: Pets,
         attributes: ["animalType", "breed"],
       },
-    },
+    ],
     where: {
       appointmentStatus: "COMPLETE",
       medicalRecordStatus: "COMPLETE",
     },
-    raw: true,
   });
 
   if (!adminAppointmentsList) return res.status(404).json([]);

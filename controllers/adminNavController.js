@@ -4,6 +4,7 @@ import {
   Pets,
   User,
   Notifications,
+  Services,
 } from "../models/index.models.js";
 import sendNotificationEmail from "../utils/sendNotification.js";
 import dayjs from "dayjs";
@@ -45,12 +46,15 @@ async function handleAdminNav(req, res) {
     };
   });
 
+  const servicesCount = await Services.count();
+
   res.render("adminNav", {
     pendingAppointments,
     confirmedAppointments,
     cancelledAppointments,
     notifications: formattedNotifications,
     adminName: req.user.fullName,
+    servicesCount,
   });
 }
 
@@ -118,9 +122,34 @@ async function handleCancelAppointment(req, res) {
   res.status(200).json({ message: "Appointment successfully cancelled" });
 }
 
+async function handleGetAdminServices(req, res) {
+  const services = await Services.findAll({ raw: true });
+
+  res.json(services);
+}
+
+async function handlePostAddAdminService(req, res) {
+  const { newService } = req.body;
+
+  await Services.create({ serviceName: newService });
+
+  res.status(200).json({ message: "Successfully created new service" });
+}
+
+async function handlePostDeleteAdminService(req, res) {
+  const { serviceId } = req.body;
+
+  await Services.destroy({ where: { id: serviceId } });
+
+  res.status(200).json({ message: "Service deleted" });
+}
+
 export {
   handleAdminNav,
   handleGetAdminAppointmentRequests,
   handleGetAdminMedicalRecords,
   handleCancelAppointment,
+  handleGetAdminServices,
+  handlePostAddAdminService,
+  handlePostDeleteAdminService,
 };

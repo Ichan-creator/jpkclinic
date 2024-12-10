@@ -1,7 +1,12 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Op } from "sequelize";
-import { Appointments, Notifications, Pets } from "../models/index.models.js";
+import {
+  Appointments,
+  Notifications,
+  Pets,
+  Services,
+} from "../models/index.models.js";
 
 dayjs.extend(relativeTime);
 
@@ -27,10 +32,13 @@ async function handleAppointment(req, res) {
     };
   });
 
+  const services = await Services.findAll({ raw: true });
+
   res.render("appointment", {
     ...userDetails,
     userPets,
     notifications: formattedNotifications,
+    services,
   });
 }
 

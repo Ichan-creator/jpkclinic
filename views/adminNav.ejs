@@ -194,7 +194,9 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            cursor: pointer;
           "
+          onclick="handleOpenEditServices()"
         >
           <div
             style="display: flex; flex-direction: column; align-items: center"
@@ -202,7 +204,7 @@
             <i class="bx bx-list-ul"></i>
             <span>Services</span>
           </div>
-          <div class="card-number">5</div>
+          <div class="card-number"><%= servicesCount %></div>
         </div>
         <div class="reports-item reports-item-2">
           <i class="bx bx-calendar"></i>
@@ -280,6 +282,74 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="edit-services-modal">
+      <div class="edit-services-form">
+        <div class="edit-services-form-header">
+          <h2
+            style="
+              margin: 0;
+              font-weight: bold;
+              font-size: 30px;
+              line-height: 1;
+            "
+          >
+            Edit Services
+          </h2>
+          <span
+            class="close-edit-services-form"
+            onclick="handleCloseEditServices()"
+            >&times;</span
+          >
+        </div>
+        <form id="editServicesForm" class="edit-services-content">
+          <div class="edit-services-input-group">
+            <label for="newService">New Service:</label>
+            <input
+              id="newService"
+              name="newService"
+              type="text"
+              placeholder="New Service"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="edit-services-button">
+            <button type="submit">Update Services</button>
+          </div>
+        </form>
+        <div id="servicesTable"></div>
+      </div>
+    </div>
+
+    <div class="delete-service-modal">
+      <div class="delete-service">
+        <div class="close-popup-icon">✕</div>
+        <div class="delete-service-modal-header">Delete Service</div>
+        <div class="delete-service-modal-message">
+          Are you sure you want to delete this service?
+        </div>
+        <div class="delete-service-button-container">
+          <button
+            class="cancelled-button button-confirmed"
+            onclick="handleDeleteServiceConfirm()"
+          >
+            Confirm
+          </button>
+          <button
+            class="cancelled-button button-cancelled"
+            onclick="handleCloseDeleteService()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="delete-service-toast" class="delete-service-toast">
+      <span class="icon">✔</span>
+      <span>Service Deleted</span>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/dayjs/plugin/customParseFormat.js"></script>
