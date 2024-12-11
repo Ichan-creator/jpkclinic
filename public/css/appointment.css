@@ -393,16 +393,6 @@ select {
   cursor: not-allowed;
 }
 
-.tooltip {
-  display: none;
-  position: absolute;
-  background-color: #333;
-  color: #fff;
-  padding: 5px;
-  border-radius: 5px;
-  z-index: 9999;
-}
-
 @media screen and (max-width: 480px) {
   .modal-appointment-content {
     width: 90%;

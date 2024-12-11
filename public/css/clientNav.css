@@ -901,16 +901,6 @@ p {
   color: white;
 }
 
-.tooltip {
-  display: none;
-  position: fixed;
-  background-color: #333;
-  color: #fff;
-  padding: 5px;
-  border-radius: 5px;
-  z-index: 9999;
-}
-
 .event-highlight {
   background-color: #e6f7ff !important;
   color: #0056b3 !important;

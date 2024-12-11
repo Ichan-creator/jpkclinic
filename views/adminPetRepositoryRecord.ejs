@@ -165,7 +165,7 @@
       <div id="pet-record-modal" class="pet-record-modal">
         <div class="pet-record-content">
           <span class="close" id="closePetRecordModalButton">&times;</span>
-          <h2>Pet Information</h2>
+          <h2>Medical History</h2>
           <form id="pet-record-form">
             <div class="form first">
               <div class="details personal">
@@ -202,16 +202,6 @@
                     </select>
                   </div>
                   <div class="input-field">
-                    <label>Treatment Date Done</label>
-                    <input
-                      id="treatmentDateDone"
-                      name="treatmentDateDone"
-                      type="date"
-                      placeholder="Enter pet treatment date done"
-                      required
-                    />
-                  </div>
-                  <div class="input-field">
                     <label>Weight (kg)</label>
                     <input
                       id="petWeight"
@@ -221,74 +211,62 @@
                     />
                   </div>
                   <div class="input-field">
-                    <label>Temperature (°C)</label>
+                    <label>Against</label>
                     <input
-                      id="temperature"
-                      name="temperature"
-                      type="number"
-                      placeholder="Enter Pet temperature"
-                      required
-                    />
-                  </div>
-                  <div class="input-field">
-                    <label>PPM</label>
-                    <input
-                      id="ppm"
-                      name="ppm"
-                      type="number"
-                      placeholder="Enter pulse rate per minute"
-                      required
-                    />
-                  </div>
-                  <div class="input-field">
-                    <label>CBC</label>
-                    <input
-                      id="cbc"
-                      name="cbc"
-                      type="number"
-                      placeholder="Enter complete blood count"
-                      required
-                    />
-                  </div>
-                  <div class="input-field">
-                    <label>Urinalysis Result</label>
-                    <input
-                      id="urinalysisResult"
-                      name="urinalysisResult"
+                      id="against"
+                      name="against"
                       type="text"
-                      placeholder="Enter Urinalysis status"
+                      placeholder="Against"
                       required
                     />
                   </div>
                   <div class="input-field">
-                    <label>Respiratory Rate</label>
-                    <textarea
-                      name="respiratoryRate"
-                      id="respiratoryRate"
-                      placeholder="Enter Pet respiration"
+                    <label>Manufacturer</label>
+                    <input
+                      id="manufacturer"
+                      name="manufacturer"
+                      type="text"
+                      placeholder="Manufacturer"
                       required
-                    >
-                    </textarea>
+                    />
                   </div>
                   <div class="input-field">
-                    <label>Observation</label>
-                    <textarea
-                      name="observation"
-                      id="observation"
-                      placeholder="Enter observation records"
+                    <label>Serial/Lot Number</label>
+                    <input
+                      id="serialLotNumber"
+                      name="serialLotNumber"
+                      type="text"
+                      placeholder="Serial/Lot Number"
                       required
-                    >
-                    </textarea>
+                    />
                   </div>
                   <div class="input-field">
-                    <label>Prescription</label>
-                    <textarea
-                      id="prescription"
-                      name="prescription"
-                      placeholder="Enter prescription medication/s"
+                    <label>Expired Date</label>
+                    <input
+                      id="expiredDate"
+                      name="expiredDate"
+                      type="date"
+                      placeholder="Expired Date"
                       required
-                    >
-                    </textarea>
+                    />
+                  </div>
+                  <div class="input-field">
+                    <label>Treatment Date Done</label>
+                    <input
+                      id="treatmentDateDone"
+                      name="treatmentDateDone"
+                      type="date"
+                      placeholder="Enter treatment date done"
+                      required
+                    />
+                  </div>
+                  <div class="input-field">
+                    <label>Veterinarian</label>
+                    <select id="veterinarian" name="veterinarian" required>
+                      <option disabled selected>Select a Veterinarian</option>
+                      <option>Francis Katalbas</option>
+                      <option>Francisella Katalbas</option>
+                    </select>
                   </div>
                 </div>
               </div>

@@ -37,7 +37,7 @@ function colorLink() {
 }
 linkColor.forEach((l) => l.addEventListener("click", colorLink));
 
-const { h } = window.gridjs;
+const { h, html } = window.gridjs;
 
 const logoutModal = document.getElementById("logoutModal");
 
@@ -78,19 +78,35 @@ function handleCloseNotif() {
 
 const adminHistoryTable = new gridjs.Grid({
   columns: [
+    { name: "Pet ID", hidden: true },
     "Pet Name",
     "Animal Type",
     "Breed",
     "Treatment Date",
     "Service",
     "Weight (kg)",
-    "Temperature",
-    "PPM",
-    "CBC",
-    "Urinalysis Result",
-    "Respiratory Rate",
-    "Observation",
-    "Prescription",
+    "Against",
+    "Manufacturer",
+    "Serial/Lot No.",
+    "Expired Date",
+    "Treatment Date Done",
+    "Veterinarian",
+    {
+      id: "action",
+      name: "",
+      formatter: (cell, row) => {
+        return h(
+          "button",
+          {
+            className: "view-result-button",
+            onClick: () => {
+              window.location.href = `/admin-pet-repository/${row.cells[0].data}`;
+            },
+          },
+          "View Medical Records"
+        );
+      },
+    },
   ],
   width: "100%",
   fixedHeader: true,
@@ -111,19 +127,19 @@ const adminHistoryTable = new gridjs.Grid({
     then: (data) =>
       data.map((item) => {
         return [
+          item.pet.id,
           item.petNames,
           item.pet.animalType,
           item.pet.breed,
           dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
           item.service,
           item.petWeight,
-          item.temperature,
-          item.ppm,
-          item.cbc,
-          item.urinalysisResult,
-          item.respiratoryRate,
-          item.observation,
-          item.prescription,
+          item.against,
+          item.manufacturer,
+          item.serialLotNumber,
+          dayjs(item.expiredDate).format("MMMM DD, YYYY"),
+          dayjs(item.treatmentDateDone).format("MMMM DD, YYYY"),
+          item.veterinarian,
         ];
       }),
     handle: (res) => {
@@ -150,19 +166,19 @@ function getServerConfig(url) {
         then: (data) =>
           data.map((item) => {
             return [
+              item.pet.id,
               item.petNames,
               item.pet.animalType,
               item.pet.breed,
               dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
               item.service,
               item.petWeight,
-              item.temperature,
-              item.ppm,
-              item.cbc,
-              item.urinalysisResult,
-              item.respiratoryRate,
-              item.observation,
-              item.prescription,
+              item.against,
+              item.manufacturer,
+              item.serialLotNumber,
+              dayjs(item.expiredDate).format("MMMM DD, YYYY"),
+              dayjs(item.treatmentDateDone).format("MMMM DD, YYYY"),
+              item.veterinarian,
             ];
           }),
         handle: (res) => {
@@ -265,13 +281,20 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
             "Treatment Date",
             "Service",
             "Weight (kg)",
-            "Temperature",
-            "PPM",
-            "CBC",
-            "Urinalysis Result",
-            "Respiratory Rate",
-            "Observation",
-            "Prescription",
+            "Against",
+            "Manufacturer",
+            "Veterinarian",
+            {
+              id: "action",
+              name: "",
+              formatter: () => {
+                return h(
+                  "button",
+                  { className: "view-result-button", onClick: () => {} },
+                  "Go to Record"
+                );
+              },
+            },
           ],
           server: getServerConfig("/admin-pet-records-list"),
         })

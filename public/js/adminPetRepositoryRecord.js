@@ -62,17 +62,7 @@ function validateField(input) {
 }
 
 const petWeight = document.getElementById("petWeight");
-const temperature = document.getElementById("temperature");
-const ppm = document.getElementById("ppm");
-const cbc = document.getElementById("cbc");
-
 petWeight.addEventListener("input", () => validateField(petWeight));
-temperature.addEventListener("input", () => validateField(temperature));
-ppm.addEventListener("input", () => validateField(ppm));
-cbc.addEventListener("input", () => validateField(cbc));
-
-const treatmentDateDone = document.getElementById("treatmentDateDone");
-treatmentDateDone.setAttribute("min", dayjs().format("YYYY-MM-DD"));
 
 const { h } = window.gridjs;
 
@@ -202,35 +192,36 @@ window.addEventListener("load", () => {
                     const {
                       appointmentDate,
                       service,
-                      treatmentDateDone,
                       petWeight,
-                      temperature,
-                      ppm,
-                      cbc,
-                      urinalysisResult,
-                      respiratoryRate,
-                      observation,
-                      prescription,
+                      against,
+                      manufacturer,
+                      serialLotNumber,
+                      expiredDate,
+                      treatmentDateDone,
+                      veterinarian,
                     } = res.data;
+
+                    console.log(res.data);
 
                     document.getElementById("appointmentId").value =
                       appointmentId;
                     document.getElementById("treatmentDate").value =
                       dayjs(appointmentDate).format("YYYY-MM-DDTHH:mm");
                     document.getElementById("service").value = service;
+                    document.getElementById("petWeight").value =
+                      petWeight || null;
+                    document.getElementById("against").value = against || null;
+                    document.getElementById("manufacturer").value =
+                      manufacturer || null;
+                    document.getElementById("serialLotNumber").value =
+                      serialLotNumber || null;
+                    document.getElementById("expiredDate").value =
+                      expiredDate || null;
                     document.getElementById("treatmentDateDone").value =
-                      treatmentDateDone;
-                    document.getElementById("petWeight").value = petWeight;
-                    document.getElementById("temperature").value = temperature;
-                    document.getElementById("ppm").value = ppm;
-                    document.getElementById("cbc").value = cbc;
-                    document.getElementById("urinalysisResult").value =
-                      urinalysisResult;
-                    document.getElementById("respiratoryRate").value =
-                      respiratoryRate;
-                    document.getElementById("observation").value = observation;
-                    document.getElementById("prescription").value =
-                      prescription;
+                      treatmentDateDone ||
+                      new Date().toISOString().split("T")[0];
+                    document.getElementById("veterinarian").value =
+                      veterinarian || null;
                   })
                   .catch((error) => {
                     console.error(error);
@@ -284,31 +275,27 @@ petRecordForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const appointmentId = petRecordForm.appointmentId.value;
-  const treatmentDateDone = petRecordForm.treatmentDateDone.value;
   const petWeight = petRecordForm.petWeight.value;
-  const temperature = petRecordForm.temperature.value;
-  const ppm = petRecordForm.ppm.value;
-  const cbc = petRecordForm.cbc.value;
-  const urinalysisResult = petRecordForm.urinalysisResult.value;
-  const respiratoryRate = petRecordForm.respiratoryRate.value;
-  const observation = petRecordForm.observation.value;
-  const prescription = petRecordForm.prescription.value;
+  const against = petRecordForm.against.value;
+  const manufacturer = petRecordForm.manufacturer.value;
+  const serialLotNumber = petRecordForm.serialLotNumber.value;
+  const expiredDate = petRecordForm.expiredDate.value;
+  const treatmentDateDone = petRecordForm.treatmentDateDone.value;
+  const veterinarian = petRecordForm.veterinarian.value;
 
   axios
     .post("/admin-update-pet-record", {
       appointmentId,
-      treatmentDateDone,
-      petWeight,
-      temperature,
-      ppm,
-      cbc,
-      urinalysisResult,
-      respiratoryRate,
-      observation,
-      prescription,
       userId,
       service,
+      petWeight,
+      against,
+      manufacturer,
       treatmentDate,
+      serialLotNumber,
+      expiredDate,
+      treatmentDateDone,
+      veterinarian,
     })
     .then((res) => {
       window.location.reload();
@@ -339,24 +326,6 @@ editStatusForm.addEventListener("submit", (event) => {
     .catch((error) => {
       console.error;
     });
-});
-
-const respiratoryRate = document.getElementById("respiratoryRate");
-respiratoryRate.addEventListener("input", () => {
-  respiratoryRate.style.height = "auto";
-  respiratoryRate.style.height = respiratoryRate.scrollHeight + "px";
-});
-
-const observationTextArea = document.getElementById("observation");
-observationTextArea.addEventListener("input", () => {
-  observationTextArea.style.height = "auto";
-  observationTextArea.style.height = observationTextArea.scrollHeight + "px";
-});
-
-const prescriptionTextArea = document.getElementById("prescription");
-prescriptionTextArea.addEventListener("input", () => {
-  prescriptionTextArea.style.height = "auto";
-  prescriptionTextArea.style.height = prescriptionTextArea.scrollHeight + "px";
 });
 
 const breedIcons = {

@@ -176,22 +176,14 @@ window.addEventListener("load", () => {
     events: recurringEvents,
     eventSources: ["/admin-appointments-calendar"],
     eventMouseEnter: function (info) {
-      const tooltip = document.getElementById("event-tooltip");
-      const tooltipContent = document.getElementById("event-tooltip-content");
-
       const formattedAppointmentDate = dayjs(info.event.start).format(
         "MMMM D, YYYY - hh:mm A"
       );
 
-      tooltipContent.innerHTML = `Service: ${info.event.title}<br />Date: ${formattedAppointmentDate}`;
-
-      tooltip.style.display = "block";
-      tooltip.style.left = info.jsEvent.clientX + 10 + "px";
-      tooltip.style.top = info.jsEvent.clientY + 10 + "px";
-    },
-    eventMouseLeave: function (info) {
-      const tooltip = document.getElementById("event-tooltip");
-      tooltip.style.display = "none";
+      tippy(info.el, {
+        content: `Service: ${info.event.title}<br />Date: ${formattedAppointmentDate}`,
+        allowHTML: true,
+      });
     },
   });
   calendar.render();
@@ -254,31 +246,89 @@ let appointmentsListTable = new gridjs.Grid({
 });
 
 function getServerConfig(url) {
-  return {
-    url: url,
-    method: "GET",
-    then: (data) =>
-      data.map((item) => [
-        item.id,
-        item["user.id"],
-        item["user.fullName"],
-        dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
-        item.service,
-        item.petNames,
-        item.dateApproved === "Pending"
-          ? "Pending"
-          : item.dateApproved === "CANCELLED"
-          ? "CANCELLED"
-          : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
-        null,
-      ]),
-    handle: (res) => {
-      if (res.status === 404) return { data: [] };
-      if (res.ok) return res.json();
+  let serverConfig = null;
 
-      throw Error("oh no :(");
-    },
-  };
+  switch (url) {
+    case "/admin-pending-appointment-list":
+      serverConfig = {
+        url,
+        method: "GET",
+        then: (data) =>
+          data.map((item) => [
+            item.id,
+            item["user.id"],
+            item["user.fullName"],
+            dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+            item.service,
+            item.petNames,
+            item.dateApproved === "Pending"
+              ? "Pending"
+              : item.dateApproved === "CANCELLED"
+              ? "CANCELLED"
+              : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
+            null,
+          ]),
+        handle: (res) => {
+          if (res.status === 404) return { data: [] };
+          if (res.ok) return res.json();
+
+          throw Error("oh no :(");
+        },
+      };
+      break;
+
+    case "/admin-approved-appointment-list":
+      serverConfig = {
+        url,
+        method: "GET",
+        then: (data) =>
+          data.map((item) => {
+            return [
+              item.user.fullName,
+              dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+              item.service,
+              item.dateApproved === "Pending"
+                ? "Pending"
+                : item.dateApproved === "CANCELLED"
+                ? "CANCELLED"
+                : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
+            ];
+          }),
+        handle: (res) => {
+          if (res.status === 404) return { data: [] };
+          if (res.ok) return res.json();
+
+          throw Error("oh no :(");
+        },
+      };
+      break;
+
+    case "/admin-cancelled-appointment-list":
+      serverConfig = {
+        url,
+        method: "GET",
+        then: (data) =>
+          data.map((item) => [
+            item.user.fullName,
+            dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+            item.service,
+            item.dateApproved === "Pending"
+              ? "Pending"
+              : item.dateApproved === "CANCELLED"
+              ? "CANCELLED"
+              : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
+          ]),
+        handle: (res) => {
+          if (res.status === 404) return { data: [] };
+          if (res.ok) return res.json();
+
+          throw Error("oh no :(");
+        },
+      };
+      break;
+  }
+
+  return serverConfig;
 }
 
 window.addEventListener("load", () => {
@@ -383,6 +433,7 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
     } else if (button.id === "approvedToggle") {
       appointmentsListTable
         .updateConfig({
+          columns: ["Client Name", "Date & Time", "Service", "Date Approved"],
           server: getServerConfig("/admin-approved-appointment-list"),
           noRecordsFound: "No matching records found",
         })
