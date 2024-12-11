@@ -4,7 +4,7 @@ function isClient(req, res, next) {
   } else if (req.user && req.user.role === "admin") {
     return res.redirect("/admin");
   } else {
-    res.redirect("/login");
+    res.redirect("/welcome");
   }
 }
 

@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Op } from "sequelize";
 import {
+  AppointmentPets,
   Appointments,
   Notifications,
   Pets,
@@ -90,7 +91,6 @@ async function handleBookAppointment(req, res) {
     userId,
     petNames,
     service,
-    gender,
     concern,
     contactNumber,
     email,
@@ -98,27 +98,27 @@ async function handleBookAppointment(req, res) {
     veterinarian,
   } = req.body;
 
-  let existingPetRecord = await Pets.findOne({
-    attributes: ["id"],
-    where: { name: petNames, userId },
-  });
-
-  const hasExistingPetRecord = existingPetRecord?.id;
-
-  if (!existingPetRecord) {
-    existingPetRecord = await Pets.create({
-      userId,
-      name: petNames,
-      gender,
-    });
-  }
-
   try {
-    await Appointments.create({
+    const petIds = [];
+    for (const petName of petNames) {
+      let pet = await Pets.findOne({
+        attributes: ["id"],
+        where: { name: petName, userId },
+      });
+
+      if (!pet) {
+        pet = await Pets.create({
+          userId,
+          name: petName,
+        });
+      }
+
+      petIds.push(pet.id);
+    }
+
+    const appointment = await Appointments.create({
       userId,
-      petNames,
       service,
-      gender,
       concern,
       contactNumber,
       email,
@@ -126,8 +126,14 @@ async function handleBookAppointment(req, res) {
       veterinarian,
       dateApproved: "Pending",
       appointmentStatus: "PENDING",
-      petId: existingPetRecord.id,
     });
+
+    for (const petId of petIds) {
+      await AppointmentPets.create({
+        appointmentId: appointment.id,
+        petId,
+      });
+    }
 
     const message = `
     You have one new <span class="font-bold text-blue-500">${service}</span> 
@@ -144,7 +150,7 @@ async function handleBookAppointment(req, res) {
 
     return res.status(201).json({
       message: "Appointment created",
-      hasExistingPetRecord: hasExistingPetRecord ? true : false,
+      hasExistingPetRecords: petIds.length > 0,
     });
   } catch (error) {
     console.error(error);
@@ -203,23 +209,33 @@ async function handleRescheduleAppointment(req, res) {
 
 async function handleCheckAvailability(req, res) {
   const { appointmentDate, veterinarian } = req.body;
+  const userId = req.user.id;
 
-  const isAppointmentConflict = await Appointments.findOne({
-    where: {
-      appointmentDate,
-      veterinarian,
-    },
-  });
-
-  if (isAppointmentConflict) {
-    res.status(400).json({
-      message:
-        "Appoinment date and/or veterinarian is in conflict with another appointment",
+  try {
+    const appointmentConflict = await Appointments.findOne({
+      where: {
+        appointmentDate: appointmentDate,
+        veterinarian: veterinarian,
+        userId: {
+          [Op.ne]: userId,
+        },
+      },
     });
-    return;
-  }
 
-  return res.status(200).json({ message: "Appointment available" });
+    if (appointmentConflict) {
+      return res.status(409).json({
+        message:
+          "Appoinment date and/or veterinarian is in conflict with another appointment",
+      });
+    } else {
+      return res.status(200).json({ message: "Appointment is available." });
+    }
+  } catch (error) {
+    console.error("Error checking appointment availability:", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while checking availability." });
+  }
 }
 
 export {

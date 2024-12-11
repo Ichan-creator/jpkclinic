@@ -26,7 +26,7 @@ async function handleGetOwnedPet(req, res) {
 }
 
 async function handleGetVisitationHistory(req, res) {
-  const petName = req.params.name;
+  const petId = req.params.petId;
 
   const petVisitationHistory = await Appointments.findAll({
     attributes: [
@@ -36,7 +36,14 @@ async function handleGetVisitationHistory(req, res) {
       "treatmentDateDone",
       "medicalRecordStatus",
     ],
-    where: { petNames: petName, appointmentStatus: { [Op.ne]: "CANCELLED" } },
+    include: [
+      {
+        model: Pets,
+        where: { id: petId },
+        required: true,
+      },
+    ],
+    where: { appointmentStatus: { [Op.ne]: "CANCELLED" } },
     raw: true,
   });
 
@@ -64,13 +71,12 @@ async function handleGetClientPetRecord(req, res) {
       "service",
       "treatmentDateDone",
       "petWeight",
-      "temperature",
-      "ppm",
-      "cbc",
-      "urinalysisResult",
-      "respiratoryRate",
-      "observation",
-      "prescription",
+      "against",
+      "manufacturer",
+      "serialLotNumber",
+      "expiredDate",
+      "treatmentDateDone",
+      "veterinarian",
     ],
     where: { id: appointmentId },
     raw: true,

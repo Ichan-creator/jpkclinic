@@ -428,23 +428,31 @@ appointmentForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const userId = appointmentForm.userId.value;
-  const petNames = appointmentForm.petNames.value;
   const service = appointmentForm.service.value;
-  const gender = appointmentForm.gender.value;
   const concern = appointmentForm.concern.value;
   const contactNumber = appointmentForm.contactNumber.value;
   const email = appointmentForm.email.value;
   const appointmentDate = appointmentForm.appointmentDate.value;
   const veterinarian = appointmentForm.veterinarian.value;
 
+  const multiSelectElementId = "petNames";
+  const multiSelectInstance = window.multiSelectInstances[multiSelectElementId];
+
+  let selectedValues = null;
+  if (multiSelectInstance) {
+    selectedValues = multiSelectInstance.selectedValues;
+  } else {
+    console.error(multiSelectElementId);
+    throw new Error(multiSelectElementId);
+  }
+
   axios
     .post("/check-availability", { appointmentDate, veterinarian })
     .then((res) => {
       return axios.post("/book-appointment", {
         userId,
-        petNames,
+        petNames: selectedValues,
         service,
-        gender,
         concern,
         contactNumber,
         email,
@@ -453,10 +461,6 @@ appointmentForm.addEventListener("submit", (event) => {
       });
     })
     .then((res2) => {
-      if (!res2.data.hasExistingPetRecord) {
-        localStorage.setItem("updatePetProfile", "true");
-      }
-
       formModal.style.display = "none";
 
       setTimeout(() => {
@@ -634,8 +638,8 @@ function getValidDefaultDate() {
 
 flatpickr("#appointmentDate", {
   enableTime: true,
-  minTime: "08:00",
-  maxTime: "19:00",
+  minTime: "09:00",
+  maxTime: "16:30",
   time_24hr: false,
   dateFormat: "Y-m-d\\TH:i",
   altInput: true,

@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="https://unpkg.com/intro.js/introjs.css" />
     <link rel="stylesheet" href="/css/clientNav.css" />
     <link rel="stylesheet" href="/css/appointment.css" />
+
+    <link rel="stylesheet" href="/css/multiSelect.css" />
   </head>
   <body id="body-pd">
     <header class="header" id="header">
@@ -215,8 +217,19 @@
                     />
                   </div>
                   <div class="input-field">
-                    <label>Pet Name/s</label>
-                    <input
+                    <label for="petNames">Pet Name/s</label>
+                    <select
+                      id="petNames"
+                      name="petNames"
+                      data-placeholder="Select Pets"
+                      multiple
+                      data-multi-select
+                    >
+                      <% userPets.forEach(pet => { %>
+                      <option value="<%= pet.name %>"><%= pet.name %></option>
+                      <% }); %>
+                    </select>
+                    <!-- <input
                       list="pets-list"
                       id="petNames"
                       name="petNames"
@@ -228,7 +241,7 @@
                       <% userPets.forEach(pet => { %>
                       <option value="<%= pet.name %>"></option>
                       <% }); %>
-                    </datalist>
+                    </datalist> -->
                   </div>
                   <div class="input-field">
                     <label>Service</label>
@@ -239,16 +252,6 @@
                         <%= service.serviceName %>
                       </option>
                       <% }); %>
-                    </select>
-                  </div>
-                  <div class="input-field">
-                    <label>Gender</label>
-                    <select id="gender" name="gender" required>
-                      <option value="" disabled selected>
-                        Select Pet Gender
-                      </option>
-                      <option>Male</option>
-                      <option>Female</option>
                     </select>
                   </div>
                   <div class="input-field">
@@ -453,6 +456,7 @@
       const userPets = <%- JSON.stringify(userPets) %>;
     </script>
 
+    <script src="/js/multiSelect.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

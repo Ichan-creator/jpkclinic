@@ -180,15 +180,13 @@ window.addEventListener("load", () => {
                     const {
                       appointmentDate,
                       service,
-                      treatmentDateDone,
                       petWeight,
-                      temperature,
-                      ppm,
-                      cbc,
-                      urinalysisResult,
-                      respiratoryRate,
-                      observation,
-                      prescription,
+                      against,
+                      manufacturer,
+                      serialLotNumber,
+                      expiredDate,
+                      treatmentDateDone,
+                      veterinarian,
                     } = res.data;
 
                     document.getElementById("appointmentId").value =
@@ -199,16 +197,16 @@ window.addEventListener("load", () => {
                     document.getElementById("treatmentDateDone").value =
                       treatmentDateDone;
                     document.getElementById("petWeight").value = petWeight;
-                    document.getElementById("temperature").value = temperature;
-                    document.getElementById("ppm").value = ppm;
-                    document.getElementById("cbc").value = cbc;
-                    document.getElementById("urinalysisResult").value =
-                      urinalysisResult;
-                    document.getElementById("respiratoryRate").value =
-                      respiratoryRate;
-                    document.getElementById("observation").value = observation;
-                    document.getElementById("prescription").value =
-                      prescription;
+                    document.getElementById("against").value = against;
+                    document.getElementById("manufacturer").value =
+                      manufacturer;
+                    document.getElementById("serialLotNumber").value =
+                      serialLotNumber;
+                    document.getElementById("expiredDate").value = expiredDate;
+                    document.getElementById("treatmentDateDone").value =
+                      treatmentDateDone;
+                    document.getElementById("veterinarian").value =
+                      veterinarian;
                   })
                   .catch((error) => {
                     console.error(error);
@@ -217,13 +215,13 @@ window.addEventListener("load", () => {
                 petRecordModal.style.display = "flex";
               },
             },
-            "View Result"
+            "View Medical Record"
           );
         },
       },
     ],
     server: {
-      url: `/visitation-history/${petProfileName}`,
+      url: `/visitation-history/${petId}`,
       method: "GET",
       then: (data) =>
         data.map((item) => [

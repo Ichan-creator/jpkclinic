@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
+import Pets from "./pets.js";
 
 const Appointments = sequelize.define(
   "appointments",
@@ -9,14 +10,6 @@ const Appointments = sequelize.define(
       primaryKey: true,
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
-    },
-    petNames: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    gender: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     concern: {
       type: DataTypes.STRING,

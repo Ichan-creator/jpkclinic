@@ -17,7 +17,7 @@ clientPetPageRouter.use(isAuthenticated);
 clientPetPageRouter.get("/owned-pets", isClient, handleOwnedPets);
 clientPetPageRouter.get("/owned-pets/:id", isClient, handleGetOwnedPet);
 clientPetPageRouter.get(
-  "/visitation-history/:name",
+  "/visitation-history/:petId",
   isClient,
   handleGetVisitationHistory
 );

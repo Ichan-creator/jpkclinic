@@ -100,9 +100,31 @@ async function handleGetAdminVisitationHistory(req, res) {
       "medicalRecordStatus",
       "userId",
     ],
-    where: { petId, dateApproved: { [Op.ne]: "PENDING" } },
+    include: [
+      {
+        model: Pets,
+        where: { id: petId },
+        required: true,
+      },
+    ],
+    where: {
+      dateApproved: { [Op.ne]: "PENDING" },
+    },
     raw: true,
   });
+
+  // const petVisitationHistory = await Appointments.findAll({
+  //   attributes: [
+  //     "id",
+  //     "appointmentDate",
+  //     "service",
+  //     "treatmentDateDone",
+  //     "medicalRecordStatus",
+  //     "userId",
+  //   ],
+  //   where: { petId, dateApproved: { [Op.ne]: "PENDING" } },
+  //   raw: true,
+  // });
 
   const newPetVisitationHistory = petVisitationHistory.map((item) => {
     return {

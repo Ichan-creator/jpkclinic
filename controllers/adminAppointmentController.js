@@ -52,13 +52,7 @@ async function handleGetAdminAppointmentsCalendar(req, res) {
 
 async function handleGetAdminPendingAppointmentsList(req, res) {
   const adminPendingAppointmentsList = await Appointments.findAll({
-    attributes: [
-      "id",
-      "appointmentDate",
-      "service",
-      "dateApproved",
-      "petNames",
-    ],
+    attributes: ["id", "appointmentDate", "service", "dateApproved"],
     include: {
       model: User,
       attributes: ["id", "fullName"],
@@ -79,7 +73,6 @@ async function handleGetAdminPetRecordsList(req, res) {
   const adminPetRecordsList = await Appointments.findAll({
     attributes: [
       "id",
-      "petNames",
       "appointmentDate",
       "service",
       "petWeight",
@@ -108,13 +101,7 @@ async function handleGetAdminPetRecordsList(req, res) {
 
 async function handleGetAdminApprovedAppointmentsList(req, res) {
   const adminAppointmentsList = await Appointments.findAll({
-    attributes: [
-      "id",
-      "appointmentDate",
-      "service",
-      "dateApproved",
-      "petNames",
-    ],
+    attributes: ["id", "appointmentDate", "service", "dateApproved"],
     include: {
       model: User,
       attributes: ["id", "fullName"],
@@ -131,13 +118,7 @@ async function handleGetAdminApprovedAppointmentsList(req, res) {
 
 async function handleGetAdminCancelledAppointmentsList(req, res) {
   const adminAppointmentsList = await Appointments.findAll({
-    attributes: [
-      "id",
-      "appointmentDate",
-      "service",
-      "dateApproved",
-      "petNames",
-    ],
+    attributes: ["id", "appointmentDate", "service", "dateApproved"],
     include: {
       model: User,
       attributes: ["id", "fullName"],
@@ -156,13 +137,7 @@ async function handleGetAdminCancelledAppointmentsList(req, res) {
 
 async function handleGetAdminCompletedAppointmentsList(req, res) {
   const adminAppointmentsList = await Appointments.findAll({
-    attributes: [
-      "id",
-      "petNames",
-      "veterinarian",
-      "service",
-      "appointmentDate",
-    ],
+    attributes: ["id", "veterinarian", "service", "appointmentDate"],
     include: [
       {
         model: User,
