@@ -67,11 +67,13 @@ async function handleGetAdminAppointmentRequests(req, res) {
       "appointmentDate",
       "service",
     ],
-    include: {
-      model: Pets,
-      attributes: ["name", "animalType"],
-      include: { model: User, attributes: ["id", "fullName"] },
-    },
+    include: [
+      {
+        model: Pets,
+        attributes: ["name", "animalType"],
+      },
+      { model: User, attributes: ["id", "fullName"] },
+    ],
   });
 
   res.json(appointmentRequests);

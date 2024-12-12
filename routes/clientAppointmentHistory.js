@@ -7,7 +7,7 @@ import {
 const clientAppointmentHistory = express.Router();
 
 clientAppointmentHistory.get(
-  "/appointment-history",
+  "/medical-records",
   handleGetClientAppointmentHistory
 );
 clientAppointmentHistory.get(

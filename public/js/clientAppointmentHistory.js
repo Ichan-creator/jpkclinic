@@ -49,7 +49,6 @@ const { h } = window.gridjs;
 window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
-      { name: "Pet ID", hidden: true },
       "Pet Name",
       "Animal Type",
       "Breed",
@@ -62,22 +61,6 @@ window.addEventListener("load", () => {
       "Expired Date",
       "Treatment Date Done",
       "Veterinarian",
-      {
-        id: "action",
-        name: "",
-        formatter: (cell, row) => {
-          return h(
-            "button",
-            {
-              className: "view-result-button",
-              onClick: () => {
-                window.location.href = `/owned-pets/${row.cells[0].data}`;
-              },
-            },
-            "View Medical Records"
-          );
-        },
-      },
     ],
     width: "100%",
     fixedHeader: true,
@@ -110,7 +93,9 @@ window.addEventListener("load", () => {
             item.manufacturer,
             item.serialLotNumber,
             item.expiredDate,
-            dayjs(item.treatmentDateDone).format("MMMM DD, YYYY hh:mm A"),
+            item.treatmentDateDone
+              ? dayjs(item.treatmentDateDone).format("MMMM DD, YYYY hh:mm A")
+              : "",
             item.veterinarian,
           ];
         }),

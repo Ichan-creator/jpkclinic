@@ -6,7 +6,6 @@ import {
   User,
 } from "../models/index.models.js";
 import { Op } from "sequelize";
-import sendStatusUpdate from "../utils/sendStatusUpdate.js";
 
 async function handleAdminPetRepository(req, res) {
   const notifications = await Notifications.findAll({
@@ -161,8 +160,6 @@ async function handlePostAdminUpdatePetRecord(req, res) {
   <span class="font-bold text-blue-500"><strong>${service}</strong></span> appointment
   on <span class="font-bold text-gray-600"><strong>${treatmentDate}</strong></span>
   is now <span style="color: green"><strong>COMPLETED</strong></span>.`;
-
-  sendStatusUpdate(message, userId, "COMPLETE");
 
   await Notifications.create({ message, userId });
 

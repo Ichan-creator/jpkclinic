@@ -53,8 +53,6 @@ async function handleGetClientAppointmentHistoryList(req, res) {
     },
     where: {
       userId: req.user.id,
-      appointmentStatus: "COMPLETE",
-      medicalRecordStatus: "COMPLETE",
     },
     order: [["createdAt", "DESC"]],
   });
