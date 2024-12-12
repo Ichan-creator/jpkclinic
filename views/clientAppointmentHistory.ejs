@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/images/jpk_logo.jpg" type="image/jpeg" />
     <link
+      href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
     />
@@ -26,27 +30,8 @@
     />
     <link rel="stylesheet" />
     <link rel="stylesheet" href="/css/clientNav.css" />
-    <link rel="stylesheet" href="/css/clinicDirectory.css" />
-    <style>
-      .veterinarians-box {
-        background-image: url("./images/veterinarians-bg.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        color: black;
-      }
-      .veterinarians-box h2 {
-        color: black;
-      }
-      .veterinarians-box p {
-        color: black;
-      }
-    </style>
 
-    <title>Clinic Directory | JPK Veterinary Clinic</title>
+    <title>Appointment History | JPK Veterinary Clinic</title>
   </head>
   <body id="body-pd">
     <header class="header" id="header">
@@ -181,11 +166,11 @@
               <i class="bx bx-message-square-detail nav__icon"></i>
               <span class="nav__name">Personal Page</span>
             </a>
-            <a href="/clinic-directory" class="nav__link active">
+            <a href="/clinic-directory" class="nav__link">
               <i class="bx bx-list-ul nav__icon"></i>
               <span class="nav__name">Clinic Directory</span>
             </a>
-            <a href="/appointment-history" class="nav__link">
+            <a href="/appointment-history" class="nav__link active">
               <i class="bx bx-list-ul nav__icon"></i>
               <span class="nav__name">Appointment History</span>
             </a>
@@ -199,44 +184,22 @@
         </form>
       </nav>
     </div>
-    <div class="veterinarians-box">
-      <h2
+
+    <section style="padding: 15px">
+      <div
         style="
-          text-align: center;
-          margin-top: 20px;
-          font-weight: bold;
-          font-size: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
         "
       >
-        VETERINARIANS
-      </h2>
-      <div class="card-body">
-        <div class="card">
-          <div class="card-image">
-            <img src="/images/profile-icon1.png" alt="" />
-          </div>
-          <p class="name">Dr. Francis M. Katalbas</p>
-          <p class="contact_num"><b>Contact Number:</b> (0917)815-3121</p>
-          <p class="email_address"><b>Email:</b> DOKFMK@yahoo.com.ph</p>
-        </div>
-        <div class="card">
-          <div class="card-image">
-            <img src="/images/profile-icon2.png" alt="" />
-          </div>
-          <p class="name">Dr. Francisella P. Katalbas</p>
-          <p class="contact_num"><b>Contact Number:</b> (0928)831-0031</p>
-          <p class="email_address"><b>Email:</b> franskatalbas@gmail.com</p>
-        </div>
-        <div class="card">
-          <div class="card-image">
-            <img src="/images/profile-icon3.png" alt="" />
-          </div>
-          <p class="name">Jessica Katalbas</p>
-          <p class="contact_num"><b>Contact Number:</b> (0919)362-4915</p>
-          <p class="email_address"><b>Email:</b> jessicakatalbas@yahoo.com</p>
-        </div>
+        <h2 style="margin-bottom: 15px; font-weight: bold; font-size: 25px">
+          Appointment History
+        </h2>
       </div>
-    </div>
+      <div id="clientAppointmentHistoryTable"></div>
+    </section>
+
     <div id="logoutModal" class="modal-logout">
       <div class="popup">
         <h2>Log-out Confirmation</h2>
@@ -251,7 +214,10 @@
         </div>
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/clientNav.js"></script>
+    <script src="/js/clientAppointmentHistory.js"></script>
   </body>
 </html>

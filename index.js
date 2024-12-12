@@ -17,6 +17,7 @@ import appointmentRouter from "./routes/clientAppointment.js";
 import clientPetPageRouter from "./routes/clientPetPage.js";
 import clinicDirectoryRouter from "./routes/clientClinicDirectory.js";
 import personalPageRouter from "./routes/clientPersonalPage.js";
+import clientAppointmentHistory from "./routes/clientAppointmentHistory.js";
 import adminLoginRouter from "./routes/adminLogin.js";
 import adminNavRouter from "./routes/adminNav.js";
 import adminAppointmentRouter from "./routes/adminAppointment.js";
@@ -79,6 +80,7 @@ app.use(appointmentRouter);
 app.use(clientPetPageRouter);
 app.use(personalPageRouter);
 app.use(clinicDirectoryRouter);
+app.use(clientAppointmentHistory);
 
 // Admin pages
 app.use(isAdmin);

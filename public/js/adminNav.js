@@ -162,13 +162,13 @@ window.addEventListener("load", () => {
           return [
             item.id,
             index + 1,
-            item["pet.user.fullName"],
-            item["pet.name"],
-            item["pet.animalType"],
+            item.pets[0].user.fullName,
+            item.pets[0].name,
+            item.pets[0].animalType,
             item.veterinarian,
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.appointmentStatus,
-            item["pet.user.id"],
+            item.pets[0].user.id,
             item.service,
           ];
         }),
@@ -240,8 +240,8 @@ window.addEventListener("load", () => {
         data.map((item, index) => {
           return [
             index + 1,
-            item["pet.name"],
-            item["pet.animalType"],
+            item.pets[0].name,
+            item.pets[0].animalType,
             item.veterinarian,
             item.service,
             item.medicalRecordStatus,

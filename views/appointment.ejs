@@ -178,6 +178,10 @@
               <i class="bx bx-list-ul nav__icon"></i>
               <span class="nav__name">Clinic Directory</span>
             </a>
+            <a href="/appointment-history" class="nav__link">
+              <i class="bx bx-list-ul nav__icon"></i>
+              <span class="nav__name">Appointment History</span>
+            </a>
           </div>
         </div>
         <form onsubmit="handleLogout(event)">
@@ -386,6 +390,24 @@
         <div class="cancel-modal-header">Cancel Appointment</div>
         <div class="cancel-modal-message">
           Are you sure you want to cancel this appointment?
+        </div>
+        <div style="margin-bottom: 20px">
+          <input
+            id="noteInput"
+            type="text"
+            placeholder="Note"
+            style="
+              outline: none;
+              font-size: 14px;
+              font-weight: 400;
+              color: #333;
+              border-radius: 5px;
+              border: 1px solid #aaa;
+              padding: 0 15px;
+              height: 42px;
+              margin: 8px 0;
+            "
+          />
         </div>
         <div class="cancel-button-container">
           <button

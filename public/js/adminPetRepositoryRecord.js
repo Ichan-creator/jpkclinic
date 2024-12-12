@@ -201,8 +201,6 @@ window.addEventListener("load", () => {
                       veterinarian,
                     } = res.data;
 
-                    console.log(res.data);
-
                     document.getElementById("appointmentId").value =
                       appointmentId;
                     document.getElementById("treatmentDate").value =
@@ -478,3 +476,108 @@ if (animalType === "dog" && breedIcons.dog[petBreed]) {
 } else {
   animalIcon.src = "/images/profile-icon.png";
 }
+
+async function generatePDF(data) {
+  const { PDFDocument, StandardFonts, rgb } = PDFLib;
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([600, 400]);
+
+  const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  const fontSize = 12;
+  const yStart = 350;
+  const lineHeight = 20;
+  let y = yStart;
+
+  page.drawText("Field", {
+    x: 50,
+    y,
+    size: fontSize,
+    font: boldFont,
+    color: rgb(0, 0, 0),
+  });
+  page.drawText("Value", {
+    x: 300,
+    y,
+    size: fontSize,
+    font: boldFont,
+    color: rgb(0, 0, 0),
+  });
+
+  y -= 30;
+
+  for (const [key, value] of Object.entries(data)) {
+    page.drawText(key + ":", {
+      x: 50,
+      y,
+      size: fontSize,
+      font: boldFont,
+      color: rgb(0, 0, 0),
+    });
+    page.drawText(value || "-", {
+      x: 300,
+      y,
+      size: fontSize,
+      font: regularFont,
+      color: rgb(0, 0, 0),
+    });
+    y -= lineHeight;
+  }
+
+  return await pdfDoc.save();
+}
+
+const printButton = document.querySelector(".print");
+printButton.addEventListener("click", async () => {
+  const treatmentDate = dayjs(
+    document.getElementById("treatmentDate").value
+  ).format("MMMM DD, YYYY - hh:mm A");
+  const appointmentDate = dayjs(
+    document.getElementById("treatmentDate").value
+  ).format("MMMM DD, YYYY - hh:mm A");
+  const service = document.getElementById("service").value;
+  const treatmentDateDone = document.getElementById("treatmentDateDone").value;
+  const petWeight = document.getElementById("petWeight").value;
+  const against = document.getElementById("against").value;
+  const manufacturer = document.getElementById("manufacturer").value;
+  const serialLotNumber = document.getElementById("serialLotNumber").value;
+  const expiredDate = document.getElementById("expiredDate").value;
+  const veterinarian = document.getElementById("veterinarian").value;
+
+  const formValues = {
+    "Treatment Date": treatmentDate,
+    "Appointment Date": appointmentDate,
+    Service: service,
+    "Treatment Date Done": treatmentDateDone,
+    "Pet Weight": petWeight,
+    Against: against,
+    Manufacturer: manufacturer,
+    "Serial/Lot Number": serialLotNumber,
+    "Expired Date": expiredDate,
+    Veterinarian: veterinarian,
+  };
+
+  const pdfBytes = await generatePDF(formValues);
+
+  const blob = new Blob([pdfBytes], { type: "application/pdf" });
+  const url = URL.createObjectURL(blob);
+
+  const newTab = window.open(url);
+  if (newTab) {
+    newTab.document.title = `MedicalRecord-${dayjs(
+      document.getElementById("treatmentDateDone").value
+    ).format("YYYY-MM-DD")}.pdf`;
+
+    const a = newTab.document.createElement("a");
+    a.href = url;
+    a.download = `MedicalRecord-${dayjs(
+      document.getElementById("treatmentDateDone").value
+    ).format("YYYY-MM-DD")}.pdf`;
+    newTab.document.body.appendChild(a);
+    a.click();
+    newTab.document.body.removeChild(a);
+  }
+
+  URL.revokeObjectURL(url);
+});

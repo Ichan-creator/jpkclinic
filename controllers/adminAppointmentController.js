@@ -85,7 +85,7 @@ async function handleGetAdminPetRecordsList(req, res) {
     ],
     include: {
       model: Pets,
-      attributes: ["id", "animalType", "breed"],
+      attributes: ["id", "animalType", "breed", "name"],
     },
     where: {
       appointmentStatus: "COMPLETE",
@@ -118,7 +118,7 @@ async function handleGetAdminApprovedAppointmentsList(req, res) {
 
 async function handleGetAdminCancelledAppointmentsList(req, res) {
   const adminAppointmentsList = await Appointments.findAll({
-    attributes: ["id", "appointmentDate", "service", "dateApproved"],
+    attributes: ["id", "appointmentDate", "service", "dateApproved", "note"],
     include: {
       model: User,
       attributes: ["id", "fullName"],
@@ -145,7 +145,7 @@ async function handleGetAdminCompletedAppointmentsList(req, res) {
       },
       {
         model: Pets,
-        attributes: ["animalType", "breed"],
+        attributes: ["animalType", "breed", "name"],
       },
     ],
     where: {

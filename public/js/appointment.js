@@ -570,8 +570,15 @@ function handleCloseRescheduleSuccess() {
 }
 
 function handleCancelAppointment() {
+  const noteInput = document.getElementById("noteInput").value;
+
   axios
-    .post("/cancel-appointment", { appointmentId, dateAndTime, service })
+    .post("/cancel-appointment", {
+      appointmentId,
+      dateAndTime,
+      service,
+      noteInput,
+    })
     .then((res) => {
       location.reload();
     })

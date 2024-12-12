@@ -895,3 +895,20 @@ textarea {
   background-color: #1e90ff;
   color: white;
 }
+
+.print {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  max-width: 200px;
+  width: 100%;
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: 5px;
+  margin: 25px 0;
+  background-color: green;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}

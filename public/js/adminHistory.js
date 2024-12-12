@@ -127,10 +127,10 @@ const adminHistoryTable = new gridjs.Grid({
     then: (data) =>
       data.map((item) => {
         return [
-          item.pet.id,
-          item.petNames,
-          item.pet.animalType,
-          item.pet.breed,
+          item.pets[0].id,
+          item.pets[0].name,
+          item.pets[0].animalType,
+          item.pets[0].breed,
           dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
           item.service,
           item.petWeight,
@@ -166,10 +166,10 @@ function getServerConfig(url) {
         then: (data) =>
           data.map((item) => {
             return [
-              item.pet.id,
-              item.petNames,
-              item.pet.animalType,
-              item.pet.breed,
+              item.pets[0].id,
+              item.pets[0].name,
+              item.pets[0].animalType,
+              item.pets[0].breed,
               dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
               item.service,
               item.petWeight,
@@ -221,6 +221,7 @@ function getServerConfig(url) {
               item.service,
               dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
               item.dateApproved,
+              item.note,
             ];
           }),
         handle: (res) => {
@@ -239,9 +240,9 @@ function getServerConfig(url) {
           data.map((item) => {
             return [
               item.user.fullName,
-              item.petNames,
-              item.pet.animalType,
-              item.pet.breed,
+              item.pets[0].name,
+              item.pets[0].animalType,
+              item.pets[0].breed,
               item.veterinarian,
               item.service,
               dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
@@ -291,7 +292,7 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
                 return h(
                   "button",
                   { className: "view-result-button", onClick: () => {} },
-                  "Go to Record"
+                  "View Medical Record"
                 );
               },
             },
@@ -320,6 +321,7 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
             "Service",
             "Appointment Date",
             "Date Approved",
+            "Note",
           ],
           server: getServerConfig("/admin-cancelled-appointment-list"),
           noRecordsFound: "No matching records found",

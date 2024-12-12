@@ -72,7 +72,6 @@ async function handleGetAdminAppointmentRequests(req, res) {
       attributes: ["name", "animalType"],
       include: { model: User, attributes: ["id", "fullName"] },
     },
-    raw: true,
   });
 
   res.json(appointmentRequests);
@@ -85,7 +84,6 @@ async function handleGetAdminMedicalRecords(req, res) {
       model: Pets,
       attributes: ["name", "animalType"],
     },
-    raw: true,
     where: { appointmentStatus: { [Op.ne]: "cancelled" } },
   });
 

@@ -161,7 +161,7 @@ async function handleBookAppointment(req, res) {
 }
 
 async function handleCancelAppointment(req, res) {
-  const { appointmentId, dateAndTime, service } = req.body;
+  const { appointmentId, dateAndTime, service, noteInput } = req.body;
 
   await Appointments.update(
     {
@@ -169,6 +169,7 @@ async function handleCancelAppointment(req, res) {
       appointmentStatus: "CANCELLED",
       medicalRecordStatus: "NO RECORD",
       treatmentDateDone: "CANCELLED",
+      note: noteInput,
     },
     { where: { id: appointmentId } }
   );

@@ -56,6 +56,7 @@ const Appointments = sequelize.define(
     petWeight: { type: DataTypes.STRING },
     against: { type: DataTypes.STRING },
     manufacturer: { type: DataTypes.STRING },
+    note: { type: DataTypes.STRING },
   },
   { timestamps: true }
 );

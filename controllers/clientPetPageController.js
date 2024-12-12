@@ -14,6 +14,8 @@ async function handleGetOwnedPet(req, res) {
   const petId = req.params.id;
 
   const petDetails = await Pets.findOne({ where: { id: petId }, raw: true });
+
+  console.log(petDetails);
   const formattedAccountCreationDate = dayjs(petDetails.createdAt).format(
     "MMMM D, YYYY h:mm A"
   );
@@ -99,6 +101,21 @@ async function handleEditPetProfile(req, res) {
   );
 
   res.status(200).json({ message: "Pet profile updated" });
+}
+
+async function handlePrintRecord(req, res) {
+  const {
+    treatmentDate,
+    appointmentDate,
+    service,
+    treatmentDateDone,
+    petWeight,
+    against,
+    manufacturer,
+    serialLotNumber,
+    expiredDate,
+    veterinarian,
+  } = req.body;
 }
 
 export {
