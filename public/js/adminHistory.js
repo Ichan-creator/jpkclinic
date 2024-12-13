@@ -327,7 +327,6 @@ function getServerConfig(url) {
         method: "GET",
         then: (data) =>
           data.map((item) => {
-            console.log(item);
             return [
               item.user.fullName,
               item.pets.map((pet) => "- " + pet.name).join("\n"),

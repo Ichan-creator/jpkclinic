@@ -13,7 +13,7 @@ adminPetPageRouter.get(
   handleGetClientOwnedPets
 );
 adminPetPageRouter.get(
-  "/admin-visitation-history/:name",
+  "/admin-visitation-history/:petId",
   handleGetAdminVisitationHistory
 );
 

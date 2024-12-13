@@ -255,7 +255,6 @@ function getServerConfig(url) {
         method: "GET",
         then: (data) =>
           data.map((item) => {
-            console.log(item);
             return [
               item.id,
               item.user.id,

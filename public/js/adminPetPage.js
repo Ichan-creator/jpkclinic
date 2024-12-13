@@ -5,7 +5,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId);
 
   if (nav && bodypd && headerpd) {
-      nav.addEventListener("mouseenter", () => {
+    nav.addEventListener("mouseenter", () => {
       nav.classList.add("show");
 
       toggle.classList.add("bx-x");
@@ -14,7 +14,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
       headerpd.classList.add("body-pd");
     });
 
-      nav.addEventListener("mouseleave", () => {
+    nav.addEventListener("mouseleave", () => {
       nav.classList.remove("show");
 
       toggle.classList.remove("bx-x");
@@ -37,20 +37,24 @@ function colorLink() {
 }
 linkColor.forEach((l) => l.addEventListener("click", colorLink));
 
-const petProfileName = document.getElementById("petProfileName").textContent;
+const currentPath = window.location.pathname;
+const pathSegments = currentPath.split("/");
+const petId = pathSegments[pathSegments.length - 1];
 
 window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: ["Date Picked", "Service", "Date Approved"],
     server: {
-      url: `/admin-visitation-history/${petProfileName}`,
+      url: `/admin-visitation-history/${petId}`,
       method: "GET",
       then: (data) =>
-        data.map((item) => [
-          dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
-          item.service,
-          item.dateApproved,
-        ]),
+        data.map((item) => {
+          return [
+            dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
+            item.service,
+            dayjs(item.dateApproved).format("MMMM DD, YYYY hh:mm A"),
+          ];
+        }),
       handle: (res) => {
         if (res.status === 404) return { data: [] };
         if (res.ok) return res.json();

@@ -229,7 +229,11 @@ window.addEventListener("load", () => {
             item.id,
             dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
             item.service,
-            item.pets[0].treatmentDateDone,
+            item.pets[0].appointment_pets.treatmentDateDone
+              ? dayjs(item.pets[0].appointment_pets.treatmentDateDone).format(
+                  "MMMM DD, YYYY"
+                )
+              : "",
             item.medicalRecordStatus,
           ];
         }),
