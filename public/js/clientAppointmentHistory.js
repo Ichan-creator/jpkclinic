@@ -163,3 +163,26 @@ window.addEventListener("load", () => {
     },
   }).render(document.getElementById("clientAppointmentHistoryTable"));
 });
+
+function handleLogout(event) {
+  event.preventDefault();
+
+  logoutModal.style.display = "flex";
+  logoutModal.style.alignItems = "center";
+  logoutModal.style.justifyContent = "center";
+}
+
+function handleConfirmLogout() {
+  fetch("/logout", { method: "POST" })
+    .then((response) => {
+      if (response.ok) {
+        window.location.replace("/login");
+        setTimeout(() => {
+          window.history.pushState(null, null, "/login");
+        }, 500);
+      }
+    })
+    .catch((error) => {
+      console.error("Logout failed:", error);
+    });
+}
