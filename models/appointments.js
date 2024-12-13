@@ -45,18 +45,6 @@ const Appointments = sequelize.define(
       type: DataTypes.STRING,
     },
     note: { type: DataTypes.STRING },
-    // treatmentDateDone: {
-    //   type: DataTypes.STRING,
-    // },
-    // serialLotNumber: {
-    //   type: DataTypes.STRING,
-    // },
-    // expiredDate: {
-    //   type: DataTypes.STRING,
-    // },
-    // petWeight: { type: DataTypes.STRING },
-    // against: { type: DataTypes.STRING },
-    // manufacturer: { type: DataTypes.STRING },
   },
   { timestamps: true }
 );

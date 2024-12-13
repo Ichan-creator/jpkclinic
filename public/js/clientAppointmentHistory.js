@@ -127,27 +127,50 @@ window.addEventListener("load", () => {
             dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
             item.service,
             item.pets
-              .map((pet) => (pet.petWeight ? "- " + pet.petWeight : ""))
-              .join("\n"),
-            item.pets
-              .map((pet) => (pet.against ? "- " + pet.against : ""))
-              .join("\n"),
-            item.pets
-              .map((pet) => (pet.manufacturer ? "- " + pet.manufacturer : ""))
-              .join("\n"),
-            item.pets
               .map((pet) =>
-                pet.serialLotNumber ? "- " + pet.serialLotNumber : ""
+                pet.appointment_pets.petWeight
+                  ? "- " + pet.appointment_pets.petWeight
+                  : ""
               )
               .join("\n"),
             item.pets
-              .map((pet) => (pet.expiredDate ? "- " + pet.expiredDate : ""))
+              .map((pet) =>
+                pet.appointment_pets.against
+                  ? "- " + pet.appointment_pets.against
+                  : ""
+              )
               .join("\n"),
             item.pets
               .map((pet) =>
-                pet.treatmentDateDone
+                pet.appointment_pets.manufacturer
+                  ? "- " + pet.appointment_pets.manufacturer
+                  : ""
+              )
+              .join("\n"),
+            item.pets
+              .map((pet) =>
+                pet.appointment_pets.serialLotNumber
+                  ? "- " + pet.appointment_pets.serialLotNumber
+                  : ""
+              )
+              .join("\n"),
+            item.pets
+              .map((pet) =>
+                pet.appointment_pets.expiredDate
                   ? "- " +
-                    dayjs(pet.treatmentDateDone).format("MMMM DD, YYYY hh:mm A")
+                    dayjs(pet.appointment_pets.expiredDate).format(
+                      "MMMM DD, YYYY"
+                    )
+                  : ""
+              )
+              .join("\n"),
+            item.pets
+              .map((pet) =>
+                pet.appointment_pets.treatmentDateDone
+                  ? "- " +
+                    dayjs(pet.appointment_pets.treatmentDateDone).format(
+                      "MMMM DD, YYYY hh:mm A"
+                    )
                   : ""
               )
               .join("\n"),

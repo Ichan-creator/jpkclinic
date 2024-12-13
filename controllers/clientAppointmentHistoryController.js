@@ -5,6 +5,7 @@ import {
   Pets,
   User,
 } from "../models/index.models.js";
+import { Op } from "sequelize";
 
 async function handleGetClientAppointmentHistory(req, res) {
   const user = await User.findOne({
@@ -41,6 +42,7 @@ async function handleGetClientAppointmentHistoryList(req, res) {
     },
     where: {
       userId: req.user.id,
+      appointmentStatus: { [Op.ne]: "CANCELLED" },
     },
     order: [["createdAt", "DESC"]],
   });
