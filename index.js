@@ -66,30 +66,6 @@ app.use(noCache);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/asd", async (req, res) => {
-  const userId = "4a3bea77-3c87-4875-b727-1ee781cb7127";
-
-  const match = await Appointments.findAll({
-    attributes: ["id", "appointmentDate", "service", "medicalRecordStatus"],
-    include: [
-      {
-        model: Pets,
-        where: { id: userId },
-      },
-      {
-        model: Pets,
-        through: {
-          model: AppointmentPets,
-          attributes: ["treatmentDateDone"],
-        },
-      },
-    ],
-    where: { appointmentStatus: { [Op.ne]: "CANCELLED" } },
-  });
-
-  res.json(match);
-});
-
 app.get("/try", async (req, res) => {
   const hashedPassword = await hashPassword("password");
 

@@ -175,27 +175,25 @@ window.addEventListener("load", () => {
                 const appointmentId = row.cells[0].data;
 
                 axios
-                  .get(`/pet-record/${appointmentId}`)
+                  .get(`/pet-record/${appointmentId}/${petId}`)
                   .then((res) => {
                     const {
-                      appointmentDate,
-                      service,
+                      appointment,
                       petWeight,
                       against,
                       manufacturer,
                       serialLotNumber,
                       expiredDate,
-                      treatmentDateDone,
-                      veterinarian,
                     } = res.data;
 
-                    document.getElementById("appointmentId").value =
-                      appointmentId;
-                    document.getElementById("treatmentDate").value =
-                      dayjs(appointmentDate).format("YYYY-MM-DDTHH:mm");
-                    document.getElementById("service").value = service;
-                    document.getElementById("treatmentDateDone").value =
-                      treatmentDateDone;
+                    document.getElementById("treatmentDate").value = dayjs(
+                      appointment.appointmentDate
+                    ).format("YYYY-MM-DDTHH:mm");
+                    document.getElementById("service").value =
+                      appointment.service;
+                    document.getElementById("treatmentDateDone").value = dayjs(
+                      appointment.treatmentDateDone
+                    ).format("YYYY-MM-DD");
                     document.getElementById("petWeight").value = petWeight;
                     document.getElementById("against").value = against;
                     document.getElementById("manufacturer").value =
@@ -203,10 +201,8 @@ window.addEventListener("load", () => {
                     document.getElementById("serialLotNumber").value =
                       serialLotNumber;
                     document.getElementById("expiredDate").value = expiredDate;
-                    document.getElementById("treatmentDateDone").value =
-                      treatmentDateDone;
                     document.getElementById("veterinarian").value =
-                      veterinarian;
+                      appointment.veterinarian;
                   })
                   .catch((error) => {
                     console.error(error);

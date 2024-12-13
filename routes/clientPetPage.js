@@ -21,7 +21,10 @@ clientPetPageRouter.get(
   isClient,
   handleGetVisitationHistory
 );
-clientPetPageRouter.get("/pet-record/:appointmentId", handleGetClientPetRecord);
+clientPetPageRouter.get(
+  "/pet-record/:appointmentId/:petId",
+  handleGetClientPetRecord
+);
 clientPetPageRouter.post("/edit-pet-profile", isClient, handleEditPetProfile);
 
 export default clientPetPageRouter;

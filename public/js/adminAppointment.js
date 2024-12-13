@@ -310,16 +310,19 @@ function getServerConfig(url) {
         url,
         method: "GET",
         then: (data) =>
-          data.map((item) => [
-            item.user.fullName,
-            dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
-            item.service,
-            item.dateApproved === "Pending"
-              ? "Pending"
-              : item.dateApproved === "CANCELLED"
-              ? "CANCELLED"
-              : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
-          ]),
+          data.map((item) => {
+            console.log(item);
+            return [
+              item["user.fullName"],
+              dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
+              item.service,
+              item.dateApproved === "Pending"
+                ? "Pending"
+                : item.dateApproved === "CANCELLED"
+                ? "CANCELLED"
+                : dayjs(item.dateApproved).format("MMMM DD, YYYY - hh:mm A"),
+            ];
+          }),
         handle: (res) => {
           if (res.status === 404) return { data: [] };
           if (res.ok) return res.json();
@@ -492,6 +495,7 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
     } else if (button.id === "cancelledToggle") {
       appointmentsListTable
         .updateConfig({
+          columns: ["Client Name", "Date & Time", "Service", "Date Approved"],
           server: getServerConfig("/admin-cancelled-appointment-list"),
           noRecordsFound: "No matching records found",
         })

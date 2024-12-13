@@ -52,22 +52,27 @@ async function handleGetVisitationHistory(req, res) {
 
 async function handleGetClientPetRecord(req, res) {
   const appointmentId = req.params.appointmentId;
+  const petId = req.params.petId;
 
-  const petRecord = await Appointments.findOne({
+  const petRecord = await AppointmentPets.findOne({
+    where: {
+      appointmentId,
+      petId,
+    },
     attributes: [
-      "appointmentDate",
-      "service",
-      "treatmentDateDone",
       "petWeight",
       "against",
       "manufacturer",
       "serialLotNumber",
       "expiredDate",
       "treatmentDateDone",
-      "veterinarian",
     ],
-    where: { id: appointmentId },
-    raw: true,
+    include: [
+      {
+        model: Appointments,
+        attributes: ["id", "appointmentDate", "service", "veterinarian"],
+      },
+    ],
   });
 
   res.json(petRecord);
