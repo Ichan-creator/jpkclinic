@@ -20,6 +20,18 @@ const AppointmentPets = sequelize.define(
         key: "id",
       },
     },
+    petWeight: { type: DataTypes.STRING },
+    against: { type: DataTypes.STRING },
+    manufacturer: { type: DataTypes.STRING },
+    serialLotNumber: {
+      type: DataTypes.STRING,
+    },
+    expiredDate: {
+      type: DataTypes.STRING,
+    },
+    treatmentDateDone: {
+      type: DataTypes.STRING,
+    },
   },
   { timestamps: true }
 );

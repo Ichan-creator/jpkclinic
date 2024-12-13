@@ -224,13 +224,15 @@ window.addEventListener("load", () => {
       url: `/visitation-history/${petId}`,
       method: "GET",
       then: (data) =>
-        data.map((item) => [
-          item.id,
-          dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
-          item.service,
-          item.treatmentDateDone,
-          item.medicalRecordStatus,
-        ]),
+        data.map((item) => {
+          return [
+            item.id,
+            dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
+            item.service,
+            item.pets[0].treatmentDateDone,
+            item.medicalRecordStatus,
+          ];
+        }),
       handle: (res) => {
         if (res.status === 404) return { data: [] };
         if (res.ok) return res.json();

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Appointments, Pets } from "../models/index.models.js";
+import { AppointmentPets, Appointments, Pets } from "../models/index.models.js";
 import { Op } from "sequelize";
 
 async function handleOwnedPets(req, res) {
@@ -15,7 +15,6 @@ async function handleGetOwnedPet(req, res) {
 
   const petDetails = await Pets.findOne({ where: { id: petId }, raw: true });
 
-  console.log(petDetails);
   const formattedAccountCreationDate = dayjs(petDetails.createdAt).format(
     "MMMM D, YYYY h:mm A"
   );
@@ -31,37 +30,24 @@ async function handleGetVisitationHistory(req, res) {
   const petId = req.params.petId;
 
   const petVisitationHistory = await Appointments.findAll({
-    attributes: [
-      "id",
-      "appointmentDate",
-      "service",
-      "treatmentDateDone",
-      "medicalRecordStatus",
-    ],
+    attributes: ["id", "appointmentDate", "service", "medicalRecordStatus"],
     include: [
       {
         model: Pets,
         where: { id: petId },
-        required: true,
+      },
+      {
+        model: Pets,
+        through: {
+          model: AppointmentPets,
+          attributes: ["treatmentDateDone"],
+        },
       },
     ],
     where: { appointmentStatus: { [Op.ne]: "CANCELLED" } },
-    raw: true,
   });
 
-  const newPetVisitationHistory = petVisitationHistory.map((item) => {
-    return {
-      ...item,
-      appointmentDate: dayjs(item.appointmentDate).format(
-        "MMMM DD, YYYY hh:mm A"
-      ),
-      treatmentDateDone: item.treatmentDateDone
-        ? dayjs(item.treatmentDateDone).format("MMMM DD, YYYY")
-        : "",
-    };
-  });
-
-  res.json(newPetVisitationHistory);
+  res.json(petVisitationHistory);
 }
 
 async function handleGetClientPetRecord(req, res) {

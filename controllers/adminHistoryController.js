@@ -1,8 +1,6 @@
 import dayjs from "dayjs";
 import { Notifications } from "../models/index.models.js";
 
-Notifications;
-
 async function handleGetAdminHistory(req, res) {
   const notifications = await Notifications.findAll({
     where: { type: "admin" },

@@ -8,7 +8,13 @@ import passport from "./config/passport.js";
 import path from "path";
 import session from "express-session";
 
-import { initDB, User } from "./models/index.models.js";
+import {
+  AppointmentPets,
+  Appointments,
+  initDB,
+  Pets,
+  User,
+} from "./models/index.models.js";
 import noCache from "./middlewares/noCache.js";
 
 import loginSignupRouter from "./routes/loginSignupRoute.js";
@@ -28,6 +34,7 @@ import adminEmployeeRecordsRouter from "./routes/adminEmployeeRecords.js";
 import adminHistoryRouter from "./routes/adminHistory.js";
 import hashPassword from "./utils/hashPassword.js";
 import isAdmin from "./middlewares/isAdmin.js";
+import { Op } from "sequelize";
 
 dotenv.config();
 
@@ -58,6 +65,30 @@ app.use(noCache);
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get("/asd", async (req, res) => {
+  const userId = "4a3bea77-3c87-4875-b727-1ee781cb7127";
+
+  const match = await Appointments.findAll({
+    attributes: ["id", "appointmentDate", "service", "medicalRecordStatus"],
+    include: [
+      {
+        model: Pets,
+        where: { id: userId },
+      },
+      {
+        model: Pets,
+        through: {
+          model: AppointmentPets,
+          attributes: ["treatmentDateDone"],
+        },
+      },
+    ],
+    where: { appointmentStatus: { [Op.ne]: "CANCELLED" } },
+  });
+
+  res.json(match);
+});
 
 app.get("/try", async (req, res) => {
   const hashedPassword = await hashPassword("password");

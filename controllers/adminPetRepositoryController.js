@@ -1,11 +1,12 @@
 import dayjs from "dayjs";
 import {
+  AppointmentPets,
   Appointments,
   Notifications,
   Pets,
   User,
 } from "../models/index.models.js";
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
 
 async function handleAdminPetRepository(req, res) {
   const notifications = await Notifications.findAll({
@@ -67,21 +68,27 @@ async function handleGetAdminPetRepositoryRecord(req, res) {
 
 async function handleGetAdminPetRecord(req, res) {
   const appointmentId = req.params.appointmentId;
+  const petId = req.params.petId;
 
-  const petRecord = await Appointments.findOne({
+  const petRecord = await AppointmentPets.findOne({
+    where: {
+      petId,
+      appointmentId,
+    },
     attributes: [
-      "appointmentDate",
-      "service",
       "petWeight",
       "against",
       "manufacturer",
       "serialLotNumber",
       "expiredDate",
       "treatmentDateDone",
-      "veterinarian",
     ],
-    where: { id: appointmentId },
-    raw: true,
+    include: [
+      {
+        model: Appointments,
+        attributes: ["id", "appointmentDate", "service", "veterinarian"],
+      },
+    ],
   });
 
   res.json(petRecord);
@@ -91,59 +98,34 @@ async function handleGetAdminVisitationHistory(req, res) {
   const petId = req.params.petId;
 
   const petVisitationHistory = await Appointments.findAll({
-    attributes: [
-      "id",
-      "appointmentDate",
-      "service",
-      "treatmentDateDone",
-      "medicalRecordStatus",
-      "userId",
-    ],
+    attributes: ["id", "appointmentDate", "service", "medicalRecordStatus"],
     include: [
       {
         model: Pets,
         where: { id: petId },
-        required: true,
+      },
+      {
+        model: Pets,
+        through: {
+          model: AppointmentPets,
+          attributes: ["treatmentDateDone"],
+        },
+      },
+      {
+        model: User,
+        attributes: ["id"],
       },
     ],
-    where: {
-      dateApproved: { [Op.ne]: "PENDING" },
-    },
-    raw: true,
+    where: { appointmentStatus: { [Op.ne]: "CANCELLED" } },
   });
 
-  // const petVisitationHistory = await Appointments.findAll({
-  //   attributes: [
-  //     "id",
-  //     "appointmentDate",
-  //     "service",
-  //     "treatmentDateDone",
-  //     "medicalRecordStatus",
-  //     "userId",
-  //   ],
-  //   where: { petId, dateApproved: { [Op.ne]: "PENDING" } },
-  //   raw: true,
-  // });
-
-  const newPetVisitationHistory = petVisitationHistory.map((item) => {
-    return {
-      ...item,
-      appointmentDate: dayjs(item.appointmentDate).format(
-        "MMMM DD, YYYY hh:mm A"
-      ),
-      treatmentDateDone:
-        item.treatmentDateDone && item.treatmentDateDone !== "CANCELLED"
-          ? dayjs(item.treatmentDateDone).format("MMMM DD, YYYY")
-          : item.treatmentDateDone,
-    };
-  });
-
-  res.json(newPetVisitationHistory);
+  res.json(petVisitationHistory);
 }
 
 async function handlePostAdminUpdatePetRecord(req, res) {
   const {
     appointmentId,
+    petId,
     userId,
     treatmentDate,
     service,
@@ -153,7 +135,6 @@ async function handlePostAdminUpdatePetRecord(req, res) {
     serialLotNumber,
     expiredDate,
     treatmentDateDone,
-    veterinarian,
   } = req.body;
 
   const message = `The status of your
@@ -164,17 +145,27 @@ async function handlePostAdminUpdatePetRecord(req, res) {
   await Notifications.create({ message, userId });
 
   await Appointments.update(
+    { medicalRecordStatus: "COMPLETE" },
+    {
+      where: { id: appointmentId },
+    }
+  );
+
+  await AppointmentPets.update(
     {
       petWeight,
       against,
       manufacturer,
       serialLotNumber,
       expiredDate,
-      veterinarian,
       treatmentDateDone,
-      medicalRecordStatus: "COMPLETE",
     },
-    { where: { id: appointmentId } }
+    {
+      where: {
+        appointmentId,
+        petId,
+      },
+    }
   );
 
   res.json({ message: "Successfull update pet record" });

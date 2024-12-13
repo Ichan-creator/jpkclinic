@@ -78,35 +78,42 @@ function handleCloseNotif() {
 
 const adminHistoryTable = new gridjs.Grid({
   columns: [
-    { name: "Pet ID", hidden: true },
-    "Pet Name",
-    "Animal Type",
-    "Breed",
+    {
+      name: "Pet Name",
+      formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+    },
+    {
+      name: "Animal Type",
+      formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+    },
+    { name: "Breed", formatter: (cell) => html(cell.replace(/\n/g, "<br />")) },
     "Treatment Date",
     "Service",
-    "Weight (kg)",
-    "Against",
-    "Manufacturer",
-    "Serial/Lot No.",
-    "Expired Date",
-    "Treatment Date Done",
-    "Veterinarian",
     {
-      id: "action",
-      name: "",
-      formatter: (cell, row) => {
-        return h(
-          "button",
-          {
-            className: "view-result-button",
-            onClick: () => {
-              window.location.href = `/admin-pet-repository/${row.cells[0].data}`;
-            },
-          },
-          "View Medical Records"
-        );
-      },
+      name: "Weight (kg)",
+      formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
     },
+    {
+      name: "Against",
+      formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+    },
+    {
+      name: "Manufacturer",
+      formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+    },
+    {
+      name: "Serial/Lot No.",
+      formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+    },
+    {
+      name: "Expired Date",
+      formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+    },
+    {
+      name: "Treatment Date Done",
+      formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+    },
+    "Veterinarian",
   ],
   width: "100%",
   fixedHeader: true,
@@ -127,18 +134,59 @@ const adminHistoryTable = new gridjs.Grid({
     then: (data) =>
       data.map((item) => {
         return [
-          item.pets[0].id,
-          item.pets[0].name,
-          item.pets[0].animalType,
-          item.pets[0].breed,
+          item.pets.map((pet) => "- " + pet.name).join("\n"),
+          item.pets.map((pet) => "- " + pet.animalType).join("\n"),
+          item.pets.map((pet) => "- " + pet.breed).join("\n"),
           dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
           item.service,
-          item.petWeight,
-          item.against,
-          item.manufacturer,
-          item.serialLotNumber,
-          dayjs(item.expiredDate).format("MMMM DD, YYYY"),
-          dayjs(item.treatmentDateDone).format("MMMM DD, YYYY"),
+          item.pets
+            .map((pet) =>
+              pet.appointment_pets.petWeight
+                ? "- " + pet.appointment_pets.petWeight
+                : ""
+            )
+            .join("\n"),
+          item.pets
+            .map((pet) =>
+              pet.appointment_pets.against
+                ? "- " + pet.appointment_pets.against
+                : ""
+            )
+            .join("\n"),
+          item.pets
+            .map((pet) =>
+              pet.appointment_pets.manufacturer
+                ? "- " + pet.appointment_pets.manufacturer
+                : ""
+            )
+            .join("\n"),
+          item.pets
+            .map((pet) =>
+              pet.appointment_pets.serialLotNumber
+                ? "- " + pet.appointment_pets.serialLotNumber
+                : ""
+            )
+            .join("\n"),
+          item.pets
+            .map((pet) =>
+              pet.appointment_pets.expiredDate
+                ? "- " +
+                  dayjs(pet.appointment_pets.expiredDate).format(
+                    "MMMM DD, YYYY hh:mm A"
+                  )
+                : ""
+            )
+            .join("\n"),
+          item.pets
+            .map((pet) =>
+              pet.appointment_pets.treatmentDateDone
+                ? "- " +
+                  dayjs(pet.appointment_pets.treatmentDateDone).format(
+                    "MMMM DD, YYYY hh:mm A"
+                  )
+                : ""
+            )
+            .join("\n"),
           item.veterinarian,
         ];
       }),
@@ -166,18 +214,59 @@ function getServerConfig(url) {
         then: (data) =>
           data.map((item) => {
             return [
-              item.pets[0].id,
-              item.pets[0].name,
-              item.pets[0].animalType,
-              item.pets[0].breed,
+              item.pets.map((pet) => "- " + pet.name).join("\n"),
+              item.pets.map((pet) => "- " + pet.animalType).join("\n"),
+              item.pets.map((pet) => "- " + pet.breed).join("\n"),
               dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
               item.service,
-              item.petWeight,
-              item.against,
-              item.manufacturer,
-              item.serialLotNumber,
-              dayjs(item.expiredDate).format("MMMM DD, YYYY"),
-              dayjs(item.treatmentDateDone).format("MMMM DD, YYYY"),
+              item.pets
+                .map((pet) =>
+                  pet.appointment_pets.petWeight
+                    ? "- " + pet.appointment_pets.petWeight
+                    : ""
+                )
+                .join("\n"),
+              item.pets
+                .map((pet) =>
+                  pet.appointment_pets.against
+                    ? "- " + pet.appointment_pets.against
+                    : ""
+                )
+                .join("\n"),
+              item.pets
+                .map((pet) =>
+                  pet.appointment_pets.manufacturer
+                    ? "- " + pet.appointment_pets.manufacturer
+                    : ""
+                )
+                .join("\n"),
+              item.pets
+                .map((pet) =>
+                  pet.appointment_pets.serialLotNumber
+                    ? "- " + pet.appointment_pets.serialLotNumber
+                    : ""
+                )
+                .join("\n"),
+              item.pets
+                .map((pet) =>
+                  pet.appointment_pets.expiredDate
+                    ? "- " +
+                      dayjs(pet.appointment_pets.expiredDate).format(
+                        "MMMM DD, YYYY hh:mm A"
+                      )
+                    : ""
+                )
+                .join("\n"),
+              item.pets
+                .map((pet) =>
+                  pet.appointment_pets.treatmentDateDone
+                    ? "- " +
+                      dayjs(pet.appointment_pets.treatmentDateDone).format(
+                        "MMMM DD, YYYY hh:mm A"
+                      )
+                    : ""
+                )
+                .join("\n"),
               item.veterinarian,
             ];
           }),
@@ -238,11 +327,12 @@ function getServerConfig(url) {
         method: "GET",
         then: (data) =>
           data.map((item) => {
+            console.log(item);
             return [
               item.user.fullName,
-              item.pets[0].name,
-              item.pets[0].animalType,
-              item.pets[0].breed,
+              item.pets.map((pet) => "- " + pet.name).join("\n"),
+              item.pets.map((pet) => "- " + pet.animalType).join("\n"),
+              item.pets.map((pet) => "- " + pet.breed).join("\n"),
               item.veterinarian,
               item.service,
               dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
@@ -285,17 +375,6 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
             "Against",
             "Manufacturer",
             "Veterinarian",
-            {
-              id: "action",
-              name: "",
-              formatter: () => {
-                return h(
-                  "button",
-                  { className: "view-result-button", onClick: () => {} },
-                  "View Medical Record"
-                );
-              },
-            },
           ],
           server: getServerConfig("/admin-pet-records-list"),
         })
@@ -332,9 +411,18 @@ document.querySelectorAll(".appointment-toggles button").forEach((button) => {
         .updateConfig({
           columns: [
             "Client Name",
-            "Pet Name",
-            "Animal Type",
-            "Breed",
+            {
+              name: "Pet Name",
+              formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+            },
+            {
+              name: "Animal Type",
+              formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+            },
+            {
+              name: "Breed",
+              formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+            },
             "Veterinarian",
             "Service",
             "Appointment Date",

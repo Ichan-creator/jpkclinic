@@ -24,8 +24,13 @@ Pets.belongsToMany(Appointments, {
   foreignKey: "petId",
 });
 
+AppointmentPets.belongsTo(Appointments, { foreignKey: "appointmentId" });
+AppointmentPets.belongsTo(Pets, { foreignKey: "petId" });
+Appointments.hasMany(AppointmentPets, { foreignKey: "appointmentId" });
+Pets.hasMany(AppointmentPets, { foreignKey: "petId" });
+
 async function initDB() {
-  await sequelize.sync({ alter: true });
+  await sequelize.sync({ force: true });
 }
 
 export {

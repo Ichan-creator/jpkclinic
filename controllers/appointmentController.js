@@ -67,18 +67,17 @@ async function handleGetAppointmentsList(req, res) {
   const userId = req.user.id;
 
   const appointmentsList = await Appointments.findAll({
-    attributes: [
-      "id",
-      "appointmentDate",
-      "service",
-      "dateApproved",
-      "appointmentStatus",
-    ],
     where: {
       userId,
       dateApproved: { [Op.ne]: "CANCELLED" },
     },
-    raw: true,
+    include: [
+      {
+        model: Pets,
+        through: { attributes: [] },
+      },
+    ],
+    order: [["createdAt", "DESC"]],
   });
 
   if (!appointmentsList) return res.status(404).json([]);
@@ -99,21 +98,17 @@ async function handleBookAppointment(req, res) {
   } = req.body;
 
   try {
-    const petIds = [];
-    for (const petName of petNames) {
-      let pet = await Pets.findOne({
-        attributes: ["id"],
-        where: { name: petName, userId },
+    const pets = await Pets.findAll({
+      where: {
+        userId,
+        name: petNames,
+      },
+    });
+
+    if (pets.length !== petNames.length) {
+      return res.status(404).json({
+        message: "One or more pets not found for the specified user.",
       });
-
-      if (!pet) {
-        pet = await Pets.create({
-          userId,
-          name: petName,
-        });
-      }
-
-      petIds.push(pet.id);
     }
 
     const appointment = await Appointments.create({
@@ -128,12 +123,18 @@ async function handleBookAppointment(req, res) {
       appointmentStatus: "PENDING",
     });
 
-    for (const petId of petIds) {
-      await AppointmentPets.create({
-        appointmentId: appointment.id,
-        petId,
-      });
-    }
+    const appointmentPetsData = pets.map((pet) => ({
+      appointmentId: appointment.id,
+      petId: pet.id,
+      petWeight: null,
+      against: null,
+      manufacturer: null,
+      serialLotNumber: null,
+      expiredDate: null,
+      treatmentDateDone: null,
+    }));
+
+    await AppointmentPets.bulkCreate(appointmentPetsData);
 
     const message = `
     You have one new <span class="font-bold text-blue-500">${service}</span> 
@@ -149,14 +150,15 @@ async function handleBookAppointment(req, res) {
     });
 
     return res.status(201).json({
-      message: "Appointment created",
-      hasExistingPetRecords: petIds.length > 0,
+      message: "Appointment booked successfully.",
+      appointment,
     });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ message: "An error occurred while booking the appointment." });
+    return res.status(500).json({
+      message: "An error occurred while booking the appointment.",
+      error: error.message,
+    });
   }
 }
 

@@ -187,25 +187,25 @@ window.addEventListener("load", () => {
                 treatmentDate = row.cells[1].data;
 
                 axios
-                  .get(`/admin-pet-record/${appointmentId}`)
+                  .get(`/admin-pet-record/${appointmentId}/${petId}`)
                   .then((res) => {
                     const {
-                      appointmentDate,
-                      service,
+                      appointment,
                       petWeight,
                       against,
                       manufacturer,
                       serialLotNumber,
                       expiredDate,
                       treatmentDateDone,
-                      veterinarian,
                     } = res.data;
 
                     document.getElementById("appointmentId").value =
-                      appointmentId;
-                    document.getElementById("treatmentDate").value =
-                      dayjs(appointmentDate).format("YYYY-MM-DDTHH:mm");
-                    document.getElementById("service").value = service;
+                      appointment.id;
+                    document.getElementById("treatmentDate").value = dayjs(
+                      appointment.appointmentDate
+                    ).format("YYYY-MM-DDTHH:mm");
+                    document.getElementById("service").value =
+                      appointment.service;
                     document.getElementById("petWeight").value =
                       petWeight || null;
                     document.getElementById("against").value = against || null;
@@ -219,7 +219,7 @@ window.addEventListener("load", () => {
                       treatmentDateDone ||
                       new Date().toISOString().split("T")[0];
                     document.getElementById("veterinarian").value =
-                      veterinarian || null;
+                      appointment.veterinarian || null;
                   })
                   .catch((error) => {
                     console.error(error);
@@ -247,9 +247,11 @@ window.addEventListener("load", () => {
             item.id,
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.service,
-            item.treatmentDateDone,
+            dayjs(item.pets[0].appointment_pets.treatmentDateDone).format(
+              "MMMM DD, YYYY - hh:mm A"
+            ),
             item.medicalRecordStatus,
-            item.userId,
+            item.user.id,
           ];
         }),
       handle: (res) => {
@@ -279,11 +281,11 @@ petRecordForm.addEventListener("submit", (event) => {
   const serialLotNumber = petRecordForm.serialLotNumber.value;
   const expiredDate = petRecordForm.expiredDate.value;
   const treatmentDateDone = petRecordForm.treatmentDateDone.value;
-  const veterinarian = petRecordForm.veterinarian.value;
 
   axios
     .post("/admin-update-pet-record", {
       appointmentId,
+      petId,
       userId,
       service,
       petWeight,
@@ -293,7 +295,6 @@ petRecordForm.addEventListener("submit", (event) => {
       serialLotNumber,
       expiredDate,
       treatmentDateDone,
-      veterinarian,
     })
     .then((res) => {
       window.location.reload();

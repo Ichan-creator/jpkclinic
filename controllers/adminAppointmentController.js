@@ -60,7 +60,6 @@ async function handleGetAdminPendingAppointmentsList(req, res) {
     where: {
       dateApproved: "Pending",
     },
-    raw: true,
     order: [["createdAt", "DESC"]],
   });
 
@@ -71,18 +70,7 @@ async function handleGetAdminPendingAppointmentsList(req, res) {
 
 async function handleGetAdminPetRecordsList(req, res) {
   const adminPetRecordsList = await Appointments.findAll({
-    attributes: [
-      "id",
-      "appointmentDate",
-      "service",
-      "petWeight",
-      "against",
-      "manufacturer",
-      "serialLotNumber",
-      "expiredDate",
-      "treatmentDateDone",
-      "veterinarian",
-    ],
+    attributes: ["id", "appointmentDate", "service", "veterinarian"],
     include: {
       model: Pets,
       attributes: ["id", "animalType", "breed", "name"],

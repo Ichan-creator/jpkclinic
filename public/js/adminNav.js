@@ -37,7 +37,7 @@ function colorLink() {
 }
 linkColor.forEach((l) => l.addEventListener("click", colorLink));
 
-const { h } = window.gridjs;
+const { h, html } = window.gridjs;
 
 let appointmentId = null;
 
@@ -65,11 +65,19 @@ window.addEventListener("load", () => {
     columns: [
       { name: "id", hidden: true },
       "#",
-      "Client Name",
-      "Pet Name",
-      "Animal",
-      "Veterinarian",
-      "Appointment Date",
+      { name: "Client Name", width: "150px" },
+      {
+        name: "Pet Name(s)",
+        width: "150px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Animal Type",
+        width: "150px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      { name: "Veterinarian", width: "140px" },
+      { name: "Appointment Date", width: "190px" },
       {
         name: "Status",
         formatter: (cell, row) => {
@@ -105,6 +113,7 @@ window.addEventListener("load", () => {
       },
       {
         name: "Action",
+        width: "150px",
         formatter: (cell, row) => {
           const appointmentStatus = row.cells[7].data;
           const appointmentDate = dayjs(
@@ -163,8 +172,8 @@ window.addEventListener("load", () => {
             item.id,
             index + 1,
             item.user.fullName,
-            item.pets.map((pet) => pet.name).join(", "),
-            item.pets.map((pet) => pet.animalType).join(", "),
+            item.pets.map((pet) => "- " + pet.name).join("\n"),
+            item.pets.map((pet) => "- " + pet.animalType).join("\n"),
             item.veterinarian,
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.appointmentStatus,
@@ -200,8 +209,14 @@ window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
       "#",
-      "Pet Name",
-      "Animal",
+      {
+        name: "Pet Name(s)",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Animal Type",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
       "Veterinarian",
       "Service",
       {
@@ -240,8 +255,8 @@ window.addEventListener("load", () => {
         data.map((item, index) => {
           return [
             index + 1,
-            item.pets.map((pet) => pet.name).join(", "),
-            item.pets.map((pet) => pet.animalType).join(", "),
+            item.pets.map((pet) => "- " + pet.name).join("\n"),
+            item.pets.map((pet) => "- " + pet.animalType).join("\n"),
             item.veterinarian,
             item.service,
             item.medicalRecordStatus,

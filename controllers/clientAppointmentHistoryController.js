@@ -34,19 +34,7 @@ async function handleGetClientAppointmentHistory(req, res) {
 
 async function handleGetClientAppointmentHistoryList(req, res) {
   const clientAppointmentsHistoryList = await Appointments.findAll({
-    attributes: [
-      "id",
-      "appointmentDate",
-      "service",
-      "petWeight",
-      "against",
-      "manufacturer",
-      "serialLotNumber",
-      "expiredDate",
-      "treatmentDateDone",
-      "veterinarian",
-      "userId",
-    ],
+    attributes: ["service", "appointmentDate", "veterinarian"],
     include: {
       model: Pets,
       attributes: ["id", "animalType", "breed", "name"],

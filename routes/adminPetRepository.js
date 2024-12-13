@@ -18,7 +18,7 @@ adminPetRepositoryRouter.get(
   handleGetAdminPetRepositoryRecord
 );
 adminPetRepositoryRouter.get(
-  "/admin-pet-record/:appointmentId",
+  "/admin-pet-record/:appointmentId/:petId",
   handleGetAdminPetRecord
 );
 adminPetRepositoryRouter.get(

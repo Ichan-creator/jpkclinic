@@ -44,23 +44,63 @@ function colorLink() {
 }
 linkColor.forEach((l) => l.addEventListener("click", colorLink));
 
-const { h } = window.gridjs;
+const { h, html } = window.gridjs;
 
 window.addEventListener("load", () => {
   new gridjs.Grid({
     columns: [
-      "Pet Name",
-      "Animal Type",
-      "Breed",
-      "Treatment Date",
-      "Service",
-      "Weight (kg)",
-      "Against",
-      "Manufacturer",
-      "Serial/Lot No.",
-      "Expired Date",
-      "Treatment Date Done",
-      "Veterinarian",
+      {
+        name: "Pet Name(s)",
+        width: "150px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Animal Type",
+        width: "150px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Breed",
+        width: "120px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      { name: "Treatment Date", width: "170px" },
+      { name: "Service", width: "130px" },
+      {
+        name: "Weight (kg)",
+        width: "150px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Against",
+        width: "150px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Manufacturer",
+        width: "170px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Serial/Lot No.",
+        width: "160px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Expired Date",
+        width: "150px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Treatment Date Done",
+        width: "220px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
+      {
+        name: "Veterinarian",
+        width: "160px",
+        formatter: (cell) => html(cell.replace(/\n/g, "<br />")),
+      },
     ],
     width: "100%",
     fixedHeader: true,
@@ -80,22 +120,37 @@ window.addEventListener("load", () => {
       method: "GET",
       then: (data) =>
         data.map((item) => {
-          console.log(item);
           return [
-            item.pets[0].id,
-            item.pets[0].name,
-            item.pets[0].animalType,
-            item.pets[0].breed,
+            item.pets.map((pet) => "- " + pet.name).join("\n"),
+            item.pets.map((pet) => "- " + pet.animalType).join("\n"),
+            item.pets.map((pet) => "- " + pet.breed).join("\n"),
             dayjs(item.appointmentDate).format("MMMM DD, YYYY hh:mm A"),
             item.service,
-            item.petWeight,
-            item.against,
-            item.manufacturer,
-            item.serialLotNumber,
-            item.expiredDate,
-            item.treatmentDateDone
-              ? dayjs(item.treatmentDateDone).format("MMMM DD, YYYY hh:mm A")
-              : "",
+            item.pets
+              .map((pet) => (pet.petWeight ? "- " + pet.petWeight : ""))
+              .join("\n"),
+            item.pets
+              .map((pet) => (pet.against ? "- " + pet.against : ""))
+              .join("\n"),
+            item.pets
+              .map((pet) => (pet.manufacturer ? "- " + pet.manufacturer : ""))
+              .join("\n"),
+            item.pets
+              .map((pet) =>
+                pet.serialLotNumber ? "- " + pet.serialLotNumber : ""
+              )
+              .join("\n"),
+            item.pets
+              .map((pet) => (pet.expiredDate ? "- " + pet.expiredDate : ""))
+              .join("\n"),
+            item.pets
+              .map((pet) =>
+                pet.treatmentDateDone
+                  ? "- " +
+                    dayjs(pet.treatmentDateDone).format("MMMM DD, YYYY hh:mm A")
+                  : ""
+              )
+              .join("\n"),
             item.veterinarian,
           ];
         }),
