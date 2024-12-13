@@ -247,9 +247,11 @@ window.addEventListener("load", () => {
             item.id,
             dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
             item.service,
-            dayjs(item.pets[0].appointment_pets.treatmentDateDone).format(
-              "MMMM DD, YYYY - hh:mm A"
-            ),
+            item.pets[0].appointment_pets.treatmentDateDone
+              ? dayjs(item.pets[0].appointment_pets.treatmentDateDone).format(
+                  "MMMM DD, YYYY - hh:mm A"
+                )
+              : "",
             item.medicalRecordStatus,
             item.user.id,
           ];
