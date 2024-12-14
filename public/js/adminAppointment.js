@@ -261,7 +261,7 @@ function getServerConfig(url) {
               item.user.fullName,
               dayjs(item.appointmentDate).format("MMMM DD, YYYY - hh:mm A"),
               item.service,
-              item.petNames,
+              item.pets.map((pet) => pet.name).join(", "),
               item.dateApproved === "Pending"
                 ? "Pending"
                 : item.dateApproved === "CANCELLED"

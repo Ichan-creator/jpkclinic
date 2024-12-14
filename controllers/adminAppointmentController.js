@@ -53,10 +53,19 @@ async function handleGetAdminAppointmentsCalendar(req, res) {
 async function handleGetAdminPendingAppointmentsList(req, res) {
   const adminPendingAppointmentsList = await Appointments.findAll({
     attributes: ["id", "appointmentDate", "service", "dateApproved"],
-    include: {
-      model: User,
-      attributes: ["id", "fullName"],
-    },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "fullName"],
+      },
+      {
+        model: Pets,
+        through: {
+          attributes: [],
+        },
+        attributes: ["name"],
+      },
+    ],
     where: {
       dateApproved: "Pending",
     },

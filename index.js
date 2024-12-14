@@ -66,18 +66,6 @@ app.use(noCache);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/try", async (req, res) => {
-  const hashedPassword = await hashPassword("password");
-
-  await User.create({
-    name: "admin",
-    password: hashedPassword,
-    role: "admin",
-  });
-
-  res.json({ message: "Done" });
-});
-
 app.use(adminLoginRouter);
 app.use(loginSignupRouter);
 
